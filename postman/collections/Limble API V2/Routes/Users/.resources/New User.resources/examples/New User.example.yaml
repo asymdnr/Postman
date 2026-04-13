@@ -1,0 +1,31 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/users/"
+  method: POST
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+      	"firstName": "jeff",
+      	"lastName": "babb",
+      	"roleID": 1032,
+      	"email": "jeff@limblecmms.com",
+      	"phone": "8015555555",
+      	"locationID": "163",
+      	"wage": 16,
+      	"workDayHours": 8,
+      	"emailNotificationActive": false,
+      	"pushNotificationActive": false
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: json
+    content: |-
+      {
+          "userID": 1337
+      }
+order: 1000

@@ -1,0 +1,5 @@
+$kind: collection
+description: Limble's API is broken apart by different categories that contain
+  multiple routes.  This approach allows you to easily see eveyrthing that can
+  be added, edited or removed for different Limble modules.
+order: 1000

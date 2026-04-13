@@ -1,0 +1,8 @@
+$kind: http-request
+description: This request deletes a budget.
+url: "{{protocol}}://{{server}}:{{port}}/v2/budgets/:budgetID"
+method: DELETE
+pathVariables:
+  budgetID: "1"
+examples: ./.resources/Delete Budget.resources/examples
+order: 4000

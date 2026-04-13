@@ -1,0 +1,49 @@
+$kind: http-request
+description: >-
+  Deletes an account-level custom tag.
+
+
+  **IMPORTANT NOTE:** The change propagates to all data entities using this tag
+  (Tasks, dashboards, notifications, etc).
+
+
+  **Path Parameters:**
+
+
+  - `tagName` (string, required) - Tag name to delete (with or without '@',
+  without trailing ';')
+      - URL encode special characters (e.g., `@Food Safety` for `@Food Safety`)
+
+          
+
+  **Response (200 OK):**
+
+
+  - `deleted` (boolean) - Always true on success
+      
+  - `name` (string) - Canonical tag name that was deleted (without trailing ';')
+      
+  - `tags` (array) - Remaining account tags in canonical format with trailing
+  ';'
+      
+
+  **Validation:**
+
+
+  - Tag must exist (case-insensitive)
+      
+  - Tag name subject to normalization for matching
+      
+
+  **Error Responses:**
+
+
+  - 404 Not Found - Tag does not exist
+url: "{{protocol}}://{{server}}:{{port}}/v2/tags/:tagName"
+method: DELETE
+pathVariables:
+  - key: tagName
+    value: "@Food Safety"
+    description: Tag name to delete (URL encode spaces and special characters)
+examples: ./.resources/Delete Account Tag.resources/examples
+order: 4000

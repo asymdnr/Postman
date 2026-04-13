@@ -1,0 +1,56 @@
+$kind: http-request
+description: >-
+  This request updates a General Ledger.
+
+
+  <table class="apiTable">
+  	<thead>
+  		<tr>
+  			<th>Parameter</th>
+  			<th>Type</th>
+  			<th>Required?</th>
+  			<th>Description</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr>
+  			<td>assetID</td>
+  			<td>Int</td>
+  			<td>Optional</td>
+  			<td>The ID of the asset that this GL will be associated with. Must be a valid assetID that belongs to the current GL's location.</td>
+  		</tr>
+  		<tr>
+  			<td>abbr</td>
+  			<td>String</td>
+  			<td>Optional</td>
+  			<td>An new short version of this GLs name.</td>
+  		</tr>
+  		<tr>
+  			<td>name</td>
+  			<td>String</td>
+  			<td>Optional</td>
+  			<td>A new title for this GL.</td>
+  		</tr>
+  		<tr>
+  			<td>description</td>
+  			<td>String</td>
+  			<td>Optional</td>
+  			<td>Any further needed description for this GL.</td>
+  		</tr>
+  	</tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/gl/:glID"
+method: PATCH
+pathVariables:
+  glID: "4"
+body:
+  type: json
+  content: |-
+    {
+        "name": "Sanitation",
+        "abbr": "SAN",
+        "description": "Any supplies for the Sanitation Department",
+        "assetID": 123
+    }
+examples: ./.resources/Update General Ledger.resources/examples
+order: 3000

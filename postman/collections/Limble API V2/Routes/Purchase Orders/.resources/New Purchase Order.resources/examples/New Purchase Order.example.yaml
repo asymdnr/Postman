@@ -1,0 +1,27 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/po"
+  method: POST
+  body:
+    type: json
+    content: |-
+      {
+          "locationID": 1,
+          "vendorID": 2,
+          "userID": 3
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: json
+    content: |-
+      {
+          "poID": 1234,
+          "meta": {
+              "items": "/v2/po/items?pos=31939",
+              "state": "/v2/po/31939/state",
+              "stateTransitions": "/v2/po/31939/state/transitions"
+          }
+      }
+order: 1000

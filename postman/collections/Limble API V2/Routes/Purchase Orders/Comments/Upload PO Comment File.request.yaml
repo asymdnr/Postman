@@ -1,0 +1,32 @@
+$kind: http-request
+description: >-
+  Uploads a file to a PO comment.
+
+
+  Parameters:
+
+
+  | Parameter | In | Type | Required | Default | Description |
+
+  |---|---|---|---|---|---|
+
+  | poID | path | integer | yes |  | Purchase Order identifier |
+
+  | commentID | path | integer | yes |  | Comment identifier |
+
+  | file | form-data | file | yes |  | File to upload (max 50MB). Types: PDF,
+  PNG, JPEG, GIF, TIFF, SVG, DOC, DOCX, XLS, XLSX, ZIP, RAR, RFC822,
+  octet-stream |
+url: "{{protocol}}://{{server}}:{{port}}/v2/po/:poID/comments/:commentID/file"
+method: PUT
+pathVariables:
+  poID: "777702"
+  commentID: "3619749"
+body:
+  type: formdata
+  content:
+    - type: file
+      key: file
+      src: []
+examples: ./.resources/Upload PO Comment File.resources/examples
+order: 2000

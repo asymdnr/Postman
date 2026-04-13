@@ -1,0 +1,26 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/po/:poID/state"
+  method: PATCH
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    poID: "31939"
+  body:
+    type: text
+    content: |-
+      {
+        "newState": "custom_step_1",
+        "reason": "PO closed by manager"
+      }
+response:
+  statusCode: 400
+  statusText: Bad Request
+  body:
+    type: json
+    content: |-
+      {
+        "success": false,
+        "message": "Transition not allowed from current state"
+      }
+order: 2000

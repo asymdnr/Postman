@@ -1,0 +1,47 @@
+$kind: http-request
+description: >-
+  This endpoint makes an HTTP GET request to retrieve a part's purchasable data.
+  The response of this request is documented as a JSON schema.
+
+
+  <p><b>Return data description</b></p>
+
+
+  | **Property** | **Description** |
+
+  | --- | --- |
+
+  | partID | The ID of the part the purchasable belongs to. |
+
+  | name | The name of the purchasable. |
+
+  | size | The size of the purchasable. |
+
+  | orderUnitCode | The unit that describes how this purchasable is ordered.
+  E.g. "by the box", or "by the foot". |
+
+  | sizeUnitCode | The unit that qualifies the size value. E.g. this tells you
+  whether this purchasable is 10 liters, or cans, or feet, etc. |
+url: "{{protocol}}://{{server}}:{{port}}/v2/parts/:partID/purchasables"
+method: GET
+queryParams:
+  - key: page
+    value: "1"
+    disabled: true
+    description: This parameter is used to paginate results based on the limit.
+      Refer to Pagination section for more information.
+  - key: limit
+    value: "2"
+    disabled: true
+    description: This parameter is a result limiter. The default is set to return no
+      more than 100 results at one time.
+  - key: nameStartsWith
+    value: Box of
+    disabled: true
+    description: Filter purchasables that have a name which starts with this string.
+pathVariables:
+  - key: partID
+    value: "11"
+    description: The ID of the part you need purchasables for.
+examples: ./.resources/Get Purchasables.resources/examples
+order: 1000

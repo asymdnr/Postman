@@ -1,0 +1,18 @@
+$kind: http-request
+description: This requests updates a manual log entry. Only logs with a
+  sourceID=4 can be updated.
+url: "{{protocol}}://{{server}}:{{port}}/v2/parts/logs/:logID"
+method: PATCH
+pathVariables:
+  - key: logID
+    value: "21551"
+    description: The ID of the log to be updated.
+body:
+  type: json
+  content: "{\r
+
+    \    \"logEntry\": \"Changing log\"\r
+
+    }"
+examples: ./.resources/Update Part Log.resources/examples
+order: 3000

@@ -1,0 +1,24 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/teams/:teamID"
+  method: DELETE
+  pathVariables:
+    teamID: "{{teamID}}"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-DNS-Prefetch-Control: off
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Date: Tue, 27 Aug 2019 16:35:56 GMT
+    Connection: keep-alive
+    Content-Length: "0"
+  body:
+    type: text
+    content: ""
+order: 1000

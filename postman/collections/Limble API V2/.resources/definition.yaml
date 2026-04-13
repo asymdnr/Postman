@@ -1,0 +1,496 @@
+$kind: collection
+description: |-
+  <h1>Getting Started!</h1>
+
+  <p>Welcome to Limble CMMS’s API documentation.<br><br>You can use this documentation to configure connections to the Limble CMMS API over https using RESTful standards.</p>
+
+  <p><br>Using the API you can get information about the following portions of your system:</p>
+
+  <ul><li><div>Assets</div></li><li><div>Locations</div></li><li><div>Parts (Current quantities and Usage)</div></li><li><div>Tasks (Work Orders, Preventive Maintenance, Work Requests, etc.)</div></li><li><div>Users</div></li><li><div>Vendors</div></li><li><div>Roles</div></li><li><div>Teams</div></li><li><div>Purchase Orders</div></li><li><div>General Ledgers</div></li><li><div>Budgets</div></li><li><div>Priorities</div></li><li><div>Tags</div></li><li><div>Statuses</div></li><li><div>Bills</div></li><li><div>Regions</div></li><li><div>Webhooks</div></li><li><div>Units of Measure(UOM)</div></li></ul>
+
+  Please use the correct Limble API URL to connect to our API based on the region or the type of your Limble Account.
+
+  | **Limble Account (Region/Type)** | **Limble API URL** |
+  | --- | --- |
+  | Default | api.limblecmms.com |
+  | Canada | ca-api.limblecmms.com |
+  | Australia | au-api.limblecmms.com |
+  | Europe | eu-api.limblecmms.com |
+  | 21CFR | 21cfr-api.limblecmms.com |
+
+  ---
+
+  # Authentication
+
+  <p><br>To protect your information the Limble CMMS API uses BASIC authorization standards.<br><br>Every call to the API must include an authorization header with your base 64 encoded id and secret.<br><br><b>Client ID</b><br><br>Your Client ID is your unique customer identification.<br><br><b>Client Secret</b><br><br>Your Client Secret is used to authenticate the Client ID on each API call. This is something that <b>must be kept secret</b>.<br></p>
+
+  > How do I get my Client ID and Client Secret? 
+    
+
+  To obtain your Client ID and Client Secret login to your Limble account as a **Super Administrator** and go to **Settings** -> **Configuration**, on this page scroll down to the **API Settings** section and click **Generate API Keys**. Keep this information **secret**, you will only be able to see your Client Secret once upon initial generation. If you lose your secret you will need to regenerate it and update your integration accordingly.
+
+  > Example Header  
+  Authorization: Basic \[BASE64 ENCODED YOUR_CLIENT_ID:YOUR_CLIENT_SECRET 
+    
+
+  Below is a code example for PHP:
+
+  ```
+  $curl = curl_init();
+  $id = 'your_client_id';
+  $secret = 'your_client_id';
+  $headers = array(
+      'Content-Type:application/json',
+      'Authorization: Basic '. base64_encode($id.':'.$secret)
+  );
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+  curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://api.limblecmms.com:443/v2/tasks/',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => false,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "GET",
+  ));
+  $response = curl_exec($curl);
+  $err = curl_error($curl);
+  curl_close($curl);
+  if ($err) {
+    echo "cURL Error #:" . $err;
+  } else {
+    echo $response;
+  } ?>
+
+   ```
+
+  Below is a code example for NodeJS:
+
+  ```
+  const https = require('https');
+  const id = 'your_client_id';
+  const secret = 'your_client_secret';
+  const options = {
+    'method': 'GET',
+    'hostname': 'api.limblecmms.com',
+    'path': '/v2/tasks/?',
+    'headers': {
+      'Authorization': 'Basic ' + Buffer.from(`${credentials.id}:${credentials.secret}`).toString('base64')
+    }
+  };
+  const req = https.request(options, function (res) {
+    const chunks = [];
+    res.on("data", function (chunk) {
+      chunks.push(chunk);
+    });
+    res.on("end", function (chunk) {
+      const body = Buffer.concat(chunks);
+      console.log(body.toString());
+    });
+    res.on("error", function (error) {
+      console.error(error);
+    });
+  });
+  req.end();
+
+   ```
+
+  ---
+
+  # Error Codes
+
+  - HTTP 400 - Data Validation Error - Malformed JSON input or incorrect data type.
+      
+  - HTTP 403 - Forbidden - The resource cannot be accessed.
+      
+  - HTTP 404 - Resource not found - The resource you are targeting does not exist.
+      
+  - HTTP 409 - Resource Conflict - A resource already exists with those parameters.
+      
+  - HTTP 422 - Unprocessable Entity - The syntax of the request is correct but cannot be processed due to semantic errors.
+      
+  - HTTP 429 - Too Many Requests - See the rate limiting section below.
+      
+  - HTTP 500 - Internal Server Error - Contact Limble for assistance.
+      
+  - HTTP 501 - Method Not Support - Limble's API only supports GET, POST, PATCH, PUT, and DELETE.
+      
+
+  ---
+
+  # Success Codes
+
+  - HTTP 200 - OK - Everything was successful. PUTs, PATCHs and DELETEs on success always return an empty 200 OK.
+      
+  - HTTP 201 - CREATED - This is used on POST calls when new resouces are created. If a new resource was created Limble will always pass back a GET URL in the location header so a developer can easily GET the new resource.
+      
+
+  ---
+
+  # Overriding HTTP methods
+
+  Some systems may support only the `POST` and `GET` HTTP methods. This restriction prevents using other HTTP methods such as `PUT`, `PATCH` and `DELETE`. RESTful web API implementations can work around this restriction by letting the client override the HTTP method via the custom HTTP headers.
+
+  The Limble API supports **Method Overrides** by using a `POST` request and setting the `X-HTTP-Method-Override` header with a method string value. The header value can be `PATCH` or `PUT`. This will allow Limble API users to use `PATCH` and `PUT` endpoints by sending `POST` requests to these endpoints and overriding them with the respective HTTP method.
+
+  # Webhooks
+
+  Receive data on certain events such as Tasks being completed.
+
+  Limble's webhooks allow you to receive data whenever specific events occur.
+
+  For example, you may need to run your own script whenever a Task is completed.
+
+  Limble supports adding multiple webhooks that can be triggered when actions are carried out on:
+
+  - Tasks
+      
+  - Assets
+      
+  - Asset Fields
+      
+  - Purchase Orders
+      
+  - Purchase Order Items
+      
+
+  When an event occurs, Limble sends an HTTP POST request to a URL endpoint you configure.
+
+  You can configure this URL in the Limble Web App under:
+
+  **Settings → Configuration → API Settings**
+
+  All data sent is JSON-encoded, and Limble includes the following fields in the request headers for validation:
+
+  - `signature`
+      
+  - `timestamp`
+      
+  - `token`
+      
+
+  You may register multiple webhooks for the same event type.
+
+  ### Important: API Key Requirement for Webhooks
+
+  To receive webhooks, the customer must have at least one active **limbleAPI key** created in API Settings.
+
+  - Webhooks **will not function** without at least one valid `limbleAPI` key.
+      
+  - Limble uses the **first-created** **`limbleAPI`** **key** (by creation date) to generate the **signature** included in webhook headers.
+      
+  - The receiving system must use this key to verify the authenticity of incoming webhook requests.
+      
+
+  If a customer has multiple `limbleAPI` keys, **only the oldest one** will be used for signing webhook requests.
+
+  ### Response Time and Retry Behavior
+
+  Your server must respond to webhook POST requests within **10 seconds**.
+
+  If it does not, Limble will attempt to retry the webhook request.
+
+  Limble handles server responses as follows:
+
+  - If the server returns **200 OK**, Limble considers the webhook successful and will not retry.
+      
+  - If the server returns **406 Not Acceptable**, Limble considers the webhook received but intentionally ignored — no retry will occur.
+      
+  - For any other response (e.g., 500, timeout, etc.), Limble will retry the request.
+      
+
+  **Retry schedule:**
+
+  - After 10 minutes
+      
+  - After 1 hour
+      
+  - After 2 hours
+      
+  - After 4 hours
+      
+
+  After the final retry attempt, the webhook will be **automatically disabled**.
+
+  ### Re-enabling a Disabled Webhook
+
+  To re-enable a disabled webhook:
+
+  1. Go to **Settings → Configuration → API Settings** in the Limble Web App.  
+      Find the webhook and use the option to **Re-enable** the API endpoint.
+      
+  2. Alternatively, send a `PATCH` request using the **Update Webhook** endpoint and set `enabled = true`.
+      
+
+  ### Assets
+
+  Below is an example payload you might be sent when an event occurs on an asset:
+
+  ```
+  {
+     "assetID": 10748, 
+     "status": "CREATED",
+     "category": "asset", 
+     "user": "bob@limblecmms.com" 
+  }
+
+   ```
+
+  Once the Payload is received you can use the Get Assets API call to get the most recent Asset data. The following is a list of all the possible statuses that a webhook might be set to:
+
+  <table><tbody><tr><th>Status</th><th>Description</th></tr><tr><td><div>CREATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>An Asset is created</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>DELETED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>An Asset was deleted</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGED ASSET NAME</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>An asset has been renamed</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr></tbody></table>
+
+  ### Asset Field
+
+  Below is an example payload you might be sent when an event occurs on an asset field:
+
+  ```
+  {
+    "valueID": 46490,
+    "status": "DELETED",
+    "category": "assetField",
+    "user": "bob@limblecmms.com"
+  }
+
+   ```
+
+  Once the Payload is received you can use the Get Asset Field API call to get the most recent Asset Field data. The following is a list of all the possible statuses that a webhook might be set to:
+
+  <table><tbody><tr><th>Status</th><th>Description</th></tr><tr><td><div>ADDED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>An Asset Field was added to an Asset</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>DELETED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>An Asset Field was deleted from an Asset</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>UPDATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>An Asset Field was updated on an Asset</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr></tbody></table>
+
+  ### Location
+
+  Below is an example payload you might be sent when an event occurs on an location field:
+
+  ```
+  {
+    "valueID": 46490,
+    "status": "DELETED",
+    "category": "location",
+    "user": "bob@limblecmms.com"
+  }
+
+   ```
+
+  Once the Payload is received you can use the Get Location API call to get the most recent Location data. The following is a list of all the possible statuses that a webhook might be set to:
+
+  <table><tbody><tr><th>Status</th><th>Description</th></tr><tr><td><div>CREATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>An Location was added</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>DELETED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>An Location was deleted</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>UPDATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>An Location was updated</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr></tbody></table>
+
+  ### Parts
+
+  For Parts, you may receive a webhook that looks like this:
+
+  ```
+  {  
+     "partID": 3456,
+     "status": "CREATED",
+     "category": "part",
+     "user": "bob@limblecmms.com"
+  }
+
+   ```
+
+  All possible statuses for Parts webhooks are as follows:
+
+  <table><tbody><tr><th>Status</th><th>Description</th></tr><tr><td><div>CREATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Part was created.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>DELETED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Part was deleted.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>LOCATION UPDATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Part had its location updated.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>SUPPLIER UPDATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Part had its supplier updated.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>PRICE UPDATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Part had its price updated.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>NAME UPDATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Part had its name updated.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>QUANTITY INCREASED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The quantity of a part increased.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>QUANTITY DECREASED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The quantity of a part decreased.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr></tbody></table>
+
+  ### Purchase Order
+
+  If you have enabled purchasing webhooks, you may receive a webhook for POs that looks like this:
+
+  ```
+  {  
+     "poID": 8203,
+     "status": "READY TO RECEIVE",
+     "category": "po",
+     "user": "bob@limblecmms.com"
+  }
+
+   ```
+
+  Possible statuses for PO webhooks are:
+
+  <table><tbody><tr><th>Status</th><th>Description</th></tr><tr><td><div>CREATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO was created.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>SETUP</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO has been reset and now has the setup status.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE STATUS</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO has been approved and now has a custom status.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>READY TO RECEIVE</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO now has the Ready to Receive status.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>PARTIALLY RECEIVED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO has received any number of items and now has the Partially Received status.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>FULLY RECEIVED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO has received all of its items and now has the Fully Received status.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CLOSED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO has had all items received and all bills paid and now has the Closed status.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>DELETED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO was deleted.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE BUDGET</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO has been assigned a new budget.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE VENDOR</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO has been assigned a new vendor.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE NUMBER</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO's PO Number has been modified.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE BILL-TO</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO's bill-to field has been modified.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE SHIP-TO</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO's ship-to field has been modified.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE NOTES TO VENDOR</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO's "Notes to Vendor" field has been modified.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE CUSTOM FIELD</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Any of a PO's custom fields has been modified.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE ASSIGNMENT</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO has had its assignment (user, team, multi-user) modified.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE DATE</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO's created date has been modified.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE DELIVERY DATE</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO's expected delivery date has been modified.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>DISAPPROVED PURCHASE REQUEST</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Purchase Request PO has been disapproved.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>REOPENED PURCHASE REQUEST</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A disapproved Purchase Request PO has been reopened.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>DISAPPROVED STEP</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO has had its workflow step disapproved and been sent back a step.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr></tbody></table>
+
+  ### Purchase Order Items
+
+  For PO Items, you may receive a webhook that looks like this:
+
+  ```
+  {  
+     "poItemID": 8203,
+     "status": "RECEIVED",
+     "category": "poItem",
+     "user": "bob@limblecmms.com"
+  }
+
+   ```
+
+  All possible statuses for PO Item webhooks are as follows:
+
+  <table><tbody><tr><th>Status</th><th>Description</th></tr><tr><td><div>CREATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO Item was created.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>DELETED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO Item was deleted.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>RECEIVED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Some quantity of a PO Item was marked as received.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE GL</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO Item has been assigned a new GL or its GL has been removed.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE DESCRIPTION</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO Item has had its description modified.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE QUANTITY</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO Item has had its quantity modified.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE RATE</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO Item has had its rate (price) modified.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE TAX</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO Item has had its tax percentage modified.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE DISCOUNT</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO Item has had its discount percentage modified.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGE SHIPPING</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A PO Item has had its shipping cost modified.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr></tbody></table>
+
+  ### Tasks
+
+  Below is an example payload you might be sent when an event occurs on a Task:
+
+  ```
+  {
+     "taskID": 8203, // The unique identifier for the item the webhook event describes
+     "status": "COMPLETE", // The status (e.g. task created, task complete, etc.) -- see below for a full list of possible statuses.
+     "category": "task", // The category of item that triggered the webhook to fire (e.g. task, po, poItem).
+     "user": "bob@limblecmms.com" // The user whose action caused the webhook to fire.
+  }
+
+   ```
+
+  Once the Payload is received you can use the Get Tasks API call to get the most recent Task data. The following is a list of all the possible statuses that a webhook might be set to:
+
+  <table><tbody><tr><th>Status</th><th>Description</th></tr><tr><td><div>CREATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Task was created</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>DELETED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Task was deleted</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGED DUE DATE</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Task changed due date</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGED ASSIGNMENT</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Task changed assignment</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>COMPLETE</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Task was completed.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGED COMPLETED TASK</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Task that is completed was changed.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>COMPLETED TASK REOPENED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A task that was completed was reopened and is now open.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGED TASK NAME</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A task has been renamed.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CHANGED TASK DESCRIPTION</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The description of a task has been changed.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>ADDED COMMENT TO TASK</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A comment was added to a task.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CUSTOM TAG ADDED TO TASK</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A custom tag was added to a task.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>CUSTOM TAG REMOVED FROM TASK</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A custom tag was removed from task.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>LOGGED TIME ON TASK</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A time entry was added to a task.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr></tbody></table>
+
+  ### Task Instruction
+
+  Below is an example payload you might be sent when an event occurs on an location field:
+
+  ```
+  {
+    "instructionID": 46490,
+    "status": "Updated",
+    "category": "instruction",
+    "user": "bob@limblecmms.com"
+  }
+
+   ```
+
+  Once the Payload is received you can use the Get Instruction API call to get the task instruction data. The following is a list of all the possible statuses that a webhook might be set to:
+
+  <table><tbody><tr><th>Status</th><th>Description</th></tr><tr><td><div>CREATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Task Instruction was added</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>DELETED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Task Instruction was deleted</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>UPDATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Task Instruction was updated</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>LABEL UPDATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Task Instruction's label was updated</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>DESCRIPTION UPDATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A Task Instruction's description was updated</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>PARENT RESPONSE UPDATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The response of a Task Instruction's parent item was updated</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>SORT ORDER UPDATED</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The sort order of a Task Instruction was updated.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr></tbody></table>
+
+  ## Securing Webhooks
+
+  To ensure the authenticity and integrity of webhook events each webhook is  
+  signed with a signature as well as some other data described below:
+
+  <table><tbody><tr><th>Parameter</th><th>Type</th><th>Description</th></tr><tr><td><div>timestamp</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>int</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A standard unix time stamp</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>token</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>string</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div><br>randomly generated string that is an integrity check of the<br>payload.<br></div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>signature</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>String</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A string generated by the HMAC algorithm</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr></tbody></table>
+
+  To verify the webhook is originating from LimbleCMMS you will need to:
+
+  - Concatenate the timestamp and token
+      
+  - Encode your private API key (oldest Limble API Key) with the SHA256 algorithm
+      
+  - Encode the timestamp and token value with the HMAC algorithm using your hashed private key and the SHA256 method.
+      
+  - Compare the resulting digest to the signature provided in your webhook  
+      header
+      
+
+  ## Validation Code Examples
+
+  Code samples to verify webhook data.
+
+  <h3>PHP</h3>
+
+  ```
+  function verify($timestamp, $signature, $apiKey, $token)
+      //hash private key
+      $apiKey = hash('sha256', $apiKey);
+      $generated_signature = hash_hmac('sha256', $timestamp . $token, $apiKey);
+      if($generated_signature === $signature) {
+          return true;
+      } else {
+          return false;
+      }
+  } 
+
+   ```
+
+  <h3>NodeJS</h3>
+
+  ```
+  var crypto  = require('crypto');
+  const verify = (apiKey, token, timestamp, signature) => {
+      //hash private key
+      const apiKey = crypto.createHash('sha256').update(apiKey).digest('hex');
+      const value = timestamp+token;
+      const generated_signature = crypto.createHmac('sha256',apiKey).update(value).digest('hex');
+      if(signature === generated_signature){
+          return true;
+      } else {
+          return false;
+      }
+  };
+
+   ```
+
+  ---
+
+  # Rate limit
+
+  To help protect against run-away scripts, clients who make an inordinate  
+  number of calls over a period of time may be temporarily blocked from  
+  accessing the service. The limits are defined in the table below. If you  
+  receive an error indicating that you have exceeded the call limit, please  
+  wait and try again later. If you need higher limits please reach out to your dedicated account manager.
+
+  ## Per Hour
+
+  <table><tbody><tr><th>Method/Type of Request</th><th>Limit Per Hour</th><th>Limit Per Minute</th></tr><tr><td><div>GET</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>4000 calls per hour.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>360 calls per minute.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>PATCH</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>2000 calls per hour.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>240 calls per minute.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>POST</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>1000 calls per hour.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>240 calls per minute.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>PUT</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>1000 calls per hour.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>240 calls per minute.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>DELETE</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>100 calls per hour.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>60 calls per minute.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>BATCH REQUEST</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>20 calls per hour</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>5 calls per minute</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr></tbody></table>
+
+  Every API response is accompanied by the following set of headers to identify the status of your consumption. API calls are rate-limited on two windows of time: per-minute and per-hour. For example, if you made a request at 13:42:42, that request will expire from your per-minute window at 13:43:42 and from your per-hour window at 14:42:42.
+
+  <table><tbody><tr><th>Header</th><th>Description</th></tr><tr><td><div>X-RateLimit-Limit</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The maximum number of requests that the consumer is permitted to make per hour.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>X-RateLimit-Remaining</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The number of requests remaining in the current per-hour window.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>X-RateLimit-First-Call</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The time your first call was made in the current per-hour window.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>X-RateLimit-TTL</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The time until more request resources become available (This only displays when you've hit your limit).</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>X-RateLimit-Minute-Limit</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The maximum number of requests that the consumer is permitted to make per minute.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>X-RateLimit-Minute-Remaining</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The number of requests remaining in the current per-minute window.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>X-RateLimit-Minute-First-Call</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The time your first call was made in the current per-minute window.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>X-RateLimit-Minute-TTL</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The time until more request resources become available (This only displays when you've hit your limit).</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr></tbody></table>
+
+  # Pagination
+
+  Currently pagination using OrderBy and cursor is supported only by **GET Tasks** and **GET Assets**. Pagination using Limit and Page is supported by many other GET endpoints including **GET Tasks** and **GET Assets**.
+
+  Pagination can be implemented by using the orderBy, cursor, limit and page query parameters.  
+  **Note: cursor and page cannot be used simultaneously for pagination.**
+
+  ## Pagination using Limit and Page
+
+  This uses limit and page query parameters. For a given limit and page results will be paginated. If orderBy query parameter is given the results will be ordered and paginated accordingly.
+
+  The page parameter is **required** and can be greater than or equal to 1 for this pagination method. The default limit is 100 but can be changed. The max limit is 1000.
+
+  The response headers contain information about the Previous, Next and Last Page of the result based on the limit.
+
+  The result will be empty when for a given limit, the given page does not exist. For example, if there are 100 Assets in total and limit is set at 10, only pages 1-10 are possible. An empty result will be given for page numbers greater than 10.
+
+  This pagination method is supported by various GET endpoints. Please refer to the examples for those GET endpoints for more information.
+
+  ## Pagination using OrderBy and Cursor
+
+  **Note**: If you're implementing pagination for the first time for **GET Tasks** or **GET Assets** please follow **Pagination Using Limit and Page** as the use of **Cursor** will be deprecated in the next API version.
+
+  This uses orderBy and cursor query parameters. Generally, in all of our GET endpoints, the cursor parameter ensures that the ID will be greater than the value of cursor. This makes sense when we're ordering the results ascending by ID.
+
+  In GET Assets, when we're fetching a set of assets and ordering by lastEdited (ascending) or -lastEdited (descending), the cursor parameter will instead ensure that we're returning a set of results that begin at the next asset in the order, regardless of whether its **ID is greater or less than the value of cursor**.
+
+  If the value of cursor does not match an existing assetID, then the result set will be empty, because there is no lastEdited value to compare to. **When providing orderBy and cursor, the value of cursor must be a real assetID or the result set will be empty.**
+
+  The same applies for GET Tasks when using cursor and ordering by createdDate, dateCompleted and due.
+variables:
+  protocol: https
+  server: localhost
+  port: "3000"
+scripts:
+  - type: http:afterResponse
+    code: |
+      pm.test("Response time is less than 5s", () => {
+          pm.expect(pm.response.responseTime).to.be.below(5000);
+      });
+
+      pm.test("Response some kind of successful", () => {
+          pm.expect(pm.response.code).to.be.below(300);
+      })
+    language: text/javascript
+auth:
+  - id: d7362dc5-6646-4bb3-90f8-0bd9d2ae6d96
+    type: basic
+    name: basic auth
+    credentials:
+      password: "{{clientSecret}}"
+      username: "{{clientID}}"

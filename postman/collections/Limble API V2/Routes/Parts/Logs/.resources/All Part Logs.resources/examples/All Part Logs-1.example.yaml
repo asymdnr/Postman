@@ -1,0 +1,92 @@
+$kind: http-example
+name: All Part Logs
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/parts/logs?sources=20&users=230530&\
+    start=1715273617&parts=1,2,5&limit=5"
+  method: GET
+  queryParams:
+    - key: logs
+      value: "1"
+      disabled: true
+    - key: sources
+      value: "20"
+    - key: users
+      value: "230530"
+    - key: logEntry
+      value: null
+      disabled: true
+    - key: start
+      value: "1715273617"
+    - key: end
+      value: null
+      disabled: true
+    - key: page
+      value: "1"
+      disabled: true
+    - key: parts
+      value: 1,2,5
+    - key: limit
+      value: "5"
+    - key: cursor
+      value: null
+      disabled: true
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Date: Mon, 24 Jun 2024 16:47:32 GMT
+    Content-Type: application/json; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    vary: Accept-Encoding
+    content-security-policy: "default-src 'self';base-uri
+      'self';block-all-mixed-content;font-src 'self' https:
+      data:;frame-ancestors 'self';img-src 'self' data:;object-src
+      'none';script-src 'self';script-src-attr 'none';style-src 'self' https:
+      'unsafe-inline';upgrade-insecure-requests"
+    x-dns-prefetch-control: off
+    expect-ct: max-age=0
+    x-frame-options: SAMEORIGIN
+    strict-transport-security: max-age=31536000; includeSubDomains; preload
+    x-download-options: noopen
+    x-content-type-options: nosniff
+    x-permitted-cross-domain-policies: none
+    referrer-policy: no-referrer
+    x-xss-protection: "0"
+    api-feedback-link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    x-ratelimit-limit: "4000"
+    x-ratelimit-minute-limit: "360"
+    x-ratelimit-remaining: "3983"
+    x-ratelimit-first-call: "1719246455"
+    x-ratelimit-minute-remaining: "359"
+    x-ratelimit-minute-first-call: "1719247652"
+    etag: W/"144-KHjJNqLy4+Uac5kkM/Tgopijmoo"
+    Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0
+    Content-Encoding: gzip
+    CF-Cache-Status: DYNAMIC
+    Server: cloudflare
+    CF-RAY: 898e3342a8d88389-SEA
+  body:
+    type: json
+    content: |-
+      [
+          {
+              "logID": 72,
+              "dateCreated": 1715279617,
+              "partID": 1,
+              "sourceID": 20,
+              "logEntry": "1 used from Bill during Manual Qty adjustment.",
+              "userID": 230530,
+              "associatedID": 304723
+          },
+          {
+              "logID": 102,
+              "dateCreated": 1718406015,
+              "partID": 2,
+              "sourceID": 20,
+              "logEntry": "1 used from Bill during Manual Qty adjustment.",
+              "userID": 230530,
+              "associatedID": 323880
+          }
+      ]
+order: 2000

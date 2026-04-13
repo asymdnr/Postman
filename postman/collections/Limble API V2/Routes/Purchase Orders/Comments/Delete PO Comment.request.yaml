@@ -1,0 +1,21 @@
+$kind: http-request
+description: |-
+  Deletes a PO comment.
+
+  Parameters:
+
+  | Parameter | In | Type | Required | Default | Description |
+  |---|---|---|---|---|---|
+  | poID | path | integer | yes |  | Purchase Order identifier |
+  | commentID | path | integer | yes |  | Comment identifier |
+
+  Responses:
+  - 200 OK: Deleted.
+  - 404 Not Found: Comment not found.
+url: "{{protocol}}://{{server}}:{{port}}/v2/po/:poID/comments/:commentID"
+method: DELETE
+pathVariables:
+  poID: "1"
+  commentID: "5678"
+examples: ./.resources/Delete PO Comment.resources/examples
+order: 5000

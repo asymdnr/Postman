@@ -1,0 +1,52 @@
+$kind: http-request
+description: >-
+  This request will create a new Option for a Dropdown or Option instruction of
+  a task.
+
+
+  <table class="apiTable">
+  	<thead>
+  		<tr>
+  			<th>Parameter</th>
+  			<th>Type</th>
+  			<th>Required?</th>
+  			<th>Description</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr>
+  		<tr>
+  			<td>instruction</td>
+  			<td>string</td>
+  			<td>Required</td>
+  			<td>The text that guides the User for selecting the option.</td>
+  		</tr>
+  		<tr>
+  			<td>instructionOptionOrder</td>
+  			<td>Int</td>
+  			<td>Optional</td>
+  			<td>If this is set the option is created at that position of the list. This value cannot be greater than the total number of option present in the list. If not set the option is added to the end of the list.</td>
+  		</tr>
+  	</tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/instructions/:instruc\
+  tionID/options"
+method: POST
+pathVariables:
+  - key: taskID
+    value: "11429"
+    description: taskID of the task you are getting the option/dropdown list.
+  - key: instructionID
+    value: "49343"
+    description: instructionID of the option/dropdown list you are getting the options for.
+body:
+  type: json
+  content: "{\r
+
+    \t\"instruction\": \"Yes\",\r
+
+    \    \"instructionOptionOrder\": 1\r
+
+    }"
+examples: ./.resources/New Instruction Option.resources/examples
+order: 2000

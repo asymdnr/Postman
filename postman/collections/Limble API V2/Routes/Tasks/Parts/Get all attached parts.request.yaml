@@ -1,0 +1,87 @@
+$kind: http-request
+description: >-
+  Gets parts attached to all tasks.
+
+
+  This request gets parts associated with any task.  A single Task can have
+  multiple parts associated with it.
+
+
+  <p><b>Return data description</b></p>
+
+  <table>
+      <thead>
+          <tr>
+              <th>Property</th>
+              <th>Description</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>relationID</td>
+              <td>The identifier that associates parts to tasks.</td>
+          </tr>
+          <tr>
+              <td>partID</td>
+              <td>The partID of the part associated to this task.</td>
+          </tr>
+          <tr>
+              <td>taskID</td>
+              <td>The taskID this part is assoicated with.</td>
+          </tr>
+          <tr>
+              <td>quantity</td>
+              <td>The quantity of this part associated to this task.</td>
+          </tr>
+          <tr>
+              <td>lastEdited</td>
+              <td>The unix timestamp date of the last time this record was edited.</td>
+          </tr>
+          <tr>
+              <td>usedPrice</td>
+              <td>The price of the part at the time of use.</td>
+          </tr>
+          <tr>
+              <td>partName</td>
+              <td>The name of the part.</td>
+          </tr>
+          <tr>
+              <td>poItemID</td>
+              <td>The unique ID of the PO item associated with this record.</td>
+          </tr>
+      </tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/parts?tasks=5,10,12"
+method: GET
+headers:
+  Content-Type: application/json
+queryParams:
+  - key: tasks
+    value: 5,10,12
+    description: This parameter is used to get parts attached to a list of tasks.
+      This parameter accepts a comma delimited list of task IDs.
+  - key: parts
+    value: 121,112,553
+    disabled: true
+    description: This parameter is used to get only certain. This parameter accepts
+      a comma delimited list of task IDs.
+  - key: cursor
+    value: "137"
+    disabled: true
+    description: This parameter is a cursor that selects what id you want to start
+      receiving results at. e.g. passing 137 here will only get you assets with
+      an id greater than 137.
+  - key: limit
+    value: "100"
+    disabled: true
+    description: This parameter is a result limiter. The default is set to return no
+      more than 100 results at one time.
+scripts:
+  - type: afterResponse
+    code: |
+      pm.test("response exists", () => {
+          pm.response.to.have.status(200);
+      });
+    language: text/javascript
+examples: ./.resources/Get all attached parts.resources/examples
+order: 2000

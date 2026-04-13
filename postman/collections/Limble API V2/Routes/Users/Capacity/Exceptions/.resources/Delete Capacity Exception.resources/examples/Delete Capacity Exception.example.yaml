@@ -1,0 +1,15 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/users/capacity/exceptions/:userID/:\
+    exceptionID"
+  method: DELETE
+  pathVariables:
+    userID: ""
+    exceptionID: ""
+response:
+  statusCode: 204
+  statusText: No Content
+  body:
+    type: text
+    content: ""
+order: 1000

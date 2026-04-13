@@ -1,0 +1,58 @@
+$kind: http-request
+description: >-
+  This request creates a new Priority.
+
+
+  <strong>When providing priorityLevel or isDefault, calls to this endpoint may
+  reorder or otherwise adjust <em>other</em> priorities.</strong>
+
+
+  <table class="apiTable">
+  	<thead>
+  		<tr>
+  			<th>Parameter</th>
+  			<th>Type</th>
+  			<th>Required?</th>
+  			<th>Description</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr>
+  			<td>name</td>
+  			<td>String</td>
+  			<td>Required</td>
+  			<td>The title of this priority.</td>
+  		</tr>
+  		<tr>
+  			<td>priorityLevel</td>
+  			<td>Int</td>
+  			<td>Required</td>
+  			<td>What level is this priority? If we're inserting a priority in the middle of the levels, priorities with a priorityLevel equal-to or greater-than the specified priorityLevel will have their priorityLevel incremented by one. This can only be between the numbers 1 and the current highest priorityLevel + 1.</td>
+  		</tr>
+  		<tr>
+  			<td>color</td>
+  			<td>String</td>
+  			<td>Optional</td>
+  			<td>This is the color that will be shown on all tasks with this priority. Default is #429b1f</td>
+  		</tr>
+  		<tr>
+  			<td>isDefault</td>
+  			<td>Boolean</td>
+  			<td>Optional</td>
+  			<td>Should this be the default priority that tasks are assigned to when a priority is not specified? Default is false. If isDefault is true, then any other priorities will have their isDefault set to false.</td>
+  		</tr>
+  	</tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/priorities"
+method: POST
+body:
+  type: json
+  content: |
+    {
+        "name": "Super Extreme",
+        "priorityLevel": 5,
+        "color": "#000000",
+        "isDefault": true
+    }
+examples: ./.resources/New Priority.resources/examples
+order: 3000

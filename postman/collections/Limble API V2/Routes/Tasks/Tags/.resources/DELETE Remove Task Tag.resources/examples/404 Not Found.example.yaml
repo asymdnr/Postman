@@ -1,0 +1,19 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/tags/:tagRaw"
+  method: DELETE
+  pathVariables:
+    taskID: ""
+    tagRaw: ""
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "message": "Tag not found"
+      }
+order: 2000

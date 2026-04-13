@@ -1,0 +1,57 @@
+$kind: http-request
+description: |-
+  Creates a part category to help you organize your parts.
+
+  <table class="apiTable">
+  	<thead>
+  		<tr>
+  			<th>Parameter</th>
+  			<th>Type</th>
+  			<th>Required?</th>
+  			<th>Description</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr class="even">
+  			<td>name</td>
+  			<td>string</td>
+  			<td>Required</td>
+  			<td>The name of your new part category (i.e. "Lawn Mower Parts")</td>
+  		</tr>
+  	</tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/parts/categories/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+    	"name": "{{categoryName}}"
+    }
+scripts:
+  - type: beforeRequest
+    code: pm.globals.set('categoryName', `new category - ${Math.floor(Math.random()
+      * 10000000)}`);
+    language: text/javascript
+  - type: afterResponse
+    code: >
+      const categoryID = pm.response.json().categoryID;
+
+
+      pm.test("response is created", () => {
+          pm.response.to.have.status(201);
+      });
+
+
+      pm.test("location header is valid", () => {
+          const locationHeader = postman.getResponseHeader('Location')
+          pm.expect(locationHeader).to.eql(`/v2/parts/categories/?categories=${categoryID}`);
+      });
+
+
+      pm.globals.set('categoryID', categoryID);
+    language: text/javascript
+examples: ./.resources/Create Part Category.resources/examples
+order: 1000

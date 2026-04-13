@@ -1,0 +1,34 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/instructions/:instructionID"
+  method: GET
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    instructionID: "12345"
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: >-
+      {
+        "instructionID": 12345,
+        "taskID": 67890,
+        "parentInstructionID": 0,
+        "instruction": "Check oil levels and record reading",
+        "type": 3,
+        "instructionFiles": [
+          {
+            "fileName": "oil_check_guide.pdf",
+            "downloadLink": "https://example.com/files/oil_check_guide.pdf?expires=1234567890"
+          }
+        ],
+        "response": "Oil level at 75%"
+      }
+order: 1000

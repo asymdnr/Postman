@@ -1,0 +1,169 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/assets/?limit=5&orderBy=-lastEdited\
+    &page=3"
+  method: GET
+  queryParams:
+    - key: assets
+      value: "1"
+      disabled: true
+      description: This parameter is used to only get specific Assets. This parameter
+        expects a comma delimited list of Asset IDs.
+    - key: name
+      value: test%
+      disabled: true
+      description: This is a parameter used to string search for a name or partial
+        name of an asset this parameter expects a string with the wildcard %.
+    - key: locations
+      value: "73"
+      disabled: true
+      description: This parameter is used to only get Assets at a specific group of
+        Locations. This parameter accepts a comma delimited list of Location
+        IDs.
+    - key: start
+      value: "1541796014"
+      disabled: true
+      description: This parameter is used to only get Assets that were last edited
+        after the unix timestamp passed into the start parameter. For example,
+        all Assets that were last edited after April 18th, 2018.
+    - key: end
+      value: "1541796014"
+      disabled: true
+      description: This parameter is used to only get Assets that were last edited
+        *before* the unix timestamp passed into the end parameter.
+    - key: cursor
+      value: "0"
+      disabled: true
+      description: This parameter is a cursor that selects what ID you want to start
+        receiving results at. Without ordering, this will return results with an
+        ID greater than the value of cursor. With ordering, this will return
+        results starting at the next item in the order, regardless of whether
+        its ID is greater than or lesser than the value of cursor.
+    - key: limit
+      value: "5"
+      description: This parameter is a result limiter. The default is set to return no
+        more than 100 results at one time.
+    - key: parentAssetID
+      value: "2317"
+      disabled: true
+      description: This parameter can be used to get asset(s) children using the
+        Parent's ID. This parameter accepts a comma delimited list of Asset IDs.
+    - key: orderBy
+      value: -lastEdited
+      description: This parameter is used to order results by their lastEdited
+        property instead of the default ordering by ascending assetID. CANNOT be
+        provided alongside the cursor parameter. to paginate in this ordering,
+        use the start or end parameters.
+    - key: page
+      value: "3"
+      description: This parameter is used to paginate results based on the limit.
+        Refer to Pagination section for more information.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Security-Policy: "default-src 'self';base-uri
+      'self';block-all-mixed-content;font-src 'self' https:
+      data:;frame-ancestors 'self';img-src 'self' data:;object-src
+      'none';script-src 'self';script-src-attr 'none';style-src 'self' https:
+      'unsafe-inline';upgrade-insecure-requests"
+    X-DNS-Prefetch-Control: off
+    Expect-CT: max-age=0
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: no-referrer
+    X-XSS-Protection: "0"
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Last-Page: /v2/assets/?limit=5&orderBy=-lastEdited&page=279
+    Next-Page: /v2/assets/?limit=5&orderBy=-lastEdited&page=4
+    Previous-Page: /v2/assets/?limit=5&orderBy=-lastEdited&page=2
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "1617"
+    ETag: W/"651-8iDwADU8ivKaURXdUIfkE+U+neA"
+    Date: Wed, 06 Oct 2021 16:01:44 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: >-
+      [
+          {
+              "assetID": 10836,
+              "name": "Health Berkshire",
+              "startedOn": 1632949149,
+              "lastEdited": 1632949149,
+              "parentAssetID": 0,
+              "locationID": 205,
+              "hoursPerWeek": 40,
+              "meta": {
+                  "fields": "/v2/assets/fields/?assets=10836",
+                  "tasks": "/v2/tasks/?assets=10836"
+              },
+              "workRequestPortal": "https://app.limblestaging.com/#!/problem/fdle6w36/205/10836",
+              "image": []
+          },
+          {
+              "assetID": 10835,
+              "name": "Walks",
+              "startedOn": 1632949148,
+              "lastEdited": 1632949149,
+              "parentAssetID": 0,
+              "locationID": 205,
+              "hoursPerWeek": 40,
+              "meta": {
+                  "fields": "/v2/assets/fields/?assets=10835",
+                  "tasks": "/v2/tasks/?assets=10835"
+              },
+              "workRequestPortal": "https://app.limblestaging.com/#!/problem/fdle6w36/205/10835",
+              "image": []
+          },
+          {
+              "assetID": 10834,
+              "name": "Executive Springs Phased",
+              "startedOn": 1632949148,
+              "lastEdited": 1632949148,
+              "parentAssetID": 0,
+              "locationID": 205,
+              "hoursPerWeek": 40,
+              "meta": {
+                  "fields": "/v2/assets/fields/?assets=10834",
+                  "tasks": "/v2/tasks/?assets=10834"
+              },
+              "workRequestPortal": "https://app.limblestaging.com/#!/problem/fdle6w36/205/10834",
+              "image": []
+          },
+          {
+              "assetID": 10833,
+              "name": "functionalities",
+              "startedOn": 1632949148,
+              "lastEdited": 1632949148,
+              "parentAssetID": 0,
+              "locationID": 205,
+              "hoursPerWeek": 40,
+              "meta": {
+                  "fields": "/v2/assets/fields/?assets=10833",
+                  "tasks": "/v2/tasks/?assets=10833"
+              },
+              "workRequestPortal": "https://app.limblestaging.com/#!/problem/fdle6w36/205/10833",
+              "image": []
+          },
+          {
+              "assetID": 10832,
+              "name": "AGP magnetic Handmade",
+              "startedOn": 1632949148,
+              "lastEdited": 1632949148,
+              "parentAssetID": 0,
+              "locationID": 205,
+              "hoursPerWeek": 40,
+              "meta": {
+                  "fields": "/v2/assets/fields/?assets=10832",
+                  "tasks": "/v2/tasks/?assets=10832"
+              },
+              "workRequestPortal": "https://app.limblestaging.com/#!/problem/fdle6w36/205/10832",
+              "image": []
+          }
+      ]
+order: 1000

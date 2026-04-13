@@ -1,0 +1,20 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/tags/:tagName"
+  method: DELETE
+  pathVariables:
+    - key: tagName
+      value: "@Food Safety"
+      description: Tag name to delete (URL encode spaces and special characters)
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "message": "Tag not found"
+      }
+order: 2000

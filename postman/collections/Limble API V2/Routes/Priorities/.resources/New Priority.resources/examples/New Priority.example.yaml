@@ -1,0 +1,36 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/priorities"
+  method: POST
+  body:
+    type: json
+    content: |
+      {
+          "name": "Super Extreme",
+          "priorityLevel": 5,
+          "color": "#000000",
+          "isDefault": true
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    X-DNS-Prefetch-Control: off
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "18"
+    ETag: W/"12-an+BZYda15gv3ObjJDuEcKPwesY"
+    Date: Tue, 23 Mar 2021 20:50:44 GMT
+    Connection: keep-alive
+  body:
+    type: json
+    content: |-
+      {
+          "priorityID": 113
+      }
+order: 1000

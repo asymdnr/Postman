@@ -1,0 +1,50 @@
+$kind: http-request
+description: >-
+  Gets capacity exception records across users for the requested locations.
+
+
+  `capacityMinutes` is the user's available capacity **per day** for each date
+  in the exception range.
+
+
+  Query behavior:
+
+  - `locations` is required.
+
+  - `users` optionally narrows results to specific users.
+
+  - `startDate`/`endDate` filter by date overlap (YYYY-MM-DD).
+
+  - `cursor`/`limit` paginate results.
+
+
+  Response fields include:
+
+  `exceptionID`, `userID`, `createdByUserID`, `exceptionStartDate`,
+  `exceptionEndDate`, `capacityMinutes`, `hoursPerDay`, `minutesPerDay`,
+  `exceptionTitle`, `exceptionNotes`.
+url: "{{protocol}}://{{server}}:{{port}}/v2/users/capacity/exceptions?locations\
+  =1,3&users=42,57&startDate=2026-01-01&endDate=2026-01-31&cursor=0&limit=100"
+method: GET
+queryParams:
+  - key: locations
+    value: 1,3
+    description: Required comma-separated location IDs.
+  - key: users
+    value: 42,57
+    description: Optional comma-separated user IDs filter.
+  - key: startDate
+    value: 2026-01-01
+    description: Optional lower date bound (YYYY-MM-DD) for overlap filtering.
+  - key: endDate
+    value: 2026-01-31
+    description: Optional upper date bound (YYYY-MM-DD) for overlap filtering. Must
+      be >= startDate when both are present.
+  - key: cursor
+    value: "0"
+    description: Optional ID cursor for keyset pagination.
+  - key: limit
+    value: "100"
+    description: Optional max rows per page.
+examples: ./.resources/Get Capacity Exceptions by Location.resources/examples
+order: 2000

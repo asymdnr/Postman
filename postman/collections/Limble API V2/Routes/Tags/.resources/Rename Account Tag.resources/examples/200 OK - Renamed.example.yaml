@@ -1,0 +1,32 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/tags"
+  method: PATCH
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "oldName": "@Food Safety",
+        "newName": "@Food & Safety"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "renamed": true,
+        "from": "@Food Safety",
+        "to": "@Food & Safety",
+        "tags": [
+          "@Food & Safety;",
+          "@Quality;",
+          "@Safety;"
+        ]
+      }
+order: 1000

@@ -1,0 +1,10 @@
+$kind: http-request
+description: This request deletes manual log entries (sourceID=4).
+url: "{{protocol}}://{{server}}:{{port}}/v2/parts/logs/:logID"
+method: DELETE
+pathVariables:
+  - key: logID
+    value: "21524"
+    description: The ID of the log to be deleted.
+examples: ./.resources/Delete Part Log.resources/examples
+order: 4000

@@ -1,0 +1,42 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/parts/vendors/associations"
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json; charset=utf-8
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+  body:
+    type: json
+    content: |-
+      [
+          {
+              "relationID": 1,
+              "partID": 158,
+              "vendorID": 12,
+              "vendorPartNumber": "ABC-001",
+              "partPrice": 9.99,
+              "createdAt": 1700000000,
+              "updatedAt": 1700100000,
+              "partName": "Air Filter",
+              "number": "25x25x1",
+              "locationID": 163,
+              "vendorName": "Acme Supply Co."
+          },
+          {
+              "relationID": 2,
+              "partID": 159,
+              "vendorID": 34,
+              "vendorPartNumber": null,
+              "partPrice": null,
+              "createdAt": 1700050000,
+              "updatedAt": 1700050000,
+              "partName": "Oil Filter",
+              "number": "OF-500",
+              "locationID": 163,
+              "vendorName": "Parts Depot"
+          }
+      ]
+order: 1000

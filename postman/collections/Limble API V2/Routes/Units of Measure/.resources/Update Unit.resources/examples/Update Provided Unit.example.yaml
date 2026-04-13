@@ -1,0 +1,32 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/uom/:unitCode"
+  method: PATCH
+  pathVariables:
+    - key: unitCode
+      value: each
+      description: The unit identifier.
+  body:
+    type: json
+    content: "{\r
+
+      \    \"abbreviation\": \"EA\"\r
+
+      }"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+          "unitCode": "each",
+          "defaultAbbreviation": "ea",
+          "abbreviation": "EA",
+          "name": "Each",
+          "isCustom": false,
+          "category": "count"
+      }
+order: 2000

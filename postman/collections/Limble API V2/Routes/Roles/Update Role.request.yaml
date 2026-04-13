@@ -1,0 +1,54 @@
+$kind: http-request
+description: |-
+  This request updates a Role's name.
+
+  <table class="apiTable">
+  	<thead>
+  		<tr>
+  			<th>Parameter</th>
+  			<th>Type</th>
+  			<th>Required?</th>
+  			<th>Description</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr>
+  			<td>name</td>
+  			<td>String</td>
+  			<td>Required</td>
+  			<td>The name of the role.</td>
+  		</tr>
+  	</tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/roles/:roleID"
+method: PATCH
+headers:
+  Content-Type: application/json
+pathVariables:
+  - key: roleID
+    value: "{{roleID}}"
+    description: The roleID of the role you are updating.
+body:
+  type: text
+  content: |-
+    {
+    	"name": "Manager"
+    }
+scripts:
+  - type: beforeRequest
+    code: >
+      const updatedRoleName = `updated_role_name_${Math.floor(Math.random() *
+      10000000)}`;
+
+
+      pm.globals.set('updatedRoleName', updatedRoleName);
+    language: text/javascript
+  - type: afterResponse
+    code: "pm.test(\"response is ok\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });"
+    language: text/javascript
+examples: ./.resources/Update Role.resources/examples
+order: 3000

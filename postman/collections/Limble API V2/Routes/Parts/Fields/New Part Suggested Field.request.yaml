@@ -1,0 +1,76 @@
+$kind: http-request
+description: >-
+  This request adds a new Field to the list of Suggested Fields that can later
+  be attached to Parts.
+
+
+  <table class="apiTable">
+  	<thead>
+  		<tr>
+  			<th>Parameter</th>
+  			<th>Type</th>
+  			<th>Required?</th>
+  			<th>Description</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr>
+  			<td>locationID</td>
+  			<td>Int</td>
+  			<td>Required</td>
+  			<td>The location ID of the Location to add the new Field to.</td>
+  		</tr>
+  		<tr>
+  			<td>name</td>
+  			<td>String</td>
+  			<td>Required</td>
+  			<td>The name of the new Field. <b>Some custom field names such as "Part Name" are not allowed and reserved for internal use. This will result in a 409 error.</b></td>
+  		</tr>
+  		<tr>
+  			<td>fieldType</td>
+  			<td>Int</td>
+  			<td>Required</td>
+  			<td>The type of the new Field. You can choose from Text (1), Date (2), Pictures (3), Documents (4), Number (5), Currency (6).</td>
+  		</tr>
+  	</tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/parts/fields/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |
+    {
+    	"locationID": 163,
+    	"name": "Manufacturer Part Number",
+    	"fieldTypeID": 1
+    }
+scripts:
+  - type: beforeRequest
+    code: >
+      var fieldName = () => `new part field - ${Math.floor(Math.random() *
+      10000000)}`;
+
+      pm.globals.set('newPartFieldName', fieldName());
+    language: text/javascript
+  - type: afterResponse
+    code: >
+      const partFieldID = pm.response.json().fieldID;
+
+
+      pm.test("response is created", () => {
+          pm.response.to.have.status(201);
+      });
+
+
+      pm.test("location header is valid", () => {
+          const locationHeader = postman.getResponseHeader('Location')
+          pm.expect(locationHeader).to.eql(`/v2/parts/fields/?fields=${partFieldID}`);
+      })
+
+
+      pm.globals.set('partFieldID', partFieldID);
+    language: text/javascript
+examples: ./.resources/New Part Suggested Field.resources/examples
+order: 5000

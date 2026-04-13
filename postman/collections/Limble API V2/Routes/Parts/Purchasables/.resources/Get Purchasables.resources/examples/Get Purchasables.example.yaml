@@ -1,0 +1,78 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/parts/:partID/purchasables"
+  method: GET
+  pathVariables:
+    partID: "1"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Date: Wed, 18 Dec 2024 22:14:08 GMT
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "2"
+    Connection: keep-alive
+    content-security-policy: "default-src 'self';base-uri
+      'self';block-all-mixed-content;font-src 'self' https:
+      data:;frame-ancestors 'self';img-src 'self' data:;object-src
+      'none';script-src 'self';script-src-attr 'none';style-src 'self' https:
+      'unsafe-inline';upgrade-insecure-requests"
+    x-dns-prefetch-control: off
+    expect-ct: max-age=0
+    x-frame-options: SAMEORIGIN
+    strict-transport-security: max-age=31536000; includeSubDomains; preload
+    x-download-options: noopen
+    x-content-type-options: nosniff
+    x-permitted-cross-domain-policies: none
+    referrer-policy: no-referrer
+    x-xss-protection: "0"
+    api-feedback-link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    x-ratelimit-limit: "4000"
+    x-ratelimit-minute-limit: "360"
+    x-ratelimit-remaining: "3992"
+    x-ratelimit-first-call: "1734557517"
+    x-ratelimit-minute-remaining: "359"
+    x-ratelimit-minute-first-call: "1734560048"
+    etag: W/"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w"
+    Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0
+    CF-Cache-Status: DYNAMIC
+    Server: cloudflare
+    CF-RAY: 8f42810c4f516c0d-DFW
+  body:
+    type: json
+    content: "[\r
+
+      \    {\r
+
+      \        \"purchasableID\": 10,\r
+
+      \        \"partID\": 1,\r
+
+      \        \"name\": \"Drum of 10 liters\",\r
+
+      \        \"size\": 10,\r
+
+      \        \"orderUnitCode\": \"drum\",\r
+
+      \        \"sizeUnitCode\": \"liter\"\r
+
+      \    },\r
+
+      \    {\r
+
+      \        \"purchasableID\": 15,\r
+
+      \        \"partID\": 1,\r
+
+      \        \"name\": \"By the gallon\",\r
+
+      \        \"size\": 1,\r
+
+      \        \"orderUnitCode\": \"gallon\",\r
+
+      \        \"sizeUnitCode\": \"gallon\"\r
+
+      \    }\r
+
+      ]"
+order: 1000

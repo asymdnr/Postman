@@ -1,0 +1,66 @@
+$kind: http-request
+description: >-
+  This request updates an existing capacity exception and returns the updated
+  resource.
+
+
+  `capacityMinutes` means the user's available capacity **per day** for each day
+  in the exception date/range. It is **not** the total duration of the exception
+  range.
+
+
+  Examples:
+
+  - `capacityMinutes: 0` => unavailable that day (or each day in the range).
+
+  - `capacityMinutes: 480` => 8 hours available per day.
+
+
+  Return data description
+
+
+  Property	Description
+
+  exceptionID	Unique ID for the capacity exception record.
+
+  userID	The user the exception applies to.
+
+  createdByUserID	The user who created the exception.
+
+  exceptionStartDate	The first date the exception applies (YYYY-MM-DD).
+
+  exceptionEndDate	The last date the exception applies (YYYY-MM-DD). Null when
+  the exception is only for one day.
+
+  capacityMinutes	Allowed capacity in minutes **per day** for the exception
+  date/range.
+
+  hoursPerDay	Derived whole-hour portion of capacityMinutes.
+
+  minutesPerDay	Derived minute remainder after hoursPerDay.
+
+  exceptionTitle	Optional short title for the exception.
+
+  exceptionNotes	Optional notes/details for the exception.
+url: "{{protocol}}://{{server}}:{{port}}/v2/users/capacity/exceptions/:userID/:\
+  exceptionID"
+method: PATCH
+headers:
+  - key: Content-Type
+    value: application/json
+    description: JSON request body
+pathVariables:
+  userID: ""
+  exceptionID: ""
+body:
+  type: json
+  content: |-
+    {
+      "exceptionStartDate": "2026-01-10",
+      "exceptionEndDate": "2026-01-20",
+      "capacityMinutes": 240,
+      "exceptionTitle": "Updated availability",
+      "exceptionNotes": "Shortened due to meetings"
+    }
+examples: ./.resources/Update Capacity Exception.resources/examples
+order: 5000

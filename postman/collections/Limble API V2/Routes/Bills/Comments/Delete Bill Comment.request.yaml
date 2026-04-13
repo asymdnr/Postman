@@ -1,0 +1,21 @@
+$kind: http-request
+description: |-
+  Deletes a Bill comment.
+
+  Parameters:
+
+  | Parameter | In | Type | Required | Default | Description |
+  |---|---|---|---|---|---|
+  | billID | path | integer | yes |  | Bill identifier |
+  | commentID | path | integer | yes |  | Comment identifier |
+
+  Responses:
+  - 200 OK: Deleted.
+  - 404 Not Found: Comment not found.
+url: "{{protocol}}://{{server}}:{{port}}/v2/bills/:billID/comments/:commentID"
+method: DELETE
+pathVariables:
+  billID: "2001"
+  commentID: "12"
+examples: ./.resources/Delete Bill Comment.resources/examples
+order: 5000

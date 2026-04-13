@@ -1,0 +1,20 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/tags/:tagRaw"
+  method: DELETE
+  pathVariables:
+    taskID: ""
+    tagRaw: ""
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: >-
+      {
+        "removed": null,
+        "message": "Invalid tag name. A tag must have exactly one leading @ and non-empty content after normalization."
+      }
+order: 3000

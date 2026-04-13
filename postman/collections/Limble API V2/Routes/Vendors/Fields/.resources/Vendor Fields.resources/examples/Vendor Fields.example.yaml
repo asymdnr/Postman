@@ -1,0 +1,93 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/vendors/fields/"
+  method: GET
+  queryParams:
+    - key: fields
+      value: 1,2
+      disabled: true
+      description: This parameter is used to only get specific fields by ID. This
+        parameter expects a comma delimited list of fieldIDs.
+    - key: vendors
+      value: "1"
+      disabled: true
+      description: This parameter is used to only get specific Vendors. This parameter
+        expects a comma delimited list of Vendor IDs.
+    - key: start
+      value: "1555105636"
+      disabled: true
+      description: This parameter is used to only get vendor fields for vendors that
+        were last edited after the unix timestamp passed into the start
+        parameter. For example, all Vendors that were last edited after April
+        18th, 2018.
+    - key: end
+      value: "1555105636"
+      disabled: true
+      description: This parameter is used to only get vendor fields for vendors that
+        were last edited *before* the unix timestamp passed into the end
+        parameter.
+    - key: cursor
+      value: "0"
+      disabled: true
+      description: This parameter is a cursor that selects what fieldID you want to
+        start receiving results at. e.g. passing 137 here will only get you
+        vendor fields with an id greater than 137.
+    - key: limit
+      value: "100"
+      disabled: true
+      description: This parameter is a result limiter. The default is set to return no
+        more than 100 results at one time.
+    - key: page
+      value: "1"
+      disabled: true
+      description: This parameter is used to paginate results based on the limit.
+        Refer to Pagination section for more information.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-DNS-Prefetch-Control: off
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "296"
+    ETag: W/"128-30nvK1/DAJV5u2vCQJQg7f36ifY"
+    Date: Tue, 27 Aug 2019 17:02:25 GMT
+    Connection: keep-alive
+  body:
+    type: json
+    content: >-
+      [
+          {
+              "fieldID": 1,
+              "vendorID": 1,
+              "fieldName": "pic",
+              "value": null,
+              "valueID": 1,
+              "fieldType": "Pictures",
+              "lastEdited": 1567139818,
+              "locationID": 330,
+              "files": [
+                  {
+                      "fileName": "41527325_10157931415518298_4759790604056002560_n.jpg",
+                      "link": "https://content.limblecmms.com/upload-36/vendors/330/1/1/41527325_10157931415518298_4759790604056002560_n.jpg?Expires=1572459681&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jb250ZW50LmxpbWJsZWNtbXMuY29tL3VwbG9hZC0zNi92ZW5kb3JzLzMzMC8xLzEvNDE1MjczMjVfMTAxNTc5MzE0MTU1MTgyOThfNDc1OTc5MDYwNDA1NjAwMjU2MF9uLmpwZyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTU3MjQ1OTY4MX19fV19&Signature=Iyd-KhXQvTp4sovnX~HMe4Iim~MhDdJlNb8B6nxgeiq1wmW-iOuS3lR2ZyFUHUu~02q3JQSvXvJZSeTUEkEdzt9V8oFnIPBb1n5tMgzK2SafvkOKZcOnGNQdYd3NW~EiKugA9xsMKVlfExyYbaGT6tKDiASUEj0NKwy5xjjN1DlniFzM0jW1M2X6F6--w0H2XbiKKfUJQzmgWHVM8nlk4vVik153NAGSjetwOSc5uAw1FJQ~PlaU92MbalE2d9F7cQonT9RHJmnf03lF9ww8vlMUHEfJ-PBHTJJeiAXgymggdQk60OKFQ3vf2CJJoDbr2Bi7an911UrNXs8KB1pfiw__&Key-Pair-Id=APKAIH5A42E3EPKJRHFQ"
+                  }
+              ]
+          },
+          {
+              "fieldID": 2,
+              "vendorID": 1,
+              "field": "testText",
+              "value": "test",
+              "valueID": 2,
+              "fieldType": "Text",
+              "locationID": 330,
+              "files": null,
+              "lastEdited": 1555105636
+          }
+      ]
+order: 1000

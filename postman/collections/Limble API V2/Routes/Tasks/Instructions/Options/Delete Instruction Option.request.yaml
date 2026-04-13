@@ -1,0 +1,14 @@
+$kind: http-request
+description: This request will delete an option from a Dropdown or Option instruction.
+url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/instructions/:instructionID/o\
+  ptions/:instructionOptionID"
+method: DELETE
+pathVariables:
+  - key: instructionID
+    value: "49343"
+    description: instructionID of the instruction whose option you are deleting.
+  - key: instructionOptionID
+    value: "7097"
+    description: instructionOptionID of the instruction option you are deleting.
+examples: ./.resources/Delete Instruction Option.resources/examples
+order: 3000

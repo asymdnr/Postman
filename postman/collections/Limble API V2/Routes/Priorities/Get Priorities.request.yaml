@@ -1,0 +1,44 @@
+$kind: http-request
+description: >-
+  This request returns your priorities in Limble.  
+
+
+  <strong>Return data description</strong>
+
+
+  <table>
+      <thead>
+          <tr>
+              <th>Property</th>
+              <th>Description</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>priorityID</td>
+              <td>The priority's unique identifier.</td>
+          </tr>
+          <tr>
+              <td>name</td>
+              <td>The full name of the priority.</td>
+          </tr>
+          <tr>
+              <td>priorityLevel</td>
+              <td>A number representing ordering or indicator of severity.</td>
+          </tr>
+          <tr>
+              <td>color</td>
+              <td>A hex-color string that will be used to color tasks associated to this priority.</td>
+          </tr>
+          <tr>
+              <td>isDefault</td>
+              <td>A boolean representing whether or not this is the priority that will be associated to tasks by default.</td>
+          </tr>
+      </tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/priorities?priorities=118"
+method: GET
+queryParams:
+  priorities: "118"
+examples: ./.resources/Get Priorities.resources/examples
+order: 1000

@@ -1,0 +1,28 @@
+$kind: http-request
+description: >-
+  Uploads a main image to a task.
+
+
+  Parameters:
+
+
+  | Parameter | In | Type | Required | Default | Description |
+
+  |---|---|---|---|---|---|
+
+  | taskID | path | integer | yes |  | Task identifier |
+
+  | image | form-data | file | yes |  | Image file (≤ 50MB). Types: JPEG, PNG,
+  JPG, GIF |
+url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/image"
+method: PUT
+pathVariables:
+  taskID: "555"
+body:
+  type: formdata
+  content:
+    - type: file
+      key: image
+      src: []
+examples: ./.resources/Upload Task Main Image.resources/examples
+order: 3000

@@ -1,0 +1,92 @@
+$kind: http-request
+description: |-
+  This request returns a list of Assets with top level information such as name, last edited, etc.
+
+  **Note:** this endpoint supports pagination. Please refer to the [<b>Pagination</b>](#pagination) section for more information.
+
+  <p><b>Return data description</b></p>
+
+  <p><br><br></p><p><br><br><br></p><table><tbody><tr><th>Property</th><th>Description</th></tr><tr><td><div>meta</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Requests to gather more information on an Asset such as Fields for the Asset or what Tasks are assigned to the Asset</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>startedOn</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The date when this Asset was started on. This property is used to help determine runtime which is used in MTBF.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>lastEdited</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A UNIX timestamp of when this Asset was last edited.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>parentAssetID</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The Asset that is the parent of this Asset. If the value is 0 that means this Asset does not have a parent.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>locationID</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The ID of the location this asset is located at.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>hoursPerWeek</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The number of hours this Asset runs per week. This is used to determine runtime which is used in MTBF. If the value is -1 then the Asset uses the Location's hoursPerWeek setting.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>workRequestPortal</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The url work requestors can use to submit problems with this Asset.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>image</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Array of objects that have a file name and a link you can use to download that image. All links are only valid for 15 minutes, a new call will generate a new link.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>geoLocation</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The location of an asset on a Map.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr></tbody></table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/assets/"
+method: GET
+queryParams:
+  - key: assets
+    value: "1"
+    disabled: true
+    description: This parameter is used to only get specific Assets. This parameter
+      expects a comma delimited list of Asset IDs.
+  - key: name
+    value: "%test%"
+    disabled: true
+    description: This is a parameter used to string search for a name or partial
+      name of an asset this parameter expects a string with the wildcard %.
+  - key: locations
+    value: "73"
+    disabled: true
+    description: This parameter is used to only get Assets at a specific group of
+      Locations. This parameter accepts a comma delimited list of Location IDs.
+  - key: start
+    value: "1541796014"
+    disabled: true
+    description: This parameter is used to only get Assets that were last edited
+      after the unix timestamp passed into the start parameter. For example, all
+      Assets that were last edited after April 18th, 2018.
+  - key: end
+    value: "1541796014"
+    disabled: true
+    description: This parameter is used to only get Assets that were last edited
+      *before* the unix timestamp passed into the end parameter.
+  - key: cursor
+    value: "0"
+    disabled: true
+    description: This parameter is a cursor that selects what ID you want to start
+      receiving results at. Without ordering, this will return results with an
+      ID greater than the value of cursor. With ordering, this will return
+      results starting at the next item in the order, regardless of whether its
+      ID is greater than or lesser than the value of cursor.
+  - key: limit
+    value: "1"
+    disabled: true
+    description: This parameter is a result limiter. The default is set to return no
+      more than 100 results at one time.
+  - key: parentAssetID
+    value: "2317"
+    disabled: true
+    description: This parameter can be used to get asset(s) children using the
+      Parent's ID. This parameter accepts a comma delimited list of Asset IDs.
+  - key: orderBy
+    value: -lastEdited
+    disabled: true
+    description: This parameter is used to order results by their lastEdited
+      property instead of the default ordering by ascending assetID. CANNOT be
+      provided alongside the cursor parameter. to paginate in this ordering, use
+      the start or end parameters.
+  - key: page
+    value: "1"
+    disabled: true
+    description: This parameter is used to paginate results based on the limit.
+      Refer to Pagination section for more information.
+  - key: geoLocation
+    value: "true"
+    disabled: true
+    description: This parameter is used to filter results that contain a geoLocation
+      property. By default it is false and will return **all** assets with and
+      without geoLocation property. If true, it will only return assets with a
+      geoLocation property.
+scripts:
+  - type: afterResponse
+    code: |-
+      // const firstAsset = pm.response.json()[0];
+
+      // pm.test('gets assets', () => {
+      //   pm.expect(firstAsset.name).to.eql('test111');
+      // });
+
+      // pm.globals.set('assetID', firstAsset.id);
+
+      pm.test("response is created", () => {
+          pm.response.to.have.status(200);
+      });
+    language: text/javascript
+examples: ./.resources/Assets.resources/examples
+order: 6000

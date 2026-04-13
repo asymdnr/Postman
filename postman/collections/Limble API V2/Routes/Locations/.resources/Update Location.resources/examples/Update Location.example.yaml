@@ -1,0 +1,82 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/locations/:locationID"
+  method: PATCH
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    - key: locationID
+      value: "2187"
+      description: locationID of the location you are updating.
+  body:
+    type: json
+    content: "{\r
+
+      \    \"name\": \"NYC\",\r
+
+      \    \"timezone\": \"America/Denver\",\r
+
+      \    \"phone\": \"8015555555\",\r
+
+      \    \"address\": \"3290 W Mayflower Ave\",\r
+
+      \    \"address2\": \"Lehi, Utah, 84043\",\r
+
+      \    \"weeklyOperationHours\": 41,\r
+
+      \    \"geoLocation\": {\r
+
+      \        \"type\": \"Feature\",\r
+
+      \        \"properties\": {\r
+
+      \            \"name\": \"Salt Lake City\"\r
+
+      \        },\r
+
+      \        \"geometry\": {\r
+
+      \            \"type\": \"Point\",\r
+
+      \            \"coordinates\": [\r
+
+      \                -111.9012451171875,\r
+
+      \                40.76962180287486\r
+
+      \            ]\r
+
+      \        }\r
+
+      \    },\r
+
+      \    \"currencyCode\": \"USD\"\r
+
+      }"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Security-Policy: "default-src 'self';base-uri
+      'self';block-all-mixed-content;font-src 'self' https:
+      data:;frame-ancestors 'self';img-src 'self' data:;object-src
+      'none';script-src 'self';script-src-attr 'none';style-src 'self' https:
+      'unsafe-inline';upgrade-insecure-requests"
+    X-DNS-Prefetch-Control: off
+    Expect-CT: max-age=0
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: no-referrer
+    X-XSS-Protection: "0"
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Date: Thu, 24 Mar 2022 17:01:19 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+    Content-Length: "0"
+  body:
+    type: text
+    content: ""
+order: 1000

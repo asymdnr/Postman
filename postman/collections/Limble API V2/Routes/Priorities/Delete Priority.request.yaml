@@ -1,0 +1,22 @@
+$kind: http-request
+description: >-
+  <p>This call simply removes a priority from Limble.</p>
+
+  <p><strong>Things to keep in mind when using this endpoint:</strong>
+
+  <ul>
+      <li>
+          Calls to this endpoint will potentially adjust other priorities' priorityLevels.
+      </li>
+      <li>If you delete a priority that isDefault, you will not have a default priority anymore, and that may cause issues.</li>
+      <li>If you delete a priority that has tasks associated to it, those tasks will have their priority removed.</li>
+  </ul></p>
+url: "{{protocol}}://{{server}}:{{port}}/v2/priorities/:priorityID"
+method: DELETE
+pathVariables:
+  priorityID: "8"
+body:
+  type: json
+  content: ""
+examples: ./.resources/Delete Priority.resources/examples
+order: 4000

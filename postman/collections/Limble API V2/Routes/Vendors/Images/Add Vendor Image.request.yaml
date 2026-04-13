@@ -1,0 +1,23 @@
+$kind: http-request
+description: This request adds the main image to a Vendor.
+url: "{{protocol}}://{{server}}:{{port}}/v2/vendors/:vendorID/image"
+method: PUT
+pathVariables:
+  - key: vendorID
+    value: "{{vendorID}}"
+    description: The ID of the vendor you are adding the image to.
+body:
+  type: formdata
+  content:
+    - type: file
+      key: image
+      src: 4k-wallpaper-background-beautiful-853199.jpg
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("response is created", () => {
+          pm.response.to.have.status(200);
+      });
+    language: text/javascript
+examples: ./.resources/Add Vendor Image.resources/examples
+order: 1000

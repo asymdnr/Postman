@@ -1,0 +1,48 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/bills/:billID/transactions/:transac\
+    tionID"
+  method: PATCH
+  pathVariables:
+    - key: billID
+      value: "425"
+      description: The ID of the Bill for which the transaction needs to be updated.
+    - key: transactionID
+      value: "399"
+      description: The ID of the transaction which needs ot be updated.
+  body:
+    type: json
+    content: "{\r
+
+      \    \"poItemID\":358,\r
+
+      \    \"qtyReceived\": 1\r
+
+      }"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Security-Policy: "default-src 'self';base-uri
+      'self';block-all-mixed-content;font-src 'self' https:
+      data:;frame-ancestors 'self';img-src 'self' data:;object-src
+      'none';script-src 'self';script-src-attr 'none';style-src 'self' https:
+      'unsafe-inline';upgrade-insecure-requests"
+    X-DNS-Prefetch-Control: off
+    Expect-CT: max-age=0
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: no-referrer
+    X-XSS-Protection: "0"
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Date: Thu, 02 Sep 2021 20:29:21 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+    Content-Length: "0"
+  body:
+    type: text
+    content: ""
+order: 1000

@@ -1,0 +1,27 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/statuses"
+  method: POST
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "name": "Blocked",
+        "description": "Task is blocked by external dependencies",
+        "sortOrder": 3
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+    Location: /v2/statuses?statuses=10
+  body:
+    type: text
+    content: |-
+      {
+        "statusID": 10
+      }
+order: 1000

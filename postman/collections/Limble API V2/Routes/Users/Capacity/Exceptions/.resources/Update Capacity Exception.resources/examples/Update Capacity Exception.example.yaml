@@ -1,0 +1,41 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/users/capacity/exceptions/:userID/:\
+    exceptionID"
+  method: PATCH
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: JSON request body
+  pathVariables:
+    userID: ""
+    exceptionID: ""
+  body:
+    type: json
+    content: |-
+      {
+        "exceptionStartDate": "2026-01-10",
+        "exceptionEndDate": "2026-01-20",
+        "capacityMinutes": 240,
+        "exceptionTitle": "Updated availability",
+        "exceptionNotes": "Shortened due to meetings"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: json
+    content: |-
+      {
+        "exceptionID": 1201,
+        "userID": 42,
+        "createdByUserID": 1,
+        "exceptionStartDate": "2026-01-10",
+        "exceptionEndDate": "2026-01-20",
+        "capacityMinutes": 240,
+        "hoursPerDay": 4,
+        "minutesPerDay": 0,
+        "exceptionTitle": "Updated availability",
+        "exceptionNotes": "Shortened due to meetings"
+      }
+order: 1000

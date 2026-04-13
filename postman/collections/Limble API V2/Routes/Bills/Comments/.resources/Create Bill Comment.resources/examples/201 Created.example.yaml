@@ -1,0 +1,25 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/bills/:billID/comments"
+  method: POST
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    billID: "2001"
+  body:
+    type: text
+    content: |-
+      {
+        "comment": "Bill received.",
+        "showExternalUsers": true
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  body:
+    type: text
+    content: |-
+      { 
+        "commentID": "cmt_123"
+       }
+order: 1000

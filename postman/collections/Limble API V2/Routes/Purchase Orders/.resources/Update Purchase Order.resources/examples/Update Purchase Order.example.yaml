@@ -1,0 +1,42 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/po/:poID"
+  method: PATCH
+  pathVariables:
+    poID: "1"
+  body:
+    type: json
+    content: |-
+      {
+          "budgetID": 1,
+          "vendorID": 2,
+          "userID": 1,
+          "requestDescription": "We're gonna need a bigger boat.",
+          "customField1": "Test 2",
+          "customField2": "Test 5",
+          "customField3": "Test 1",
+          "customField4": "Test 56"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-DNS-Prefetch-Control: off
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "16"
+    ETag: W/"10-oV4hJxRVSENxc/wX8+mA4/Pe4tA"
+    Date: Fri, 08 Jan 2021 23:23:28 GMT
+    Connection: keep-alive
+  body:
+    type: json
+    content: |-
+      {
+          "success": true
+      }
+order: 1000

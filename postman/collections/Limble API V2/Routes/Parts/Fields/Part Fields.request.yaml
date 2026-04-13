@@ -1,0 +1,94 @@
+$kind: http-request
+description: >-
+  This request gets detailed information about custom set Part Fields.
+
+
+  This request will return an array of objects that have a file name and a link
+  you can use to download that image. All links are only valid for 15 minutes, a
+  new call will generate a new link.
+
+
+  **Note:** this endpoint supports pagination. Please refer to the
+  [**Pagination**](#pagination) section for more information.
+url: "{{protocol}}://{{server}}:{{port}}/v2/parts/fields/"
+method: GET
+queryParams:
+  - key: fields
+    value: 1,2
+    disabled: true
+    description: This parameter is used to only get specific fields by ID. This
+      parameter expects a comma delimited list of fieldIDs.
+  - key: name
+    value: "%text%"
+    disabled: true
+    description: This parameter is used to only get specific field by name. This
+      parameter expects a string full name of a field or partial name with the
+      wildcard %.
+  - key: parts
+    value: "2992"
+    disabled: true
+    description: This parameter is used to only get part fields for a specific Part.
+      This parameter expects a partID.
+  - key: start
+    value: "1580016200"
+    disabled: true
+    description: This parameter is used to only get part fields for parts that were
+      last edited after the unix timestamp passed into the start parameter.
+  - key: end
+    value: "1610602900"
+    disabled: true
+    description: This parameter is used to only get parts fields for part fields
+      that were last edited *before* the unix timestamp passed into the end
+      parameter.
+  - key: cursor
+    value: "0"
+    disabled: true
+    description: This parameter is a cursor that selects what fieldID you want to
+      start receiving results at. e.g. passing 137 here will only get you vendor
+      fields with an id greater than 137.
+  - key: limit
+    value: "5"
+    disabled: true
+    description: This parameter is a result limiter. The default is set to return no
+      more than 100 results at one time.
+  - key: value
+    value: "%3%"
+    disabled: true
+    description: This parameter is used to only get specific field by value. This
+      parameter expects a string full name of a field or partial name with the
+      wildcard %.
+  - key: locations
+    value: 38469,38472
+    disabled: true
+    description: This parameter is used to paginate results based on the limit.
+      Refer to Pagination section for more information.
+  - key: values
+    value: "27"
+    disabled: true
+    description: This parameter is used to get part fields by their valueID. This
+      parameter expects a comma delimited list of Value IDs.
+  - key: page
+    value: "1"
+    disabled: true
+scripts:
+  - type: afterResponse
+    code: "// example using pm.response.to.be*\r
+
+      pm.test(\"response must be valid and have a body\", function () {\r
+
+      \     // assert that the status code is 200\r
+
+      \     pm.response.to.be.ok; // info, success, redirection,
+      clientError,  serverError, are other variants\r
+
+      \     // assert that the response has a valid JSON body\r
+
+      \     pm.response.to.be.withBody;\r
+
+      \     pm.response.to.be.json; // this assertion also checks if a
+      body  exists, so the above check is not needed\r
+
+      });"
+    language: text/javascript
+examples: ./.resources/Part Fields.resources/examples
+order: 1000

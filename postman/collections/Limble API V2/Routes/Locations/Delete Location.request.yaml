@@ -1,0 +1,24 @@
+$kind: http-request
+description: This request removes a Location from your Limble account.  This
+  will also remove everything else at this locaiton including Assets, Parts,
+  Tasks, etc.  Be VERY careful using this call.
+url: "{{protocol}}://{{server}}:{{port}}/v2/locations/:locationID"
+method: DELETE
+headers:
+  Content-Type: application/json
+pathVariables:
+  - key: locationID
+    value: "{{locationID}}"
+    description: locationID of the location you are removing.
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"response should be okay to process\", function () { \r
+
+      \    pm.response.to.not.be.error; \r
+
+      \    pm.response.to.not.have.jsonBody(\"error\"); \r
+
+      });"
+    language: text/javascript
+examples: ./.resources/Delete Location.resources/examples
+order: 4000

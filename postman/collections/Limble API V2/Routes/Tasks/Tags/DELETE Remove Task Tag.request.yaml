@@ -1,0 +1,22 @@
+$kind: http-request
+description: |-
+  Removes a single custom tag from a task.
+
+  Path:
+  - tag: string — Tag to remove; may be raw or canonical; server normalizes.
+
+  Success Response (200):
+  - deleted: true
+  - name: string — Canonical tag (includes trailing ';').
+  - tags: string[] — Updated canonical tags.
+
+  Errors:
+  - 404: { message: 'Tag not found' }
+  - 400: { removed: null, message: string } — Invalid input.
+url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/tags/:tagRaw"
+method: DELETE
+pathVariables:
+  taskID: ""
+  tagRaw: ""
+examples: ./.resources/DELETE Remove Task Tag.resources/examples
+order: 3000

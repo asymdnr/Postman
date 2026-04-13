@@ -1,0 +1,31 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/statuses/:statusID"
+  method: PATCH
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    - key: statusID
+      value: "10"
+      description: The ID of the status to update
+  body:
+    type: json
+    content: |-
+      {
+        "name": "On Hold",
+        "description": "Task temporarily paused",
+        "sortOrder": 5
+      }
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": false,
+        "message": "Status not found"
+      }
+order: 3000

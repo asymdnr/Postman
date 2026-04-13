@@ -1,0 +1,61 @@
+$kind: http-example
+name: New Asset
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/assets/"
+  method: POST
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |
+      {
+      	"locationID": {{assetLocationID}},
+      	"name": "{{assetName}}",
+      	"hoursPerWeek": 100,
+          "geoLocation": {
+            "type": "Feature",
+            "properties": {
+              "name": "Lehi"
+            },
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -111.84906005859375,
+                40.39075031913329
+              ]
+            }
+          }
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Server: nginx
+    Date: Thu, 08 Feb 2024 19:46:07 GMT
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "15"
+    Connection: keep-alive
+    Content-Security-Policy: "default-src 'self';base-uri
+      'self';block-all-mixed-content;font-src 'self' https:
+      data:;frame-ancestors 'self';img-src 'self' data:;object-src
+      'none';script-src 'self';script-src-attr 'none';style-src 'self' https:
+      'unsafe-inline';upgrade-insecure-requests"
+    X-DNS-Prefetch-Control: off
+    Expect-CT: max-age=0
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: no-referrer
+    X-XSS-Protection: "0"
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Location: /v2/assets/?assets=2
+    ETag: W/"f-kmG8qoR1QXbUM9wWc5jDHKyJOTM"
+  body:
+    type: json
+    content: |-
+      {
+          "assetID": "2"
+      }
+order: 2000

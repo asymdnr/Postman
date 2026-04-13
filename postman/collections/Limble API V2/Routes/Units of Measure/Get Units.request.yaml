@@ -1,0 +1,64 @@
+$kind: http-request
+description: >-
+  This endpoint makes an HTTP GET request to retrieve the unit of measurement
+  (UOM) data. The response of this request is documented as a JSON schema.
+
+
+  <p><b>Return data description</b></p>
+
+
+  | **Property** | **Description** |
+
+  | --- | --- |
+
+  | unitCode | The identifier of this unit of measure. It is some random text
+  for custom units (e.g. `j5VEKvW-TD8femkRe02KV`) and it is something semantic
+  for provided units (e.g. `fluid_ounce`) |
+
+  | name | The full name of a unit to make it clear what it is. |
+
+  | abbreviation | The abbreviated name of a unit that is used for compact
+  formatting such as `fl oz`. Can override the default abbreviation of a
+  provided unit. E.g. if the default abbreviation of fluid ounce is `fl oz`, you
+  can make it `oz.` |
+
+  | defaultAbbreviation | This is always the same as abbreviation for custom
+  units. For provided units, this never changes. If you choose to alias the
+  abbreviation, this will show the original, and the abbreivation property will
+  be your alias. |
+
+  | category | Also known as the "physical quantity" of a unit, which tells you
+  what exactly this is measuring. The possibilities are `volume`, `weight`,
+  `length`, `count`. All custom units will have the category of `count`, as
+  there is no way to setup custom conversion rates. |
+
+  | isCustom | Boolean which tells you if this is a custom unit or provided
+  unit. |
+url: "{{protocol}}://{{server}}:{{port}}/v2/uom"
+method: GET
+queryParams:
+  - key: unitCodes
+    value: fluid_ounce_us, W0gzuwOpmOo_dXKtrc2RL
+    disabled: true
+    description: This parameter is used to only get specific units. This parameter
+      accepts a comma delimited list of unit codes.
+  - key: limit
+    value: "10"
+    disabled: true
+    description: This parameter is a result limiter. The default is 20 units and the
+      max is 100.
+  - key: page
+    value: "2"
+    disabled: true
+    description: "This parameter is used to paginate results based on the limit.
+      Refer to Pagination section for more information. "
+  - key: nameStartsWith
+    value: p
+    disabled: true
+    description: Filter by units that have a name which starts with this string.
+  - key: abbreviationStartsWith
+    value: l
+    disabled: true
+    description: Filter by units that have an abbreviation which starts with this string.
+examples: ./.resources/Get Units.resources/examples
+order: 1000

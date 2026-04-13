@@ -1,0 +1,100 @@
+$kind: http-example
+request:
+  url: https://api.limblecmms.com:443/v2/tasks/labor?locations=14296
+  method: GET
+  headers:
+    Content-Type: application/json
+  queryParams:
+    - key: tasks
+      value: 6,11
+      disabled: true
+      description: This parameter is used to only get specific Tasks. This parameter
+        accepts a comma delimited list of task IDs.
+    - key: users
+      value: "0"
+      disabled: true
+      description: This parameter is used to only get labor records for a specific
+        user or set of users in a comma delimited list.
+    - key: start
+      value: "1564895015"
+      disabled: true
+      description: This parameter is used to only get labor that was logged after the
+        unix timestamp passed into the start parameter. For example, all Assets
+        that were last edited after April 18th, 2018.
+    - key: end
+      value: "1564895015"
+      disabled: true
+      description: This parameter is used to only get labor that was logged *before*
+        the unix timestamp passed into the end parameter.
+    - key: limit
+      value: "100"
+      disabled: true
+      description: This parameter is a result limiter. The default is set to return no
+        more than 100 results at one time.
+    - key: cursor
+      value: "0"
+      disabled: true
+      description: This parameter is a cursor that selects what taskID you want to
+        start receiving results at. e.g. passing 137 here will only get you
+        tasks with an id greater than 137.
+    - key: locations
+      value: "14296"
+      description: This parameter is used to only get labor for tasks at a specific
+        Location. This parameter accepts a comma delimited list of location IDs.
+  body:
+    type: json
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-DNS-Prefetch-Control: off
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "42855"
+    ETag: W/"a767-NSO933W49rwdfGCWBWY6tC3z7RQ"
+    Date: Tue, 14 Jan 2020 00:26:06 GMT
+    Connection: keep-alive
+  body:
+    type: json
+    content: |-
+      [
+          {
+              "meta": {
+                  "task": "/v2/tasks/?tasks=7",
+                  "user": "/v2/users/?users=341"
+              },
+              "userID": 341,
+              "timeSpent": 7200,
+              "userWage": 15,
+              "taskID": 7,
+              "taskName": "Tire Rotation",
+              "tashPriorityID": 1682,
+              "description": null,
+              "dateLogged": 1457559196,
+              "billableTime": null,
+              "billableRate": null,
+              "categoryID": null
+          },
+          {
+              "meta": {
+                  "task": "/v2/tasks/?tasks=16",
+                  "user": "/v2/users/?users=341"
+              },
+              "userID": 341,
+              "timeSpent": 3660,
+              "userWage": 15,
+              "taskID": 16,
+              "description": null,
+              "dateLogged": 1457569392,
+              "billableTime": null,
+              "billableRate": null,
+              "categoryID": null
+          }
+      ]
+order: 1000

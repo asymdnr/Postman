@@ -1,0 +1,41 @@
+$kind: http-request
+description: |-
+  Updates the state of the specified PO.  
+    
+  Important Note: Currently POs can only move forward one state per state change request.
+
+  Parameters:
+
+  | Parameter | In | Type | Required | Default | Description |
+  | --- | --- | --- | --- | --- | --- |
+  | poID | path | integer | yes |  | Purchase Order identifier |
+  | newState | body | string | yes |  | All PO states: 0 (setup), 1–96 (custom), 97 (ready_to_receive), 98 (partially_received), 99 (fully_received), 100 (closed), 101 (disapproved). API accepts numbers, standard names, or custom_step_N |
+  | reason | body | string | no |  | Optional note (max 500 chars) |
+
+  Responses:
+
+  - 200 OK: State changed.
+      
+  - 400 Bad Request: Invalid transition or failed validation.
+      
+  - 404 Not Found: PO not found.
+      
+
+  Response data:
+
+  <table><tbody><tr><th>Property</th><th>Description</th></tr><tr><td><div>success</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Boolean, if this operation was successful</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>state</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>JSON object describing current state.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>previousState</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>JSON object describing previous state.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>validNextStates</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>JSON object with a list of possible next states.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr></tbody></table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/po/:poID/state"
+method: PATCH
+headers:
+  Content-Type: application/json
+pathVariables:
+  poID: "31939"
+body:
+  type: text
+  content: |-
+    {
+      "newState": "custom_step_1",
+      "reason": "PO closed by manager"
+    }
+examples: ./.resources/Change PO State.resources/examples
+order: 1000

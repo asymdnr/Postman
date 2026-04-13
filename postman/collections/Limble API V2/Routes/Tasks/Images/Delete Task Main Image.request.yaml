@@ -1,0 +1,19 @@
+$kind: http-request
+description: |-
+  Deletes the task's main image.
+
+  Parameters:
+
+  | Parameter | In | Type | Required | Default | Description |
+  |---|---|---|---|---|---|
+  | taskID | path | integer | yes |  | Task identifier |
+
+  Responses:
+  - 200 OK: Image cleared.
+  - 404 Not Found: No image exists for this task.
+url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/image"
+method: DELETE
+pathVariables:
+  taskID: "555"
+examples: ./.resources/Delete Task Main Image.resources/examples
+order: 4000

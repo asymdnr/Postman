@@ -1,0 +1,106 @@
+$kind: http-request
+description: >-
+  This request creates a new Budget.
+
+
+  <table class="apiTable">
+  	<thead>
+  		<tr>
+  			<th>Parameter</th>
+  			<th>Type</th>
+  			<th>Required?</th>
+  			<th>Description</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr>
+  			<td>locationID</td>
+  			<td>Int</td>
+  			<td>Required</td>
+  			<td>The ID of the location this budget will belong to.</td>
+  		</tr>
+  		<tr>
+  			<td>name</td>
+  			<td>String</td>
+  			<td>Required</td>
+  			<td>The title of this budget.</td>
+  		</tr>
+  		<tr>
+  			<td>awaitingAllowPOEdit</td>
+  			<td>Boolean</td>
+  			<td>Required</td>
+  			<td>When POs belonging to this budget are in the "ready to receive" state, will they be editable?</td>
+  		</tr>
+  		<tr>
+  			<td>awaitingEmailSend</td>
+  			<td>Boolean</td>
+  			<td>Required</td>
+  			<td>When POs belonging to this budget enter the "ready to receive" state, should the assignee(s) be emailed?</td>
+  		</tr>
+  		<tr>
+  			<td>awaitingAssignmentType</td>
+  			<td>Enum</td>
+  			<td>Required</td>
+  			<td>What type ('user' or 'team') should we interpret the awaitingAssignment value as?</td>
+  		</tr>
+  		<tr>
+  			<td>awaitingAssignment</td>
+  			<td>Int or Array of Ints</td>
+  			<td>Required</td>
+  			<td>When POs belonging to this budget enter the "ready to receive" state, who will they be assigned to? If awaitingAssignmentType is 'team' then this <em>cannot be</em> an array, and may only be one number.</td>
+  		</tr>
+  		<tr>
+  			<td>prEmailSend</td>
+  			<td>Boolean</td>
+  			<td>Required</td>
+  			<td>When PO items are received on POs that belong to this budget in the "ready to receive" or "partially received" states, should we send email notification(s)?</td>
+  		</tr>
+  		<tr>
+  			<td>prAssignmentType</td>
+  			<td>Enum</td>
+  			<td>Required</td>
+  			<td>What type ('user' or 'team') should we interpret the prAssignment value as?</td>
+  		</tr>
+  		<tr>
+  			<td>prAssignment</td>
+  			<td>Int or Array of Ints</td>
+  			<td>Required</td>
+  			<td>When bills are generated for PO items on POs that belong to this budget, who should the bills be assigned to? If prAssignmentType is 'team' then this <em>cannot be</em> an array, and may only be one number.</td>
+  		</tr>
+  		<tr>
+  			<td>defaultBudget</td>
+  			<td>Object</td>
+  			<td>Required</td>
+  			<td>An object containing Boolean flags for global, purchaseRequests, and minPartQtyPOs. Setting any of these flags to true will set the same value for any other budgets at this location to false (we cannot have two default budgets). All properties of this object are required.
+              <ul>
+                 <li>global: Should this be the default budget for this location?</li>
+                 <li>purchaseRequests: When purchase requests are created from tasks, should this be the default budget?</li>
+                 <li>minPartQtyPOs: When a PO is automatically created due to part quantity threshold, should this be the default budget?</li>
+              </ul>
+           </td>
+  		</tr>
+  	</tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/budgets"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+       "locationID": 163,
+       "name": "Awesome Test Budget",
+       "awaitingAllowPOEdit": true,
+       "awaitingEmailSend": true,
+       "awaitingAssignmentType": "team",
+       "awaitingAssignment": 437,
+       "prEmailSend": true,
+       "prAssignmentType": "team",
+       "prAssignment": 437,
+       "defaultBudget": {
+         "global": true,
+         "purchaseRequests": true,
+         "minPartQtyPOs": true
+       }
+    }
+examples: ./.resources/New Budget.resources/examples
+order: 3000

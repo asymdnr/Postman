@@ -1,0 +1,90 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/vendors?page"
+  method: GET
+  queryParams:
+    - key: vendors
+      value: "1"
+      disabled: true
+      description: This parameter is used to only get specific Vendors. This parameter
+        expects a comma delimited list of Vendor IDs.
+    - key: locations
+      value: 330, 173
+      disabled: true
+      description: This parameter is used to only get Vendors at a specific group of
+        Locations. This parameter accepts a comma delimited list of Location
+        IDs.
+    - key: name
+      value: bryan%
+      disabled: true
+      description: This parameter is used to only get specific vendor by name. This
+        parameter expects a string full name of a vendor or partial name with
+        the wildcard %.
+    - key: start
+      value: "1518559856"
+      disabled: true
+      description: This parameter is used to only get Vendors that were last edited
+        after the unix timestamp passed into the start parameter. For example,
+        all Vendors that were last edited after April 18th, 2018.
+    - key: end
+      value: "1518559856"
+      disabled: true
+      description: This parameter is used to only get Vendors that were last edited
+        *before* the unix timestamp passed into the end parameter.
+    - key: cursor
+      value: "0"
+      disabled: true
+      description: This parameter is a cursor that selects what vendorID you want to
+        start receiving results at. e.g. passing 137 here will only get you
+        vendors with an id greater than 137.
+    - key: limit
+      value: "100"
+      disabled: true
+      description: This parameter is a result limiter. The default is set to return no
+        more than 100 results at one time.
+    - key: page
+      value: null
+      description: This parameter is used to paginate results based on the limit.
+        Refer to Pagination section for more information.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-DNS-Prefetch-Control: off
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "1325"
+    ETag: W/"52d-GQiL1gmK5l9AMUA7N976PdXKmjA"
+    Date: Tue, 27 Aug 2019 17:19:02 GMT
+    Connection: keep-alive
+  body:
+    type: json
+    content: >-
+      [
+          {
+              "meta": {
+                  "fields": "/v2/vendors/fields/?vendors=1"
+              },
+              "vendorID": 1,
+              "name": "bryan's IT shop",
+              "email": "bob@limblecmms.com",
+              "phone": "801-123-1234",
+              "contact": "Bryan Christiansen",
+              "address": "123 Test Rd",
+              "locationID": 330,
+              "startedOn": 1555085498,
+              "lastEdited": 1566925530,
+      		"image": [
+                  {
+                      "fileName": "41372537_10157931415578298_3719969727385174016_n.jpg",
+                      "link": "https://content.limblecmms.com/upload-36/vendors/330/1/41372537_10157931415578298_3719969727385174016_n.jpg?Expires=1572386698&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jb250ZW50LmxpbWJsZWNtbXMuY29tL3VwbG9hZC0zNi92ZW5kb3JzLzMzMC8xLzQxMzcyNTM3XzEwMTU3OTMxNDE1NTc4Mjk4XzM3MTk5Njk3MjczODUxNzQwMTZfbi5qcGciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE1NzIzODY2OTh9fX1dfQ__&Signature=Os2lzvCLIJOteYIgc-NgodzrLdjNAYdncy0e~kKtv0qwvZJJr1feiDdJGMt~CIgdCHpLwqlajpK2-GpZIv6SDkVJ5Cl2MoOld64Uy6M1K~wLe1U75aCLqyRRVi~PzpWUpJxF2cf0OwMdYXJfeYhGl74PsvJB1AjeNsxV8aM4hDzILKeJpQVwlsRoXydfyCKe1Ese43kHtEy~Mpb4xZNBeOUaC2d6yR8MigtGFSgwPA1A9mKy8WknmjD7YkLaIl9MaMV4tj2QTDDWilbfps0WSYCzxqqtORoGfLV65kGmYXvOAEmVW3XX~Bkc9xsma~p2V8N0ngqg~ngLF8WEp8ooPw__&Key-Pair-Id=APKAIH5A42E3EPKJRHFQ"
+                  }
+              ]
+          }
+      ]
+order: 1000

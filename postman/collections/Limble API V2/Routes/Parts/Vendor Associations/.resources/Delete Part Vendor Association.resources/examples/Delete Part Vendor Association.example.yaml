@@ -1,0 +1,20 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/parts/vendors/associations/:relatio\
+    nID"
+  method: DELETE
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    - key: relationID
+      value: "5"
+      description: The unique ID of the vendor-part association to delete.
+response:
+  statusCode: 204
+  statusText: No Content
+  headers:
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+  body:
+    type: text
+    content: ""
+order: 1000

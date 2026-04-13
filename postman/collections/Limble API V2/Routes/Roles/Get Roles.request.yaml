@@ -1,0 +1,20 @@
+$kind: http-request
+description: This request returns a list of Roles.
+url: "{{protocol}}://{{server}}:{{port}}/v2/roles/?roles=1032&name=%view%&curso\
+  r=0&limit=100"
+method: GET
+queryParams:
+  roles: "1032"
+  name: "%view%"
+  cursor: "0"
+  limit: "100"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"response is ok\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });"
+    language: text/javascript
+examples: ./.resources/Get Roles.resources/examples
+order: 1000

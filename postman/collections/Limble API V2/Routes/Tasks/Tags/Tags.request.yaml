@@ -1,0 +1,14 @@
+$kind: http-request
+description: |-
+  This request gets all Custom Tags associated with a Task.
+
+  <p><b>Return data description</b></p>
+
+  | Property | Description |
+  | --- | --- |
+  | tags | An array of custom tags associated with the task. |
+url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/tags"
+method: GET
+pathVariables:
+  taskID: "1160"
+order: 1000

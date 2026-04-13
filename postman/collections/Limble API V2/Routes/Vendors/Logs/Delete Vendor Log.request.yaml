@@ -1,0 +1,10 @@
+$kind: http-request
+description: This request deleted a manual log entry for a vendor.
+url: "{{protocol}}://{{server}}:{{port}}/v2/vendors/logs/:logID"
+method: DELETE
+pathVariables:
+  - key: logID
+    value: "10"
+    description: The ID of the log to be deleted.
+examples: ./.resources/Delete Vendor Log.resources/examples
+order: 5000

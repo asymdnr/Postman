@@ -1,0 +1,48 @@
+$kind: http-request
+description: |-
+  This request updates an Asset's top level information. See Update Asset Field Value to update an Asset Field's value.
+
+  <p><br><br></p><p><br><br><br></p><table><tbody><tr><th>Parameter</th><th>Type</th><th>Required?</th><th>Description</th></tr><tr><td>name</td><td>String</td><td>Optional</td><td>The new name of the Asset.</td></tr><tr><td>hoursPerWeek</td><td>Integer</td><td>Optional</td><td>The new hours of operation per week for this Asset. Use -1 to disable this feature and have it default to the Locations hours of operation.</td></tr><tr><td>parentAssetID</td><td>Int</td><td>Optional</td><td>The asset's parent. This must be another asset ID and is used to display an Asset hierarchy. You can not have assets be their own ancestor.</td></tr><tr><td>startedOn</td><td>Int</td><td>Optional</td><td>The new date this Asset was created. Must be a <a href="https://www.unixtimestamp.com">unix<br>timestamp</a>.</td></tr><tr><td>geoLocation</td><td>geoJSON</td><td>Optional</td><td>The <a href="https://geojson.org">geoJSON</a> Feature object that can be used to locate an asset on a Map. To remove geoLocation from an Asset pass an empty object ( <code>{}</code>).</td></tr></tbody></table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/assets/:assetID/"
+method: PATCH
+headers:
+  Content-Type: application/json
+pathVariables:
+  - key: assetID
+    value: "10728"
+    description: The value of the asset that needs to be updated
+body:
+  type: text
+  content: |
+    {
+    	"startedOn": 1541796015,
+    	"hoursPerWeek": 30,
+    	"name": "{{newAssetName}}",
+         "geoLocation": {
+          "type": "Feature",
+          "properties": {
+            "name": "Salt Lake City"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              -111.9012451171875,
+              40.76962180287486
+            ]
+          }
+        }
+        
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("response is created", () => {
+          pm.response.to.have.status(200);
+      });
+    language: text/javascript
+  - type: beforeRequest
+    code: pm.globals.set('updatedAssetName', `updated asset -
+      ${Math.floor(Math.random() * 10000000)}`);
+    language: text/javascript
+examples: ./.resources/Patch Asset.resources/examples
+order: 8000

@@ -1,0 +1,60 @@
+$kind: http-request
+description: >-
+  This request marks a quantity of a PO item as having been received and
+  generates a bill for the receipt of the item.
+
+
+  <table class="apiTable">
+  	<thead>
+  		<tr>
+  			<th>Parameter</th>
+  			<th>Type</th>
+  			<th>Required?</th>
+  			<th>Description</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr>
+  			<td>quantity</td>
+  			<td>Int</td>
+  			<td>Required</td>
+  			<td>A positive number representing the received number of items. The sum of all receipts cannot be greater than the total quantity on the PO item.<br/><br/>For example: if a PO item has a quantity of 5, then we use this request to receive 3, that will mark 3 of the PO item as received and generate a bill for that receipt of 3 PO items. If we run the same request again to receive another 3, the total would be 6 and the request would be rejected with an error.</td>
+  		</tr>
+  	</tbody>
+  </table>
+
+
+  <strong>Return data description</strong>
+
+
+  <table>
+      <thead>
+          <tr>
+              <th>Property</th>
+              <th>Description</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>transactionID</td>
+              <td>The unique ID of the transaction created by this request.</td>
+          </tr>
+          <tr>
+              <td>prID</td>
+              <td>The unique ID of the PR (Bill) created by this request.</td>
+          </tr>
+      </tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/po/:poID/items/:poItemID"
+method: PUT
+pathVariables:
+  poID: "1"
+  poItemID: "1"
+body:
+  type: json
+  content: |
+    {
+        "quantity": 100
+    }
+examples: ./.resources/Receive PO Item.resources/examples
+order: 5000

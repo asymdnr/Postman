@@ -1,0 +1,5 @@
+$kind: collection
+description: Asset fields are a way to add custom information onto your
+  assets.  For example you may want to fields such as Make, Model, Meter
+  Readings, Manuals, Pictures, Contracts etc.
+order: 2000

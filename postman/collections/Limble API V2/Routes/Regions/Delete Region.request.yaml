@@ -1,0 +1,19 @@
+$kind: http-request
+description: |-
+  Deletes a region.
+
+  Parameters:
+
+  | Parameter | In | Type | Required | Default | Description |
+  |---|---|---|---|---|---|
+  | regionID | path | integer | yes |  | Region identifier |
+
+  Responses:
+  - 200 OK: Deleted.
+  - 404 Not Found: Region does not exist.
+url: "{{protocol}}://{{server}}:{{port}}/v2/regions/:regionID"
+method: DELETE
+pathVariables:
+  regionID: "123"
+examples: ./.resources/Delete Region.resources/examples
+order: 4000

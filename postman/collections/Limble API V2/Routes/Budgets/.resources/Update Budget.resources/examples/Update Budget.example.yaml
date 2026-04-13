@@ -1,0 +1,42 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/budgets/:budgetID"
+  method: PATCH
+  pathVariables:
+    budgetID: "1"
+  body:
+    type: json
+    content: |-
+      {
+          "name": "Extremely Cool Budget",
+          "awaitingAllowPOEdit": false,
+          "awaitingEmailSend": false,
+          "awaitingAssignmentType": "team",
+          "awaitingAssignment": 12,
+          "prEmailSend": false,
+          "prAssignmentType": "user",
+          "prAssignment": [1, 2, 3],
+          "defaultBudget": {
+              "global": true,
+              "purchaseRequests": false,
+              "minPartQtyPOs": true
+          }
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-DNS-Prefetch-Control: off
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Date: Wed, 03 Feb 2021 19:12:23 GMT
+    Connection: keep-alive
+    Content-Length: "0"
+  body:
+    type: text
+    content: ""
+order: 1000

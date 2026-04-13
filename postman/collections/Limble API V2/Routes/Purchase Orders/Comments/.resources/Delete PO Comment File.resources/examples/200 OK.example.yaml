@@ -1,0 +1,17 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/po/:poID/comments/:commentID/file?f\
+    ilename=invoice.pdf"
+  method: DELETE
+  queryParams:
+    filename: invoice.pdf
+  pathVariables:
+    poID: "1234"
+    commentID: "5678"
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 1000

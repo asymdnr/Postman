@@ -1,0 +1,53 @@
+$kind: http-request
+description: >-
+  Updates an existing custom status. Default statuses (0, 1, 2) cannot be
+  modified.
+
+
+  **IMPORTANT NOTE:** Changes to statuses automatically propogate to all tasks
+  currently assigned that status.
+
+
+  **Path Parameters:**
+
+
+  - `statusID` (number, required) - ID of the status to update
+      
+
+  **Request Body (at least one field required):**
+
+
+  - `name` (string, optional) - New status name, 1-100 characters, must be
+  unique
+      
+  - `description` (string, optional) - New description, max 65535 characters
+      
+  - `sortOrder` (integer, optional) - New display order, 0-99
+      
+
+  **Validation:**
+
+
+  - Cannot modify default statuses (IDs 0, 1, 2)
+      
+  - If changing name, must not conflict with existing statuses
+      
+  - Status must exist and belong to the customer
+url: "{{protocol}}://{{server}}:{{port}}/v2/statuses/:statusID"
+method: PATCH
+headers:
+  Content-Type: application/json
+pathVariables:
+  - key: statusID
+    value: "10"
+    description: The ID of the status to update
+body:
+  type: json
+  content: |-
+    {
+      "name": "On Hold",
+      "description": "Task temporarily paused",
+      "sortOrder": 5
+    }
+examples: ./.resources/Update Status.resources/examples
+order: 3000

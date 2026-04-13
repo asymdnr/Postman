@@ -1,0 +1,129 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/users"
+  method: GET
+  queryParams:
+    - key: users
+      value: 341,340
+      disabled: true
+      description: This parameter expects a comma-separated list of users to get by id
+    - key: name
+      value: "%jeff%"
+      disabled: true
+      description: This parameter is used to only get specific user by name. This
+        parameter expects a string full name of a user or partial name with the
+        wildcard %.
+    - key: roles
+      value: "320"
+      disabled: true
+      description: This parameter expects a comma-separated list of users to get by roleID
+    - key: teams
+      value: 436,437
+      disabled: true
+      description: This parameter expects a comma-separated list of users to get by teamID
+    - key: cursor
+      value: "0"
+      disabled: true
+      description: This parameter is a cursor that selects what userID you want to
+        start receiving results at. e.g. passing 137 here will only get you
+        tasks with an id greater than 137.
+    - key: limit
+      value: "100"
+      disabled: true
+      description: This parameter is a result limiter. The default is set to return no
+        more than 100 results at one time.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-DNS-Prefetch-Control: off
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "3800"
+    ETag: W/"ed8-H3KA27yk3eil5s21uHFvg692XcY"
+    Date: Tue, 27 Aug 2019 16:14:46 GMT
+    Connection: keep-alive
+  body:
+    type: json
+    content: |-
+      [
+          {
+              "userID": 341,
+              "username": "jeff",
+              "email": "jbezos@limblecmms.com",
+              "phone": "8015555555",
+              "firstName": "jeff",
+              "lastName": "bezos",
+              "wage": 16,
+              "active": "true",
+              "emailNotificationActive": "false",
+              "pushNotificationActive": "false",
+              "workdayHours": 8,
+              "dateAdded": 0,
+              "teams": [
+                  {
+                      "teamID": 436,
+                      "locationID": 74,
+                      "name": "Manager"
+                  },
+                  {
+                      "teamID": 436,
+                      "locationID": 163,
+                      "name": "Manager"
+                  },
+                  {
+                      "teamID": 436,
+                      "locationID": 584,
+                      "name": "Manager"
+                  },
+                  {
+                      "teamID": 437,
+                      "locationID": 585,
+                      "name": "Technician"
+                  },
+                  {
+                      "teamID": 436,
+                      "locationID": 587,
+                      "name": "Manager"
+                  }
+              ],
+              "roles": [
+                  {
+                      "roleID": 320,
+                      "locationID": 74,
+                      "name": "Super User"
+                  },
+                  {
+                      "roleID": 321,
+                      "locationID": 74,
+                      "name": "Manager"
+                  },
+                  {
+                      "roleID": 321,
+                      "locationID": 163,
+                      "name": "Manager"
+                  },
+                  {
+                      "roleID": 321,
+                      "locationID": 584,
+                      "name": "Manager"
+                  },
+                  {
+                      "roleID": 321,
+                      "locationID": 587,
+                      "name": "Manager"
+                  },
+                  {
+                      "roleID": 322,
+                      "locationID": 585,
+                      "name": "Technician"
+                  }
+              ]
+          }
+      ]
+order: 1000

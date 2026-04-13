@@ -1,0 +1,31 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/tags"
+  method: POST
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "name": "@Food Safety"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "created": true,
+        "name": "@Food Safety",
+        "sanitizations": [],
+        "tags": [
+          "@Food Safety;",
+          "@Safety;",
+          "@Quality;"
+        ]
+      }
+order: 1000
