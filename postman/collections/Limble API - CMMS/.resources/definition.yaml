@@ -1,0 +1,5 @@
+$kind: collection
+name: Limble API - CMMS
+variables:
+  Limble APi - asyraaf - password: ""
+  Limble APi - asyraaf - id: ""
