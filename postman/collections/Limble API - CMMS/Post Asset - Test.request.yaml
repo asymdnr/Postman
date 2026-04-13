@@ -1,22 +1,28 @@
 $kind: http-request
 name: Post Asset - Test
 url: https://api.limblecmms.com:443//v2/assets/
-method: POST
+method: PATCH
 headers:
   Content-Type: application/json
 body:
   type: json
   content: "{\r
 
-    \        \"name\": \"FLUKE M10000\",\r
+    \        \"name\": \"Gas Station 2\",\r
+
+    \        \"startedOn\": 1775449892,\r
+
+    \        \"lastEdited\": 1775449892,\r
+
+    \        \"parentAssetID\": 0,\r
 
     \        \"locationID\": 77954,\r
 
+    \        \"geoLocation\": null,\r
+
     \        \"hoursPerWeek\": 40\r
 
-    \r
-
-    }\r\n"
+    }"
 auth:
   type: basic
   credentials:
