@@ -1,9 +1,0 @@
-$kind: http-request
-description: This request deletes a step from a budget.
-url: "{{protocol}}://{{server}}:{{port}}/v2/budgets/:budgetID/steps/:stepID"
-method: DELETE
-pathVariables:
-  budgetID: "1"
-  stepID: "2"
-examples: ./.resources/Delete Step.resources/examples
-order: 2000

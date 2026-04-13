@@ -1,9 +1,0 @@
-$kind: http-request
-description: This request deletes a GL. If any PO Items are associated to this
-  GL, their glID will be set to 0.
-url: "{{protocol}}://{{server}}:{{port}}/v2/gl/:glID"
-method: DELETE
-pathVariables:
-  glID: "46"
-examples: ./.resources/Delete General Ledger.resources/examples
-order: 4000
