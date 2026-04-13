@@ -1,0 +1,116 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/assets/?limit=1&page=1&geoLocation=\
+    true"
+  method: GET
+  queryParams:
+    - key: assets
+      value: "1"
+      disabled: true
+      description: This parameter is used to only get specific Assets. This parameter
+        expects a comma delimited list of Asset IDs.
+    - key: name
+      value: test%
+      disabled: true
+      description: This is a parameter used to string search for a name or partial
+        name of an asset this parameter expects a string with the wildcard %.
+    - key: locations
+      value: "73"
+      disabled: true
+      description: This parameter is used to only get Assets at a specific group of
+        Locations. This parameter accepts a comma delimited list of Location
+        IDs.
+    - key: start
+      value: "1541796014"
+      disabled: true
+      description: This parameter is used to only get Assets that were last edited
+        after the unix timestamp passed into the start parameter. For example,
+        all Assets that were last edited after April 18th, 2018.
+    - key: end
+      value: "1541796014"
+      disabled: true
+      description: This parameter is used to only get Assets that were last edited
+        *before* the unix timestamp passed into the end parameter.
+    - key: cursor
+      value: "0"
+      disabled: true
+      description: This parameter is a cursor that selects what ID you want to start
+        receiving results at. Without ordering, this will return results with an
+        ID greater than the value of cursor. With ordering, this will return
+        results starting at the next item in the order, regardless of whether
+        its ID is greater than or lesser than the value of cursor.
+    - key: limit
+      value: "1"
+      description: This parameter is a result limiter. The default is set to return no
+        more than 100 results at one time.
+    - key: parentAssetID
+      value: "2317"
+      disabled: true
+      description: This parameter can be used to get asset(s) children using the
+        Parent's ID. This parameter accepts a comma delimited list of Asset IDs.
+    - key: orderBy
+      value: -lastEdited
+      disabled: true
+      description: This parameter is used to order results by their lastEdited
+        property instead of the default ordering by ascending assetID. CANNOT be
+        provided alongside the cursor parameter. to paginate in this ordering,
+        use the start or end parameters.
+    - key: page
+      value: "1"
+      description: This parameter is used to paginate results based on the limit.
+        Refer to Pagination section for more information.
+    - key: geoLocation
+      value: "true"
+      description: This parameter is used to filter results that contain a geoLocation
+        property. By default it is false and will return **all** assets with and
+        without geoLocation property. If true, it will only return assets with a
+        geoLocation property.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Security-Policy: "default-src 'self';base-uri
+      'self';block-all-mixed-content;font-src 'self' https:
+      data:;frame-ancestors 'self';img-src 'self' data:;object-src
+      'none';script-src 'self';script-src-attr 'none';style-src 'self' https:
+      'unsafe-inline';upgrade-insecure-requests"
+    X-DNS-Prefetch-Control: off
+    Expect-CT: max-age=0
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: no-referrer
+    X-XSS-Protection: "0"
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Last-Page: /v2/assets/?limit=1&page=2&geoLocation=true
+    Next-Page: /v2/assets/?limit=1&page=2&geoLocation=true
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "635"
+    ETag: W/"27b-rwBpXBVaJmpo+YNTBNuESfHL7Ac"
+    Date: Thu, 24 Mar 2022 17:07:23 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: >-
+      [
+          {
+              "assetID": 10724,
+              "name": "new asset - 2492041",
+              "startedOn": 1647979765,
+              "lastEdited": 1647979765,
+              "parentAssetID": 0,
+              "locationID": 163,
+              "geoLocation": "{\"type\":\"Feature\",\"properties\":[],\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-78.80115509033202,35.79539926172002],[-78.80218505859375,35.77562523392773],[-78.76407623291016,35.77646085576333],[-78.76304626464844,35.7952600252034],[-78.80115509033202,35.79539926172002]]]}}",
+              "hoursPerWeek": 100,
+              "meta": {
+                  "fields": "/v2/assets/fields/?assets=10724",
+                  "tasks": "/v2/tasks/?assets=10724"
+              },
+              "workRequestPortal": "https://app.limblestaging.com/#!/problem/fdle6w36/163/10724",
+              "image": []
+          }
+      ]
+order: 2000

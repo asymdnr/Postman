@@ -1,0 +1,25 @@
+$kind: http-request
+name: Post Asset - Test
+url: https://api.limblecmms.com:443//v2/assets/
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r
+
+    \        \"name\": \"FLUKE M10000\",\r
+
+    \        \"locationID\": 77954,\r
+
+    \        \"hoursPerWeek\": 40\r
+
+    \r
+
+    }\r\n"
+auth:
+  type: basic
+  credentials:
+    password: FZ9F772N1T14357IMLNXEK4K3DVOAVEZ
+    username: 94HIH6C6BOWJ4E79GYK9XCWOUKKWQI2H
+order: 1490469347018646
