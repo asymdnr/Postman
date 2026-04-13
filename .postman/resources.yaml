@@ -2,6 +2,16 @@
 workspace:
   id: 7d86f9ff-c0d4-44f2-8306-50c42bfb222a
 
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
+
+cloudResources:
+  collections:
+    ..\postman\collections\Limble API Notes: 53961760-fd72cc9f-c15c-41b2-9350-4db94f86160f
+    ..\postman\collections\My Collection: 53961760-8ad46feb-5121-41c0-a942-4657006e4421
+    ..\postman\collections\API Notes: 53961760-e28c57b1-5d6b-4b41-9a93-7a7704906f6e
+  environments:
+    ..\postman\environments\New Environment.environment.yaml: 4508bd68-83c5-47b2-9c4f-f342002567f2
+
 # All resources in the `postman/` folder are automatically registered in Local View.
 # Point to additional files outside the `postman/` folder to register them individually. Example:
 #localResources:

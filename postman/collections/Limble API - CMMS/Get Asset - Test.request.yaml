@@ -1,5 +1,0 @@
-$kind: http-request
-name: Get Asset - Test
-url: ""
-method: GET
-order: 1776051110148

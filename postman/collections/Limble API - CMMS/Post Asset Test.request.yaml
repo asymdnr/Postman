@@ -1,0 +1,23 @@
+$kind: http-request
+name: Post Asset Test
+url: https://api.limblecmms.com:443/v2/assets/
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r
+
+    \t\"locationID\": 78747,\r
+
+    \    \"parentAssetID\": 11,\r
+
+    \t\"name\": \"GC & Dosing New Zone 244\"\r
+
+    }\r\n"
+auth:
+  type: basic
+  credentials:
+    username: 94HIH6C6BOWJ4E79GYK9XCWOUKKWQI2H
+    password: FZ9F772N1T14357IMLNXEK4K3DVOAVEZ
+order: 4000

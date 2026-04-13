@@ -1,0 +1,15 @@
+$kind: http-request
+name: Patch Asset Field Test
+url: https://api.limblecmms.com:443/v2/assets/fields/217
+method: PATCH
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r\n \"value\": \"Steam\"\r\n}\r\n"
+auth:
+  credentials:
+    username: 94HIH6C6BOWJ4E79GYK9XCWOUKKWQI2H
+    password: FZ9F772N1T14357IMLNXEK4K3DVOAVEZ
+  type: basic
+order: 2181

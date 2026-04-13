@@ -1,4 +1,5 @@
 $kind: http-request
+name: Get Asset Test
 url: ""
 method: GET
-order: 4370161481400933
+order: 1000
