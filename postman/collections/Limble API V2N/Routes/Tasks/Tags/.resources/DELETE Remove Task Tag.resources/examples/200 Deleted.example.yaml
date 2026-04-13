@@ -1,0 +1,23 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/tags/:tagRaw"
+  method: DELETE
+  pathVariables:
+    taskID: ""
+    tagRaw: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "deleted": true,
+        "name": "@Food;",
+        "tags": [
+          "@Safety;"
+        ]
+      }
+order: 1000

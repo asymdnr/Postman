@@ -1,0 +1,38 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/po/:poID/items/:poItemID"
+  method: PATCH
+  pathVariables:
+    poID: "1"
+    poItemID: "2"
+  body:
+    type: json
+    content: |-
+      {
+          "itemType": 4,
+          "partID": 0,
+          "taskID": 0
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-DNS-Prefetch-Control: off
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "16"
+    ETag: W/"10-oV4hJxRVSENxc/wX8+mA4/Pe4tA"
+    Date: Tue, 12 Jan 2021 19:12:36 GMT
+    Connection: keep-alive
+  body:
+    type: json
+    content: |-
+      {
+          "success": true
+      }
+order: 1000

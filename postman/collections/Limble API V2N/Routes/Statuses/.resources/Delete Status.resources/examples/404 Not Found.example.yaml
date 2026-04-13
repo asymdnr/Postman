@@ -1,0 +1,26 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/statuses/:statusID?replacementStatu\
+    sID=1"
+  method: DELETE
+  queryParams:
+    - key: replacementStatusID
+      value: "1"
+      description: ID of the status to reassign tasks to (required)
+  pathVariables:
+    - key: statusID
+      value: "10"
+      description: The ID of the status to delete
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": false,
+        "message": "Status not found"
+      }
+order: 4000

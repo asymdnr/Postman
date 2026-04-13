@@ -1,0 +1,32 @@
+$kind: http-request
+url: "{{protocol}}://{{server}}:{{port}}/v2/budgets/steps?name=%test%&steps=1,2\
+  ,3&budgets=158&locations=1,2,3&cursor=0&limit=100"
+method: GET
+queryParams:
+  - key: name
+    value: "%test%"
+    description: This is a parameter used to string search for a name or partial
+      name of a budget. This parameter expects a string with the wildcard %.
+  - key: steps
+    value: 1,2,3
+    description: This parameter is used to only get specific steps. This parameter
+      accepts a comma delimited list of step IDs.
+  - key: budgets
+    value: "158"
+    description: This parameter is used to only get steps that are linked to a
+      budget. This parameter accepts a comma delimited list of budget IDs.
+  - key: locations
+    value: 1,2,3
+    description: This parameter is used to only get steps that are linked to a
+      budget at a specific location. This parameter accepts a comma delimited
+      list of location IDs.
+  - key: cursor
+    value: "0"
+    description: This parameter is a cursor that selects what stepID you want to
+      start receiving results at. e.g. passing 137 here will only get you steps
+      with an ID greater than 137.
+  - key: limit
+    value: "100"
+    description: This parameter is a result limiter. The default is set to return no
+      more than 100 results at one time.
+order: 3000

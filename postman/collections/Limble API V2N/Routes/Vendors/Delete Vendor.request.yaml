@@ -1,0 +1,23 @@
+$kind: http-request
+description: This request deletes a Vendor.
+url: "{{protocol}}://{{server}}:{{port}}/v2/vendors/:vendorID"
+method: DELETE
+headers:
+  Content-Type: application/json
+pathVariables:
+  vendorID: "{{vendorID}}"
+body:
+  type: text
+  content: ""
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"response should be okay to process\", function () { \r
+
+      \    pm.response.to.not.be.error; \r
+
+      \    pm.response.to.not.have.jsonBody(\"error\"); \r
+
+      });"
+    language: text/javascript
+examples: ./.resources/Delete Vendor.resources/examples
+order: 7000

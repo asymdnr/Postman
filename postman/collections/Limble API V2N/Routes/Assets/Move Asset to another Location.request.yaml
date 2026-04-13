@@ -1,0 +1,24 @@
+$kind: http-request
+description: |-
+  This request moves an existing asset from it's current location to another location. An parent asset that has one or more children assets cannot be moved.
+
+  A child asset can be moved and will be created as a top level asset in the other location.
+
+  <table><tbody><tr><th>Parameter</th><th>Type</th><th>Required?</th><th>Description</th></tr><tr><td><div>locationID</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Int</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Required</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The locationID of the location the asset needs to be moved to.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>transferParts</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>boolean</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Optional</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>A boolean representing whether parts associated with the asset should be moved to the location as well.<br><br>Defaults to true.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr></tbody></table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/assets/:assetID/move"
+method: PATCH
+pathVariables:
+  - key: assetID
+    value: "14113"
+    description: The value of the asset that needs to be moved
+body:
+  type: json
+  content: "{\r
+
+    \    \"locationID\":73,\r
+
+    \    \"transferParts\": true\r
+
+    }"
+examples: ./.resources/Move Asset to another Location.resources/examples
+order: 10000

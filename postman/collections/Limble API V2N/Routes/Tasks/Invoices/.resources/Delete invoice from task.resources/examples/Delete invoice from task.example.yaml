@@ -1,0 +1,18 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/invoices/:invoiceID"
+  method: DELETE
+  pathVariables:
+    - key: taskID
+      value: "14879"
+      description: The taskID of the task you want to remove the invoice from.
+    - key: invoiceID
+      value: "290"
+      description: The invoiceID of the invoice you want to remove.
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 1000

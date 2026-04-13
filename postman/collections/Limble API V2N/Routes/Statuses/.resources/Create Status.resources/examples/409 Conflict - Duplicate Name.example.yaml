@@ -1,0 +1,23 @@
+$kind: http-example
+request:
+  url: ""
+  method: POST
+  body:
+    type: text
+    content: |-
+      {
+        "name": "Open"
+      }
+response:
+  statusCode: 409
+  statusText: Conflict
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "success": false,
+        "message": "Status name already exists"
+      }
+order: 2000

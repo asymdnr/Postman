@@ -1,0 +1,67 @@
+$kind: http-request
+description: >-
+  Applies one or more existing custom tags to a task. Tags must already exist at
+  the account level (see POST /v2/tags to create new tags).
+
+
+  Body:
+
+  - tags: string[] — List of tags, or
+
+  - tag: string — Single tag.
+
+
+  Success Response (200):
+
+  - created: true
+
+  - name?: string — Present when a single tag was added; canonical without
+  trailing ';'.
+
+  - sanitizations?: string[] — Applied normalizations.
+
+  - note?: string — Present when input had multiple '@' characters.
+
+  - tags: string[] — Updated canonical tags with trailing ';'.
+
+
+  Conflicts (409):
+
+  - Single: { created: false, message: 'Tag already exists', name, tags }
+
+  - Multiple: { created: false, message: 'No new tags to add', tags }
+
+
+  Errors:
+
+  - 404: { created: false, message, invalidTag(s), tags, availableTags } —
+  Tag(s) don't exist at account level.
+
+  - 400: { added: [], message: string } — Invalid input (semicolons, empty tags,
+  etc.).
+
+
+  Notes:
+
+  - Tags MUST exist in the account's tag definitions before they can be applied
+  to tasks.
+
+  - Validation is case-insensitive (e.g., '@urgent' matches '@Urgent').
+
+  - Semicolons in input are rejected.
+
+  - The availableTags field in 404 responses shows which tags can be used.
+url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/tags"
+method: PUT
+headers:
+  Content-Type: application/json
+pathVariables:
+  taskID: "1160"
+body:
+  type: text
+  content: |-
+    {
+      "tags": ["@Food", "@Safety"]
+    }
+examples: ./.resources/PUT Apply Task Tags.resources/examples
+order: 2000

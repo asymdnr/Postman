@@ -1,0 +1,12 @@
+$kind: http-request
+description: >
+  <p>This request deletes a PO Item, which will also remove any relationships
+  between the PO Item, Parts, and Tasks, and will clean up any history of
+  transactions on this PO Item.</p>
+url: "{{protocol}}://{{server}}:{{port}}/v2/po/:poID/items/:poItemID"
+method: DELETE
+pathVariables:
+  poID: "1"
+  poItemID: "1"
+examples: ./.resources/Delete PO Item.resources/examples
+order: 4000

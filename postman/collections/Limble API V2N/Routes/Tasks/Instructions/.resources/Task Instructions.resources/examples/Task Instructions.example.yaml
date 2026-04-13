@@ -1,0 +1,83 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/instructions?limit=2&\
+    page=1"
+  method: GET
+  queryParams:
+    - key: cursor
+      value: "0"
+      disabled: true
+      description: This parameter is a cursor that selects what partID you want to
+        start receiving results at. e.g. passing 137 here will only get you
+        parts with an id greater than 137.
+    - key: limit
+      value: "2"
+      description: This parameter is a result limiter. The default is set to return no
+        more than 100 results at one time.
+    - key: page
+      value: "1"
+      description: This parameter is used to paginate results based on the limit.
+        Refer to Pagination section for more information.
+  pathVariables:
+    taskID: "105"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Security-Policy: "default-src 'self';base-uri
+      'self';block-all-mixed-content;font-src 'self' https:
+      data:;frame-ancestors 'self';img-src 'self' data:;object-src
+      'none';script-src 'self';script-src-attr 'none';style-src 'self' https:
+      'unsafe-inline';upgrade-insecure-requests"
+    X-DNS-Prefetch-Control: off
+    Expect-CT: max-age=0
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: no-referrer
+    X-XSS-Protection: "0"
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Last-Page: /v2/tasks/105/instructions?limit=2&page=2
+    Next-Page: /v2/tasks/105/instructions?limit=2&page=2
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "443"
+    ETag: W/"1bb-1w6SRku4WLxLM2UuuolaWtgagkw"
+    Date: Tue, 19 Apr 2022 20:29:09 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: >-
+      [
+          {
+              "instructionID": 772,
+              "taskID": 105,
+              "parentInstructionID": 775,
+              "instruction": "Schedule belt repair",
+              "type": 14,
+              "options": [],
+              "response": "This response type is not supported currently, please contact Limble if you require it.",
+              "meta": {
+                  "associatedTask": "/v2/tasks/?tasks=106"
+              },
+              "instructionFiles": []
+          },
+          {
+              "instructionID": 773,
+              "taskID": 105,
+              "parentInstructionID": 0,
+              "instruction": "Remove oil filter.",
+              "type": 1,
+              "options": [],
+              "response": false,
+              "instructionFiles": [
+                  {
+                      "fileName": "165040769563793-pic.png",
+                      "link": "https://local-content.limblestaging.com/upload-36/items/165032024947299/165040769563793-pic.png"
+                  }
+              ]
+          }
+      ]
+order: 2000

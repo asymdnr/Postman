@@ -1,0 +1,233 @@
+$kind: http-example
+name: Some field values are not updated.
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/assets/fields/batch/update"
+  method: POST
+  body:
+    type: json
+    content: "[\r
+
+      \    {\r
+
+      \        \"value\": \"Fix this\",\r
+
+      \        \"valueID\": 43676\r
+
+      \    },\r
+
+      \    {\r
+
+      \        \"value\": \"31\",\r
+
+      \        \"valueID\": 27050\r
+
+      \    },\r
+
+      \    {\r
+
+      \        \"value\": \"Integrated Module\",\r
+
+      \        \"valueID\": 24898\r
+
+      \    },\r
+
+      \    {\r
+
+      \        \"value\": \"94\",\r
+
+      \        \"valueID\": 46456\r
+
+      \    },\r
+
+      \    {\r
+
+      \        \"value\": \"57\",\r
+
+      \        \"valueID\": 46457\r
+
+      \    },\r
+
+      \    {\r
+
+      \        \"value\": \"31\",\r
+
+      \        \"valueID\": 46458\r
+
+      \    },\r
+
+      \    {\r
+
+      \        \"value\": \"100\",\r
+
+      \        \"valueID\": 45474\r
+
+      \    },\r
+
+      \    {\r
+
+      \        \"value\": \"12\",\r
+
+      \        \"valueID\": 45476  \r
+
+      \    },\r
+
+      \    {\r
+
+      \        \"value\": \"22\",\r
+
+      \        \"valueID\": 45477\r
+
+      \    },\r
+
+      \    {\r
+
+      \        \"value\": \"33\",\r
+
+      \        \"valueID\": 45478\r
+
+      \    },\r
+
+      \    {\r
+
+      \        \"value\": \"59\",\r
+
+      \        \"valueID\": 45479\r
+
+      \    },\r
+
+      \    {\r
+
+      \        \"value\": \"Five\",\r
+
+      \        \"valueID\": 46014\r
+
+      \    },\r
+
+      \    {\r
+
+      \        \"value\": \"9\",\r
+
+      \        \"valueID\": 46460 \r
+
+      \    },\r
+
+      \    {\r
+
+      \        \"value\": \"9\",\r
+
+      \        \"valueID\": 46461\r
+
+      \    }\r
+
+      ]"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Security-Policy: "default-src 'self';base-uri
+      'self';block-all-mixed-content;font-src 'self' https:
+      data:;frame-ancestors 'self';img-src 'self' data:;object-src
+      'none';script-src 'self';script-src-attr 'none';style-src 'self' https:
+      'unsafe-inline';upgrade-insecure-requests"
+    X-DNS-Prefetch-Control: off
+    Expect-CT: max-age=0
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: no-referrer
+    X-XSS-Protection: "0"
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    X-RateLimit-Limit: "20"
+    X-RateLimit-Minute-Limit: "5"
+    X-RateLimit-Remaining: "16"
+    X-RateLimit-First-Call: "1681935325"
+    X-RateLimit-Minute-Remaining: "4"
+    X-RateLimit-Minute-First-Call: "1681935418"
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "746"
+    ETag: W/"2ea-9a5aiZVHzxfDJP5+7qEoVM+eS4w"
+    Date: Wed, 19 Apr 2023 20:17:05 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+          "updates": [
+              {
+                  "value": "Fix this",
+                  "valueID": 43676,
+                  "success": true
+              },
+              {
+                  "value": "31",
+                  "valueID": 27050,
+                  "success": true
+              },
+              {
+                  "value": "Integrated Module",
+                  "valueID": 24898,
+                  "success": true
+              },
+              {
+                  "value": "94",
+                  "valueID": 46456,
+                  "success": true
+              },
+              {
+                  "value": "57",
+                  "valueID": 46457,
+                  "success": true
+              },
+              {
+                  "value": "31",
+                  "valueID": 46458,
+                  "success": true
+              },
+              {
+                  "value": "100",
+                  "valueID": 45474,
+                  "success": true
+              },
+              {
+                  "value": "12",
+                  "valueID": 45476,
+                  "success": true
+              },
+              {
+                  "value": "22",
+                  "valueID": 45477,
+                  "success": true
+              },
+              {
+                  "value": "33",
+                  "valueID": 45478,
+                  "success": true
+              },
+              {
+                  "value": "59",
+                  "valueID": 45479,
+                  "success": true
+              },
+              {
+                  "value": "Five",
+                  "valueID": 46014,
+                  "success": false,
+                  "reason": "That field requires a numerical value."
+              },
+              {
+                  "value": "9",
+                  "valueID": 46460,
+                  "success": true
+              },
+              {
+                  "value": "9",
+                  "valueID": 46461,
+                  "success": true
+              }
+          ],
+          "success": false
+      }
+order: 1000

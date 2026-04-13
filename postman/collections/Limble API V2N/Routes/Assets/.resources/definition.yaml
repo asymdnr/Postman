@@ -1,0 +1,5 @@
+$kind: collection
+description: Assets can be just about anything.  Limble customers often use it
+  to represent their equipment, but assets can be used to represent locations,
+  areas, buildings and even intangible items.
+order: 2000

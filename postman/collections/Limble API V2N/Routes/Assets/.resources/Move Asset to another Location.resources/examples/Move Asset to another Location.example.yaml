@@ -1,0 +1,49 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/assets/:assetID/move"
+  method: PATCH
+  pathVariables:
+    - key: assetID
+      value: "13"
+      description: The value of the asset that needs to be moved
+  body:
+    type: json
+    content: "{\r\n    \"locationID\":163\r\n}"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Security-Policy: "default-src 'self';base-uri
+      'self';block-all-mixed-content;font-src 'self' https:
+      data:;frame-ancestors 'self';img-src 'self' data:;object-src
+      'none';script-src 'self';script-src-attr 'none';style-src 'self' https:
+      'unsafe-inline';upgrade-insecure-requests"
+    X-DNS-Prefetch-Control: off
+    Expect-CT: max-age=0
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: no-referrer
+    X-XSS-Protection: "0"
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    X-RateLimit-Limit: "2000"
+    X-RateLimit-Minute-Limit: "240"
+    X-RateLimit-Remaining: "1995"
+    X-RateLimit-First-Call: "1684352145"
+    X-RateLimit-Minute-Remaining: "238"
+    X-RateLimit-Minute-First-Call: "1684352297"
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "14"
+    ETag: W/"e-3n/8BWqSsg5LnA4Q/c7YfBO++zk"
+    Date: Wed, 17 May 2023 19:39:15 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+          "moved": true
+      }
+order: 1000

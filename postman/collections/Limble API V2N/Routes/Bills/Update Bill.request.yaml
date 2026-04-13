@@ -1,0 +1,45 @@
+$kind: http-request
+description: >-
+  This request updates a Bill. 
+
+
+  <table class="apiTable">
+  	<thead>
+  		<tr>
+  			<th>Parameter</th>
+  			<th>Type</th>
+  			<th>Required?</th>
+  			<th>Description</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr>
+  			<td>userID</td>
+  			<td>Int</td>
+  			<td>Optional</td>
+  			<td>The ID of the user that this Bill will be assigned to.</td>
+  		</tr>
+          <tr>
+              <td>status</td>
+              <td>Int</td>
+              <td>Optional</td>
+              <td>The status of this Bill.
+              Refer to GET Bill to understand what values status can be. <b>A bill status cannot be reduced once it is changed.</b> </td>
+          </tr>
+  	</tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/bills/:billID"
+method: PATCH
+pathVariables:
+  billID: "423"
+body:
+  type: json
+  content: "{\r
+
+    \    \"userID\": 340,\r
+
+    \    \"status\": 2\r
+
+    }"
+examples: ./.resources/Update Bill.resources/examples
+order: 5000

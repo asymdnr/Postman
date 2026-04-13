@@ -1,0 +1,3 @@
+$kind: collection
+description: This endpoint can be used to test authentication to Limble's API.
+order: 1000

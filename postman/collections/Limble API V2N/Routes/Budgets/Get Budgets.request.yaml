@@ -1,0 +1,55 @@
+$kind: http-request
+description: |-
+  This request returns your Budgets in Limble.  
+
+  <strong>Return data description</strong>
+
+  <table>
+      <thead>
+          <tr>
+              <th>Property</th>
+              <th>Description</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>budgetID</td>
+              <td>The Budget's unique identifier.</td>
+          </tr>
+          <tr>
+              <td>name</td>
+              <td>The full name of the Budget.</td>
+          </tr>
+          <tr>
+              <td>locationID</td>
+              <td>Which Location this Budget belongs to.</td>
+          </tr>
+      </tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/budgets?cursor=0&limit=1&name=%Gene\
+  ral%&locations=1,2,3&budgets=1,2,3"
+method: GET
+queryParams:
+  - key: cursor
+    value: "0"
+    description: This parameter is a cursor that selects what budgetID you want to
+      start receiving results at. e.g. passing 137 here will only get you
+      budgets with an ID greater than 137.
+  - key: limit
+    value: "1"
+    description: This parameter is a result limiter. The default is set to return no
+      more than 100 results at one time.
+  - key: name
+    value: "%General%"
+    description: This is a parameter used to string search for a name or partial
+      name of a budget. This parameter expects a string with the wildcard %.
+  - key: locations
+    value: 1,2,3
+    description: This parameter is used to only get budgets that are linked to a
+      location. This parameter accepts a comma delimited list of location IDs.
+  - key: budgets
+    value: 1,2,3
+    description: This parameter is used to only get specific budgets. This parameter
+      accepts a comma delimited list of budget IDs.
+examples: ./.resources/Get Budgets.resources/examples
+order: 2000

@@ -1,0 +1,32 @@
+$kind: http-request
+description: This request adds a User to a Role.
+url: "{{protocol}}://{{server}}:{{port}}/v2/users/:userID/roles"
+method: PUT
+headers:
+  Content-Type: application/json
+pathVariables:
+  - key: userID
+    value: "{{userID}}"
+    description: userID you are adding a role to.
+body:
+  type: text
+  content: |-
+    {
+    	"locationID": {{locationID}},
+    	"roleID": {{roleID}}
+    }
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"response must be valid and have a body\", function () {\r
+
+      \     // assert that the status code is 200\r
+
+      \     pm.response.to.be.ok; // info, success, redirection,
+      clientError,  serverError, are other variants\r
+
+      \     pm.response.to.not.have.jsonBody(\"error\"); \r
+
+      });"
+    language: text/javascript
+examples: ./.resources/Add User To Role.resources/examples
+order: 2000

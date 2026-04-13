@@ -1,0 +1,29 @@
+$kind: http-request
+description: |-
+  Adds a comment to a Bill.
+
+  Parameters:
+
+  | Parameter | In | Type | Required | Default | Description |
+  |---|---|---|---|---|---|
+  | billID | path | integer | yes |  | Bill identifier |
+  | comment | body | string | yes |  | Comment text |
+  | showExternalUsers | body | boolean | no | true | Visible to external users |
+
+  Responses:
+  - 201 Created: Returns commentID.
+url: "{{protocol}}://{{server}}:{{port}}/v2/bills/:billID/comments"
+method: POST
+headers:
+  Content-Type: application/json
+pathVariables:
+  billID: "2001"
+body:
+  type: text
+  content: |-
+    {
+      "comment": "Bill received.",
+      "showExternalUsers": true
+    }
+examples: ./.resources/Create Bill Comment.resources/examples
+order: 2000

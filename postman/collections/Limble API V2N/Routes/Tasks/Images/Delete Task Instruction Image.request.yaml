@@ -1,0 +1,30 @@
+$kind: http-request
+description: This request removes an instructional image from an Instruction.
+url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/instructions/:instructionID/image"
+method: DELETE
+headers:
+  Content-Type: application/json
+queryParams:
+  - key: filename
+    value: 165040769563793-pic.png
+    disabled: true
+    description: The name of the instruction file that needs to be deleted. This is
+      an optional parameter. If not given, **all** the files attached to an
+      instruction will be deleted.
+pathVariables:
+  instructionID: "59271"
+body:
+  type: formdata
+  content: []
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"response should be okay to process\", function () { \r
+
+      \    pm.response.to.not.be.error; \r
+
+      \    pm.response.to.not.have.jsonBody(\"error\"); \r
+
+      });"
+    language: text/javascript
+examples: ./.resources/Delete Task Instruction Image.resources/examples
+order: 2000

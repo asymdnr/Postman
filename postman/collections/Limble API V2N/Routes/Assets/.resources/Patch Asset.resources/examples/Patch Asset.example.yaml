@@ -1,0 +1,57 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/assets/:assetID/"
+  method: PATCH
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    assetID: "10728"
+  body:
+    type: text
+    content: |
+      {
+      	"startedOn": 1541796015,
+      	"hoursPerWeek": 30,
+      	"name": "{{newAssetName}}",
+           "geoLocation": {
+            "type": "Feature",
+            "properties": {
+              "name": "Salt Lake City"
+            },
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                -111.9012451171875,
+                40.76962180287486
+              ]
+            }
+          }
+          
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Security-Policy: "default-src 'self';base-uri
+      'self';block-all-mixed-content;font-src 'self' https:
+      data:;frame-ancestors 'self';img-src 'self' data:;object-src
+      'none';script-src 'self';script-src-attr 'none';style-src 'self' https:
+      'unsafe-inline';upgrade-insecure-requests"
+    X-DNS-Prefetch-Control: off
+    Expect-CT: max-age=0
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-Permitted-Cross-Domain-Policies: none
+    Referrer-Policy: no-referrer
+    X-XSS-Protection: "0"
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Date: Thu, 24 Mar 2022 17:11:15 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+    Content-Length: "0"
+  body:
+    type: text
+    content: ""
+order: 1000

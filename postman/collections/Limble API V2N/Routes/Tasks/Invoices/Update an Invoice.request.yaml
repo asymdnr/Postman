@@ -1,0 +1,25 @@
+$kind: http-request
+description: |-
+  This request will update an invoice attached to an **open** Task (i.e. task status=0).
+
+  <table><tbody><tr><th>Parameter</th><th>Type</th><th>Required?</th><th>Description</th></tr><tr><td>cost</td><td>Float</td><td>Required</td><td>The cost on the invoice.</td></tr><tr><td>description</td><td>String</td><td>Required</td><td>Brief description for the invoice.</td></tr></tbody></table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/invoices/:invoiceID"
+method: PATCH
+pathVariables:
+  - key: taskID
+    value: "15188"
+    description: The taskID of the task the invoice is attached to
+  - key: invoiceID
+    value: "290"
+    description: The invoiceID that needs to be updated
+body:
+  type: json
+  content: "{\r
+
+    \    \"cost\": 10000,\r
+
+    \    \"description\": \"new inovoice\"\r
+
+    }"
+examples: ./.resources/Update an Invoice.resources/examples
+order: 5000

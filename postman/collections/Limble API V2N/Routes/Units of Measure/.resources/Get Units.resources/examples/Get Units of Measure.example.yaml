@@ -1,0 +1,142 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/uom"
+  method: GET
+  queryParams:
+    - key: unitCodes
+      value: fluid_ounce_us, W0gzuwOpmOo_dXKtrc2RL
+      disabled: true
+      description: This parameter is used to only get specific units. This parameter
+        accepts a comma delimited list of unit codes.
+    - key: limit
+      value: "10"
+      disabled: true
+      description: This parameter is a result limiter. The default is 20 units and the
+        max is 100.
+    - key: page
+      value: "2"
+      disabled: true
+      description: "This parameter is used to paginate results based on the limit.
+        Refer to Pagination section for more information. "
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Date: Wed, 18 Dec 2024 21:45:14 GMT
+    Content-Type: application/json; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    vary: Accept-Encoding
+    content-security-policy: "default-src 'self';base-uri
+      'self';block-all-mixed-content;font-src 'self' https:
+      data:;frame-ancestors 'self';img-src 'self' data:;object-src
+      'none';script-src 'self';script-src-attr 'none';style-src 'self' https:
+      'unsafe-inline';upgrade-insecure-requests"
+    x-dns-prefetch-control: off
+    expect-ct: max-age=0
+    x-frame-options: SAMEORIGIN
+    strict-transport-security: max-age=31536000; includeSubDomains; preload
+    x-download-options: noopen
+    x-content-type-options: nosniff
+    x-permitted-cross-domain-policies: none
+    referrer-policy: no-referrer
+    x-xss-protection: "0"
+    api-feedback-link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    x-ratelimit-limit: "4000"
+    x-ratelimit-minute-limit: "360"
+    x-ratelimit-remaining: "3993"
+    x-ratelimit-first-call: "1734557517"
+    x-ratelimit-minute-remaining: "358"
+    x-ratelimit-minute-first-call: "1734558279"
+    etag: W/"d10-/EWTCwrZiFHL68MATSUvQ09Nr8I"
+    Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0
+    Content-Encoding: gzip
+    CF-Cache-Status: DYNAMIC
+    Server: cloudflare
+    CF-RAY: 8f4256b6cee0f0c2-DFW
+  body:
+    type: json
+    content: |-
+      [
+          {
+              "unitCode": "gallon_us",
+              "defaultAbbreviation": "gal",
+              "abbreviation": "gal",
+              "name": "Gallon",
+              "isCustom": false,
+              "category": "volume"
+          },
+          {
+              "unitCode": "milliliter",
+              "defaultAbbreviation": "mL",
+              "abbreviation": "mL",
+              "name": "Milliliter",
+              "isCustom": false,
+              "category": "volume"
+          },
+          {
+              "unitCode": "meter",
+              "defaultAbbreviation": "m",
+              "abbreviation": "m",
+              "name": "Meter",
+              "isCustom": false,
+              "category": "length"
+          },
+          {
+              "unitCode": "inch",
+              "defaultAbbreviation": "in",
+              "abbreviation": "in",
+              "name": "Inch",
+              "isCustom": false,
+              "category": "length"
+          },
+          {
+              "unitCode": "foot",
+              "defaultAbbreviation": "ft",
+              "abbreviation": "ft",
+              "name": "Foot",
+              "isCustom": false,
+              "category": "length"
+          },
+          {
+              "unitCode": "centimeter",
+              "defaultAbbreviation": "cm",
+              "abbreviation": "cm",
+              "name": "Centimeter",
+              "isCustom": false,
+              "category": "length"
+          },
+          {
+              "unitCode": "box",
+              "defaultAbbreviation": "box",
+              "abbreviation": "BoX",
+              "name": "Box",
+              "isCustom": false,
+              "category": "count"
+          },
+          {
+              "unitCode": "case",
+              "defaultAbbreviation": "case",
+              "abbreviation": "case",
+              "name": "Case",
+              "isCustom": false,
+              "category": "count"
+          },
+          {
+              "unitCode": "drum",
+              "defaultAbbreviation": "drum",
+              "abbreviation": "drum",
+              "name": "Drum",
+              "isCustom": false,
+              "category": "count"
+          },
+          {
+              "unitCode": "milligram",
+              "defaultAbbreviation": "mg",
+              "abbreviation": "mg",
+              "name": "Milligram",
+              "isCustom": false,
+              "category": "weight"
+          }
+      ]
+order: 1000

@@ -1,0 +1,49 @@
+$kind: http-request
+description: This request returns a list of Teams.
+url: "{{protocol}}://{{server}}:{{port}}/v2/teams/"
+method: GET
+queryParams:
+  - key: teams
+    value: 1778, 1771
+    disabled: true
+    description: This parameter expects a comma-separated list of teamIDs to filter
+      teams by.
+  - key: name
+    value: "%Lawn%"
+    disabled: true
+    description: This parameter is used to only get specific teams by name. This
+      parameter expects a string full name of a team or partial name with the
+      wildcard %.
+  - key: limit
+    value: "100"
+    disabled: true
+    description: This parameter is a result limiter. The default is set to return no
+      more than 100 results at one time.
+  - key: cursor
+    value: "0"
+    disabled: true
+    description: This parameter is a cursor that selects what teamID you want to
+      start receiving results at. e.g. passing 137 here will only get you tasks
+      with an id greater than 137.
+  - key: automaticallyCreated
+    value: "false"
+    disabled: true
+    description: This parameter is used to only get specific teams by if they were
+      automatically created by Limble or not. This parameter expects a bool true
+      or false. Teams can get dynamically created if multiple users are assigned
+      to the same task, for example.
+  - key: includeRoles
+    value: "false"
+    disabled: true
+    description: This parameter is used to determine whether role-based teams
+      (Manager, Technician, etc) are included in the response.
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"response is ok\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });"
+    language: text/javascript
+examples: ./.resources/Get Teams.resources/examples
+order: 1000

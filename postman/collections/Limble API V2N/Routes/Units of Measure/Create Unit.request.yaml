@@ -1,0 +1,31 @@
+$kind: http-request
+description: >-
+  The `POST /v2/uom` endpoint is used to create a new custom unit. The request
+  should include a JSON payload with the `name` and `abbreviation` fields.
+
+
+  ### Request Body
+
+
+  - `name` (string): The full name of the unit.
+      
+  - `abbreviation` (string): A compact name of the unit.
+      
+
+  ### Response
+
+
+  The full unit object of your newly created unit.
+url: "{{protocol}}://{{server}}:{{port}}/v2/uom"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"name\": \"Crate\",\r
+
+    \    \"abbreviation\": \"crt\"\r
+
+    }"
+examples: ./.resources/Create Unit.resources/examples
+order: 2000

@@ -1,0 +1,25 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/tags"
+  method: PATCH
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "oldName": "@Food Safety",
+        "newName": "@Food & Safety"
+      }
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "message": "Tag not found"
+      }
+order: 2000

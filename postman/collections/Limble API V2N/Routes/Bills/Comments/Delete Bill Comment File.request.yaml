@@ -1,0 +1,25 @@
+$kind: http-request
+description: |-
+  Deletes a file from a Bill comment.
+
+  Parameters:
+
+  | Parameter | In | Type | Required | Default | Description |
+  |---|---|---|---|---|---|
+  | billID | path | integer | yes |  | Bill identifier |
+  | commentID | path | integer | yes |  | Comment identifier |
+  | filename | query | string | yes |  | Exact filename to remove |
+
+  Responses:
+  - 200 OK: Deleted.
+  - 404 Not Found: File not found.
+url: "{{protocol}}://{{server}}:{{port}}/v2/bills/:billID/comments/:commentID/f\
+  ile?filename=receipt.png"
+method: DELETE
+queryParams:
+  filename: receipt.png
+pathVariables:
+  billID: "2001"
+  commentID: "12"
+examples: ./.resources/Delete Bill Comment File.resources/examples
+order: 4000

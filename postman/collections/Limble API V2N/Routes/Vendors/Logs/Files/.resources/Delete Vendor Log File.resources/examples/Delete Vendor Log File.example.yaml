@@ -1,0 +1,13 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/vendors/logs/file/:fileID"
+  method: DELETE
+  pathVariables:
+    fileID: ""
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 1000

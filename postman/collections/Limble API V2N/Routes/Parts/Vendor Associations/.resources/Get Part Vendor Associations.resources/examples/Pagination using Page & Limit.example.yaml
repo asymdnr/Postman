@@ -1,0 +1,49 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/parts/vendors/associations?limit=2&\
+    page=2"
+  method: GET
+  queryParams:
+    limit: "2"
+    page: "2"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json; charset=utf-8
+    Last-Page: /v2/parts/vendors/associations?limit=2&page=5
+    Next-Page: /v2/parts/vendors/associations?limit=2&page=3
+    Previous-Page: /v2/parts/vendors/associations?limit=2&page=1
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+  body:
+    type: json
+    content: |-
+      [
+          {
+              "relationID": 3,
+              "partID": 160,
+              "vendorID": 15,
+              "vendorPartNumber": "XYZ-200",
+              "partPrice": 14.50,
+              "createdAt": 1700200000,
+              "updatedAt": 1700200000,
+              "partName": "Hydraulic Hose",
+              "number": "HH-200",
+              "locationID": 163,
+              "vendorName": "Industrial Parts Inc."
+          },
+          {
+              "relationID": 4,
+              "partID": 161,
+              "vendorID": 15,
+              "vendorPartNumber": null,
+              "partPrice": 3.25,
+              "createdAt": 1700300000,
+              "updatedAt": 1700350000,
+              "partName": "Gasket Kit",
+              "number": "GK-100",
+              "locationID": 163,
+              "vendorName": "Industrial Parts Inc."
+          }
+      ]
+order: 2000

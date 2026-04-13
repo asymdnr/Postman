@@ -1,0 +1,30 @@
+$kind: http-request
+description: This request attaches a Suggested Field to a Part.
+url: "{{protocol}}://{{server}}:{{port}}/v2/parts/:partID/fields"
+method: PUT
+headers:
+  Content-Type: application/json
+  Accept: text/html
+pathVariables:
+  partID: "1030"
+body:
+  type: text
+  content: |-
+    {
+    	"fieldID": 36,
+    	"locationID":163
+    }
+scripts:
+  - type: afterResponse
+    code: |+
+      const valueID = pm.response.json().valueID;
+
+      pm.test("response is created", () => {
+          pm.response.to.have.status(201);
+      });
+
+      pm.globals.set('partValueID', valueID);
+
+    language: text/javascript
+examples: ./.resources/Attach Field to Part.resources/examples
+order: 4000

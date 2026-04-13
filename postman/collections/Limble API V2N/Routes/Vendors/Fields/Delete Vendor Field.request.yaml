@@ -1,0 +1,10 @@
+$kind: http-request
+description: This request deletes a custom field attached to a Vendor.
+url: "{{protocol}}://{{server}}:{{port}}/v2/vendors/fields/:valueID"
+method: DELETE
+pathVariables:
+  - key: valueID
+    value: "182"
+    description: valueID of the field you are removing.
+examples: ./.resources/Delete Vendor Field.resources/examples
+order: 6000

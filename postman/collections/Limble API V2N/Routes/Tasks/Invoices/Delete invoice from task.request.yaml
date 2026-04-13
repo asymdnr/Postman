@@ -1,0 +1,13 @@
+$kind: http-request
+description: This request will remove an invoice from an **open** Task (i.e. task status=0).
+url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/invoices/:invoiceID"
+method: DELETE
+pathVariables:
+  - key: taskID
+    value: "14879"
+    description: The taskID of the task you want to remove the invoice from.
+  - key: invoiceID
+    value: "290"
+    description: The invoiceID of the invoice you want to remove.
+examples: ./.resources/Delete invoice from task.resources/examples
+order: 4000

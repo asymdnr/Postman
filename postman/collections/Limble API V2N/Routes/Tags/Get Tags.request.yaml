@@ -1,0 +1,26 @@
+$kind: http-request
+description: |-
+  This request returns your tags in Limble.
+
+  <strong>Return data description</strong>
+
+  <table>
+      <thead>
+          <tr>
+              <th>Property</th>
+              <th>Description</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>name</td>
+              <td>A search-string for tags.</td>
+          </tr>
+      </tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/tags?name=safety"
+method: GET
+queryParams:
+  name: safety
+examples: ./.resources/Get Tags.resources/examples
+order: 1000

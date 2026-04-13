@@ -1,0 +1,32 @@
+$kind: http-example
+request:
+  url: ""
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: >2-
+       {
+              "instructionID": 8,
+              "taskID": 7,
+              "parentInstructionID": 0,
+              "instruction": "The part <b>\"EX7240 Project Lamp\"</b> at \"Facility 1\" has a quantity of <b>10</b> with a threshold of <b>30</b>.  At least <b>20</b> parts need to be ordered to bring \"EX7240 Project Lamp\" back in good standing.",
+              "type": 1,
+              "options": [],
+              "response": true,
+              "instructionFiles": []
+          },
+          {
+              "instructionID": 19,
+              "taskID": 6,
+              "parentInstructionID": 0,
+              "instruction": "Inspect Lamp - Insure working condition",
+              "type": 1,
+              "options": [],
+              "response": false,
+              "instructionFiles": []
+          }
+      }
+order: 1000

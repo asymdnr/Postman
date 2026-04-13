@@ -1,0 +1,47 @@
+$kind: http-request
+description: >-
+  Deletes a custom status and reassigns all tasks using it. Default statuses (0,
+  1, 2) cannot be deleted.
+
+
+  **IMPORTANT NOTE:** Deleting task statuses that are currently in use will
+  result in all tasks assigned that status being reset to status 0 (open).
+
+
+  **Path Parameters:**
+
+
+  - `statusID` (number, required) - ID of the status to delete
+      
+
+  **Query Parameters:**
+
+
+  - `replacementStatusID` (number, required) - ID of the status to assign to
+  tasks currently using the deleted status. Can be a default status (0, 1, 2) or
+  another custom status.
+      
+
+  **Validation:**
+
+
+  - Cannot delete default statuses (IDs 0, 1, 2)
+      
+  - Both statusID and replacementStatusID must exist
+      
+  - replacementStatusID must differ from statusID
+      
+  - replacementStatusID must be valid for the customer
+url: "{{protocol}}://{{server}}:{{port}}/v2/statuses/:statusID?replacementStatu\
+  sID=1"
+method: DELETE
+queryParams:
+  - key: replacementStatusID
+    value: "1"
+    description: ID of the status to reassign tasks to (required)
+pathVariables:
+  - key: statusID
+    value: "10"
+    description: The ID of the status to delete
+examples: ./.resources/Delete Status.resources/examples
+order: 4000

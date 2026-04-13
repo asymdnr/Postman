@@ -1,0 +1,58 @@
+$kind: http-request
+description: >-
+  Creates a new account-level custom tag. The tag is normalized and validated
+  before creation.
+
+
+  **Request Body:**
+
+  - `name` (string, required) - Tag name with or without leading '@', must not
+  contain ';'
+
+
+  **Response (200 OK):**
+
+  - `created` (boolean) - Always true on success
+
+  - `name` (string) - Canonical tag name without trailing ';' (e.g., `@Food
+  Safety`)
+
+  - `sanitizations` (array, optional) - List of normalization actions applied
+
+  - `tags` (array) - All account tags in canonical format with trailing ';'
+
+
+  **Normalization Rules:**
+
+  - Semicolons ';' are rejected (not allowed in input)
+
+  - Internal '@' characters removed, single leading '@' added
+
+  - Backslashes removed
+
+  - Commas converted to spaces
+
+  - Whitespace collapsed
+
+  - CR/LF and NBSP normalized to spaces
+
+  - ASCII control characters removed
+
+
+  **Error Responses:**
+
+  - 400 Bad Request - Invalid input (contains ';' or normalizes to empty)
+
+  - 409 Conflict - Tag already exists (case-insensitive comparison)
+url: "{{protocol}}://{{server}}:{{port}}/v2/tags"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "@Food Safety"
+    }
+examples: ./.resources/Create Account Tag.resources/examples
+order: 2000

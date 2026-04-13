@@ -1,0 +1,36 @@
+$kind: http-example
+request:
+  url: ""
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: json
+    content: |
+      {
+        "currentState": {
+          "number": 0,
+          "name": "setup",
+          "label": "Setup"
+        },
+        "validNextStates": [
+          {
+            "number": 97,
+            "name": "ready_to_receive",
+            "label": "Ready to Receive"
+          },
+          {
+            "number": 101,
+            "name": "disapproved",
+            "label": "Disapproved"
+          }
+        ],
+        "requirements": {
+          "ready_to_receive": {
+            "vendorRequired": true
+          },
+          "disapproved": {}
+        }
+      }
+order: 1000

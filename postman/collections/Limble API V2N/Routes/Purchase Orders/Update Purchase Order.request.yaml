@@ -1,0 +1,117 @@
+$kind: http-request
+description: >-
+  This request updates a Purchase Order. Currently, changing the locationID that
+  a PO belongs to is unsupported.
+
+
+  <table class="apiTable">
+  	<thead>
+  		<tr>
+  			<th>Parameter</th>
+  			<th>Type</th>
+  			<th>Required?</th>
+  			<th>Description</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr>
+  			<td>vendorID</td>
+  			<td>Int</td>
+  			<td>Optional</td>
+  			<td>The ID of the vendor that this PO will be associated with.</td>
+  		</tr>
+  		<tr>
+  			<td>userID</td>
+  			<td>Int</td>
+  			<td>Optional</td>
+  			<td>The ID of the user that this PO will be assigned to.</td>
+  		</tr>
+  		<tr>
+  			<td>taskID</td>
+  			<td>Int</td>
+  			<td>Optional</td>
+  			<td>The ID of the task that this PO will be associated with.</td>
+  		</tr>
+  		<tr>
+  			<td>budgetID</td>
+  			<td>Int</td>
+  			<td>Optional</td>
+  			<td>The ID of the budget that this PO will be associated with. <strong>Changing budgetID when the PO is past the setup phase (state 0) is not supported.</strong></td>
+  		</tr>
+  		<tr>
+  			<td>date</td>
+  			<td>Int</td>
+  			<td>Optional</td>
+  			<td>The start time of the PO -- this can be in the past or the future and will still show up in the UI. Must be a <a href="https://www.unixtimestamp.com/" target="_blank">unix timestamp</a>.</td>
+  		</tr>
+  		<tr>
+  			<td>expectedDate</td>
+  			<td>Int</td>
+  			<td>Optional</td>
+  			<td>The expected delivery date of this PO. Must be a <a href="https://www.unixtimestamp.com/" target="_blank">unix timestamp</a>.</td>
+  		</tr>
+  		<tr>
+  			<td>requestDescription</td>
+  			<td>String</td>
+  			<td>Optional</td>
+  			<td>A description of the "request" for this PO.</td>
+  		</tr>
+  		<tr>
+  			<td>customField1</td>
+  			<td>String</td>
+  			<td>Optional</td>
+  			<td>PO custom field, the customer chooses which custom fields are available on all POs.</td>
+  		</tr>
+  		<tr>
+  			<td>customField2</td>
+  			<td>String</td>
+  			<td>Optional</td>
+  			<td>PO custom field, the customer chooses which custom fields are available on all POs.</td>
+  		</tr>
+  		<tr>
+  			<td>customField3</td>
+  			<td>String</td>
+  			<td>Optional</td>
+  			<td>PO custom field, the customer chooses which custom fields are available on all POs.</td>
+  		</tr>
+  		<tr>
+  			<td>customField4</td>
+  			<td>String</td>
+  			<td>Optional</td>
+  			<td>PO custom field, the customer chooses which custom fields are available on all POs.</td>
+  		</tr>
+  		<tr>
+  			<td>customField5</td>
+  			<td>String</td>
+  			<td>Optional</td>
+  			<td>PO custom field, the customer chooses which custom fields are available on all POs.</td>
+  		</tr>
+  		<tr>
+  			<td>customField6</td>
+  			<td>String</td>
+  			<td>Optional</td>
+  			<td>PO custom field, the customer chooses which custom fields are available on all POs.</td>
+  		</tr>
+  	</tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/po/:poID"
+method: PATCH
+pathVariables:
+  - key: poID
+    value: "1"
+    description: poID of the PO that you are updating.
+body:
+  type: json
+  content: |-
+    {
+        "budgetID": 1,
+        "vendorID": 2,
+        "userID": 1,
+        "requestDescription": "We're gonna need a bigger boat.",
+        "customField1": "Test 2",
+        "customField2": "Test 5",
+        "customField3": "Test 1",
+        "customField4": "Test 56"
+    }
+examples: ./.resources/Update Purchase Order.resources/examples
+order: 6000

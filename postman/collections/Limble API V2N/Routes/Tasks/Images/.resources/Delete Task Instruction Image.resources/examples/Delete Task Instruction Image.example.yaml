@@ -1,0 +1,25 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/instructions/:instructionID/i\
+    mage?filename=164919387137579-pic.png"
+  method: DELETE
+  headers:
+    Content-Type: application/json
+  queryParams:
+    - key: filename
+      value: 164919387137579-pic.png
+      description: The name of the instruction file that needs to be deleted. This is
+        an optional parameter. If not given, **all** the files attached to an
+        instruction will be deleted.
+  pathVariables:
+    instructionID: "58920"
+  body:
+    type: formdata
+    content: []
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 1000

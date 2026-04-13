@@ -1,0 +1,79 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/priorities"
+  method: GET
+  queryParams:
+    - key: priorities
+      value: "118"
+      disabled: true
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-DNS-Prefetch-Control: off
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "749"
+    ETag: W/"2ed-wGW7z/uEBN6/uL445Co7poqxPUI"
+    Date: Tue, 23 Mar 2021 21:22:17 GMT
+    Connection: keep-alive
+  body:
+    type: json
+    content: |-
+      [
+          {
+              "priorityID": 8,
+              "name": "Ultra Low",
+              "priorityLevel": 4,
+              "color": "#000000",
+              "isDefault": false
+          },
+          {
+              "priorityID": 9,
+              "name": "Low Priority",
+              "priorityLevel": 1,
+              "color": "#429b1f",
+              "isDefault": false
+          },
+          {
+              "priorityID": 10,
+              "name": "Medium Priority",
+              "priorityLevel": 2,
+              "color": "#ef6a00",
+              "isDefault": false
+          },
+          {
+              "priorityID": 11,
+              "name": "Medium Priority",
+              "priorityLevel": 3,
+              "color": "#ef6a00",
+              "isDefault": false
+          },
+          {
+              "priorityID": 12,
+              "name": "High Priority",
+              "priorityLevel": 5,
+              "color": "#c22528",
+              "isDefault": false
+          },
+          {
+              "priorityID": 13,
+              "name": "High Priority",
+              "priorityLevel": 6,
+              "color": "#c22528",
+              "isDefault": false
+          },
+          {
+              "priorityID": 14,
+              "name": "On Hold",
+              "priorityLevel": 7,
+              "color": "#f1c40f",
+              "isDefault": false
+          }
+      ]
+order: 1000

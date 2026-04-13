@@ -1,0 +1,133 @@
+$kind: http-request
+description: >-
+  Returns a paginated list of vendor-part associations for the customer.
+
+
+  **Note:** this endpoint supports both cursor-based and page-based pagination.
+  Please refer to the [**Pagination**](#pagination) section for more
+  information.
+
+
+  <p><b>Return data description</b></p>
+
+
+  <table class="apiTable">
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>relationID</td>
+        <td>The unique ID of this vendor-part association.</td>
+      </tr>
+      <tr>
+        <td>partID</td>
+        <td>The ID of the associated part.</td>
+      </tr>
+      <tr>
+        <td>vendorID</td>
+        <td>The ID of the associated vendor.</td>
+      </tr>
+      <tr>
+        <td>vendorPartNumber</td>
+        <td>The vendor's part number for this part, if provided.</td>
+      </tr>
+      <tr>
+        <td>partPrice</td>
+        <td>The vendor's price for this part, if provided.</td>
+      </tr>
+      <tr>
+        <td>createdAt</td>
+        <td>Unix timestamp of when this association was created.</td>
+      </tr>
+      <tr>
+        <td>updatedAt</td>
+        <td>Unix timestamp of when this association was last updated.</td>
+      </tr>
+      <tr>
+        <td>partName</td>
+        <td>The name of the associated part.</td>
+      </tr>
+      <tr>
+        <td>number</td>
+        <td>The part's internal part number.</td>
+      </tr>
+      <tr>
+        <td>locationID</td>
+        <td>The ID of the location this part belongs to.</td>
+      </tr>
+      <tr>
+        <td>vendorName</td>
+        <td>The name of the associated vendor.</td>
+      </tr>
+    </tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/parts/vendors/associations"
+method: GET
+queryParams:
+  - key: parts
+    value: 158,159
+    disabled: true
+    description: This parameter is used to only get associations for specific parts.
+      This parameter accepts a comma delimited list of part IDs.
+  - key: vendors
+    value: 12,34
+    disabled: true
+    description: This parameter is used to only get associations for specific
+      vendors. This parameter accepts a comma delimited list of vendor IDs.
+  - key: vendorPartNumber
+    value: "%ABC%"
+    disabled: true
+    description: This parameter is used to search for associations by vendor part
+      number. This parameter expects a string with the wildcard % for partial
+      matching.
+  - key: vendorName
+    value: "%Acme%"
+    disabled: true
+    description: This parameter is used to search for associations by vendor name.
+      This parameter expects a string with the wildcard % for partial matching.
+  - key: start
+    value: "1700000000"
+    disabled: true
+    description: This parameter is used to only get associations that were last
+      updated after the unix timestamp passed into the start parameter.
+  - key: end
+    value: "1800000000"
+    disabled: true
+    description: This parameter is used to only get associations that were last
+      updated before the unix timestamp passed into the end parameter.
+  - key: cursor
+    value: "0"
+    disabled: true
+    description: This parameter is a cursor that selects what relationID you want to
+      start receiving results at. This will return results with a relationID
+      greater than the value of cursor.
+  - key: limit
+    value: "100"
+    disabled: true
+    description: This parameter is a result limiter. The default is set to return no
+      more than 100 results at one time. The maximum is 1000.
+  - key: orderBy
+    value: relationID
+    disabled: true
+    description: "This parameter is used to order results. Accepted values:
+      relationID, -relationID, createdAt, -createdAt, updatedAt, -updatedAt,
+      partName, -partName, vendorName, -vendorName. Prefix with - for descending
+      order."
+  - key: page
+    value: "1"
+    disabled: true
+    description: This parameter is used to paginate results based on the limit.
+      Refer to Pagination section for more information.
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("response is ok", function () {
+          pm.response.to.have.status(200);
+      });
+    language: text/javascript
+examples: ./.resources/Get Part Vendor Associations.resources/examples
+order: 1000

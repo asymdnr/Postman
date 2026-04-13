@@ -1,0 +1,15 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/assets/logs/file/:fileID"
+  method: DELETE
+  pathVariables:
+    - key: fileID
+      value: "58"
+      description: The ID of the file to be deleted.
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 1000

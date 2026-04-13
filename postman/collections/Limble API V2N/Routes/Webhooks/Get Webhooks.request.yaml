@@ -1,0 +1,71 @@
+$kind: http-request
+description: >-
+  This request returns your Webhooks configured for Limble.  
+
+
+  <b>Return data description</b>
+
+
+  <table>
+      <thead>
+          <tr>
+              <th>Property</th>
+              <th>Description</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>webhhokID</td>
+              <td>The ID of the Webhook</td>
+          </tr>
+          <tr>
+              <td>endpoint</td>
+              <td>The webhook URL.</td>
+          </tr>
+          <tr>
+              <td>type</td>
+              <td>The type of webhook. Webhooks can be of type task, po, poItem. </td>
+          </tr>
+          <tr>
+              <td>enabled</td>
+              <td>Determines if the webhook is enabled. 0 = Disabled 1=Enabled</td>
+          </tr>
+      </tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/webhooks/"
+method: GET
+queryParams:
+  - key: webhooks
+    value: "24"
+    disabled: true
+    description: This parameter is used to only get specific Webhooks. This
+      parameter expects a comma delimited list of webhookIDs.
+  - key: endpoint
+    value: "%hello.com"
+    disabled: true
+    description: This parameter is used for a string search by the webhook endpoint.
+      This parameter expects a URL or partial URL of a webhook using a string
+      with the wildcard %.
+  - key: type
+    value: task
+    disabled: true
+    description: This parameter is used to only get Webhooks of a specific type.
+      This parameter accepts a comma delimited list of webhook types.
+  - key: enabled
+    value: "1"
+    disabled: true
+    description: "This parameter is used to get Webooks which are enabled. This
+      paramter expects 1: Enabled or 0: Disabled"
+  - key: cursor
+    value: "0"
+    disabled: true
+    description: This parameter is a cursor that selects what webhookID you want to
+      start receiving results at. e.g. passing 10 here will only get you
+      webhooks with an id greater than 10.
+  - key: limit
+    value: "100"
+    disabled: true
+    description: This parameter is a result limiter. The default is set to return no
+      more than 100 results at one time.
+examples: ./.resources/Get Webhooks.resources/examples
+order: 1000

@@ -1,0 +1,157 @@
+$kind: http-example
+name: Task Labor
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/labor?limit=2"
+  method: GET
+  queryParams:
+    - key: tasks
+      value: 6,11
+      disabled: true
+      description: This parameter is used to only get specific Tasks. This parameter
+        accepts a comma delimited list of task IDs.
+    - key: users
+      value: "0"
+      disabled: true
+      description: This parameter is used to only get labor records for a specific
+        user or set of users in a comma delimited list.
+    - key: start
+      value: "1564895015"
+      disabled: true
+      description: This parameter is used to only get labor that was logged after the
+        unix timestamp passed into the start parameter. For example, all Assets
+        that were last edited after April 18th, 2018.
+    - key: end
+      value: "1564895015"
+      disabled: true
+      description: This parameter is used to only get labor that was logged *before*
+        the unix timestamp passed into the end parameter.
+    - key: limit
+      value: "2"
+      description: This parameter is a result limiter. The default is set to return no
+        more than 100 results at one time.
+    - key: cursor
+      value: "0"
+      disabled: true
+      description: This parameter is a cursor that selects what taskID you want to
+        start receiving results at. e.g. passing 137 here will only get you
+        tasks with an id greater than 137.
+    - key: locations
+      value: "0"
+      disabled: true
+      description: This parameter is used to retrieve labor entries for particular
+        locations. This parameter accepts a comma delimited list of location
+        IDs.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Date: Mon, 24 Jun 2024 16:47:42 GMT
+    Content-Type: application/json; charset=utf-8
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    vary: Accept-Encoding
+    content-security-policy: "default-src 'self';base-uri
+      'self';block-all-mixed-content;font-src 'self' https:
+      data:;frame-ancestors 'self';img-src 'self' data:;object-src
+      'none';script-src 'self';script-src-attr 'none';style-src 'self' https:
+      'unsafe-inline';upgrade-insecure-requests"
+    x-dns-prefetch-control: off
+    expect-ct: max-age=0
+    x-frame-options: SAMEORIGIN
+    strict-transport-security: max-age=31536000; includeSubDomains; preload
+    x-download-options: noopen
+    x-content-type-options: nosniff
+    x-permitted-cross-domain-policies: none
+    referrer-policy: no-referrer
+    x-xss-protection: "0"
+    api-feedback-link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    x-ratelimit-limit: "4000"
+    x-ratelimit-minute-limit: "360"
+    x-ratelimit-remaining: "3982"
+    x-ratelimit-first-call: "1719246455"
+    x-ratelimit-minute-remaining: "358"
+    x-ratelimit-minute-first-call: "1719247652"
+    etag: W/"4bd-7t9W101TcVLikSzWKiMAE4dKsuc"
+    Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0
+    Content-Encoding: gzip
+    CF-Cache-Status: DYNAMIC
+    Server: cloudflare
+    CF-RAY: 898e3380fbf48389-SEA
+  body:
+    type: json
+    content: |-
+      [
+          {
+              "meta": {
+                  "task": "/v2/tasks/?tasks=219",
+                  "user": "/v2/users/?users=230530"
+              },
+              "userID": 230530,
+              "timeSpent": 60,
+              "userWage": 20,
+              "taskID": 219,
+              "dateLogged": 1695027601,
+              "description": null,
+              "taskName": "Test WO",
+              "taskPriorityID": 28150,
+              "taskPriorityLevel": 3,
+              "billableTime": null,
+              "billableRate": null,
+              "categoryID": null
+          },
+          {
+              "meta": {
+                  "task": "/v2/tasks/?tasks=219",
+                  "user": "/v2/users/?users=230530"
+              },
+              "userID": 230530,
+              "timeSpent": 3660,
+              "userWage": 20,
+              "taskID": 219,
+              "dateLogged": 1695027602,
+              "description": null,
+              "taskName": "Test WO",
+              "taskPriorityID": 28150,
+              "taskPriorityLevel": 3,
+              "billableTime": null,
+              "billableRate": null,
+              "categoryID": null
+          },
+          {
+              "meta": {
+                  "task": "/v2/tasks/?tasks=47",
+                  "user": "/v2/users/?users=230530"
+              },
+              "userID": 230530,
+              "timeSpent": 3600,
+              "userWage": 20,
+              "taskID": 47,
+              "taskName": "fix the fridge",
+              "taskPriorityID": 28148,
+              "taskPriorityLevel": 1,
+              "description": null,
+              "dateLogged": 1686328138,
+              "billableTime": null,
+              "billableRate": null,
+              "categoryID": null
+          },
+          {
+              "meta": {
+                  "task": "/v2/tasks/?tasks=160",
+                  "user": "/v2/users/?users=1"
+              },
+              "userID": 1,
+              "timeSpent": 0,
+              "userWage": 15,
+              "taskID": 160,
+              "taskName": "Samsara - Vehicle Fault",
+              "taskPriorityID": null,
+              "taskPriorityLevel": null,
+              "description": null,
+              "dateLogged": 1700502149,
+              "billableTime": null,
+              "billableRate": null,
+              "categoryID": null
+          }
+      ]
+order: 2000

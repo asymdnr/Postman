@@ -1,0 +1,18 @@
+$kind: http-request
+description: This request removes the main image from a Vendor.
+url: "{{protocol}}://{{server}}:{{port}}/v2/vendors/:vendorID/image"
+method: DELETE
+headers:
+  Content-Type: application/json
+pathVariables:
+  vendorID: "{{vendorID}}"
+scripts:
+  - type: afterResponse
+    code: |+
+      pm.test("response is created", () => {
+          pm.response.to.have.status(200);
+      });
+
+    language: text/javascript
+examples: ./.resources/Delete Vendor Image.resources/examples
+order: 2000

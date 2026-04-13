@@ -1,0 +1,22 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/parts/vendors/associations/:relatio\
+    nID"
+  method: DELETE
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    relationID: "9999"
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Content-Type: application/json; charset=utf-8
+  body:
+    type: json
+    content: |-
+      {
+          "status": 404,
+          "error": "Vendor-part association not found"
+      }
+order: 2000

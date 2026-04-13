@@ -1,0 +1,130 @@
+$kind: http-request
+description: >-
+  This request creates a new User and emails them a welcome email with details
+  on how to access Limble.
+
+
+
+  <table class="apiTable">
+  	<thead>
+  		<tr>
+  			<th>Parameter</th>
+  			<th>Type</th>
+  			<th>Required?</th>
+  			<th>Description</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr>
+  			<td>firstName</td>
+  			<td>String</td>
+  			<td>Optional</td>
+  			<td>The User's first name.</td>
+  		</tr>
+  		<tr>
+  			<td>lastName</td>
+  			<td>String</td>
+  			<td>Optional</td>
+  			<td>The User's last name.</td>
+  		</tr>
+  		<tr>
+  			<td>email</td>
+  			<td>string</td>
+  			<td>Required</td>
+  			<td>The User's email address.</td>
+  		</tr>
+          <tr>
+  			<td>password</td>
+  			<td>string</td>
+  			<td>Optional</td>
+  			<td>The User's password.</td>
+  		</tr>
+  		<tr>
+  			<td>locationID</td>
+  			<td>Int</td>
+  			<td>Required</td>
+  			<td>The locationID of the Location the Role will be at.</td>
+  		</tr>
+  		<tr>
+  			<td>roleID</td>
+  			<td>Int</td>
+  			<td>Required</td>
+  			<td>The initial Role this user will be granted. This can be changed later with the "Add Role To User" request.
+  			</td>
+  		</tr>
+  		<tr>
+  			<td>phone</td>
+  			<td>string</td>
+  			<td>Optional</td>
+  			<td>The User's phone number.</td>
+  		</tr>
+  		<tr>
+  			<td>wage</td>
+  			<td>number</td>
+  			<td>Optional</td>
+  			<td>The User's wage per hour.</td>
+  		</tr>
+  		<tr>
+  			<td>workDayHours</td>
+  			<td>number</td>
+  			<td>Optional</td>
+  			<td>The User's hours per day they work.</td>
+  		</tr>
+  		<tr>
+  			<td>active</td>
+  			<td>Boolean</td>
+  			<td>Optional</td>
+  			<td>The User's activation status.</td>
+  		</tr>
+  		<tr>
+  			<td>emailNotificationActive</td>
+  			<td>Boolean</td>
+  			<td>Optional</td>
+  			<td>The User's email notification activation status.  Should they receive email notifications?</td>
+  		</tr>
+  		<tr>
+  			<td>pushNotificationActive</td>
+  			<td>Boolean</td>
+  			<td>Optional</td>
+  			<td>The User's push notification activation status. Should they receive push notifications?</td>
+  		</tr>
+  	</tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/users/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+    	"firstName": "jeff",
+    	"lastName": "Smith",
+    	"roleID": 1032,
+    	"email": "jsmith@limblecmms.com",
+        "password": "$uper $ecret",
+    	"phone": "8015555555",
+    	"locationID": "163",
+    	"wage": 16,
+    	"workDayHours": 8,
+    	"emailNotificationActive": false,
+    	"pushNotificationActive": false
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      const userID = pm.response.json().userID;
+
+      pm.test("response is created", () => {
+          pm.response.to.have.status(201);
+      });
+
+      pm.test("location header is valid", () => {
+          const locationHeader = postman.getResponseHeader('Location')
+          pm.expect(locationHeader).to.eql(`/v2/users/?users=${userID}`);
+      });
+
+      pm.globals.set('userID', userID);
+    language: text/javascript
+examples: ./.resources/New User.resources/examples
+order: 5000

@@ -1,0 +1,22 @@
+$kind: http-request
+description: |-
+  This requests creates a manual log entry for an asset.
+
+  <table><tbody><tr><th>Parameter</th><th>Type</th><th>Required?</th><th>Description</th></tr><tr><td>userID</td><td>Int</td><td>Optional</td><td>The ID of the user creating the log. If userID is not given a log entry with userID=0 will be created.</td></tr><tr><td>logEntry</td><td>String</td><td>Required</td><td>Details of the log.</td></tr></tbody></table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/assets/:assetID/logs"
+method: POST
+pathVariables:
+  - key: assetID
+    value: "1"
+    description: The ID of the asset the log will be created for.
+body:
+  type: json
+  content: "{\r
+
+    \    \"userID\": 342,\r
+
+    \    \"logEntry\": \"Creating a log\"\r
+
+    }"
+examples: ./.resources/New Asset Log.resources/examples
+order: 3000

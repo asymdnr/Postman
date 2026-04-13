@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{protocol}}://{{server}}:{{port}}/v2/bills/transactions/:transactionID"
+method: DELETE
+pathVariables:
+  - key: transactionID
+    value: "399"
+    description: The ID of the Bill Transaction to be deleted.
+examples: ./.resources/Bill Transaction.resources/examples
+order: 4000

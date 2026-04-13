@@ -1,0 +1,38 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/tags"
+  method: PUT
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    taskID: "1160"
+  body:
+    type: text
+    content: |-
+      {
+        "tags": ["@Food", "@Safety"]
+      }
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: >-
+      {
+        "created": false,
+        "message": "2 tag(s) do not exist. Please create them first using POST /v2/tags",
+        "invalidTags": [
+          "@Invalid",
+          "@AlsoInvalid"
+        ],
+        "tags": [],
+        "availableTags": [
+          "@Urgent;",
+          "@Safety;",
+          "@Maintenance;",
+          "@Food;"
+        ]
+      }
+order: 2000

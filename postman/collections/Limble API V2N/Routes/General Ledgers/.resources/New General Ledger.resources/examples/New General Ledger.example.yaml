@@ -1,0 +1,37 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/gl"
+  method: POST
+  body:
+    type: json
+    content: |-
+      {
+          "locationID": 63,
+          "assetID": 8895,
+          "abbr": "OFF1",
+          "name": "Office 1",
+          "description": "Any general supplies for Office 1"
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    X-DNS-Prefetch-Control: off
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "16"
+    ETag: W/"10-oV4hJxRVSENxc/wX8+mA4/Pe4tA"
+    Date: Fri, 08 Jan 2021 18:59:32 GMT
+    Connection: keep-alive
+  body:
+    type: json
+    content: |-
+      {
+          "glID": 6
+      }
+order: 1000

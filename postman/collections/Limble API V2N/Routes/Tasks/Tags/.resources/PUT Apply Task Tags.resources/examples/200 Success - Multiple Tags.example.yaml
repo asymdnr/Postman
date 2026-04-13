@@ -1,0 +1,30 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/tags"
+  method: PUT
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    taskID: "1160"
+  body:
+    type: text
+    content: |-
+      {
+        "tags": ["@Food", "@Safety"]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "created": true,
+        "tags": [
+          "@Food;",
+          "@Safety;"
+        ]
+      }
+order: 1000

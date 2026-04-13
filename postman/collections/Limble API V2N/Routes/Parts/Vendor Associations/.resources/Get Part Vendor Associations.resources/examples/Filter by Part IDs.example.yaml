@@ -1,0 +1,60 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/parts/vendors/associations?parts=15\
+    8,159"
+  method: GET
+  queryParams:
+    - key: parts
+      value: 158,159
+      description: Filter by part ID(s). Accepts a comma-delimited list of part IDs.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json; charset=utf-8
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+  body:
+    type: json
+    content: |-
+      [
+          {
+              "relationID": 1,
+              "partID": 158,
+              "vendorID": 12,
+              "vendorPartNumber": "ABC-001",
+              "partPrice": 9.99,
+              "createdAt": 1700000000,
+              "updatedAt": 1700100000,
+              "partName": "Air Filter",
+              "number": "25x25x1",
+              "locationID": 163,
+              "vendorName": "Acme Supply Co."
+          },
+          {
+              "relationID": 2,
+              "partID": 158,
+              "vendorID": 34,
+              "vendorPartNumber": "AF-158B",
+              "partPrice": 8.50,
+              "createdAt": 1700060000,
+              "updatedAt": 1700060000,
+              "partName": "Air Filter",
+              "number": "25x25x1",
+              "locationID": 163,
+              "vendorName": "Parts Depot"
+          },
+          {
+              "relationID": 3,
+              "partID": 159,
+              "vendorID": 12,
+              "vendorPartNumber": null,
+              "partPrice": 4.75,
+              "createdAt": 1700120000,
+              "updatedAt": 1700120000,
+              "partName": "Oil Filter",
+              "number": "OF-500",
+              "locationID": 163,
+              "vendorName": "Acme Supply Co."
+          }
+      ]
+order: 3000

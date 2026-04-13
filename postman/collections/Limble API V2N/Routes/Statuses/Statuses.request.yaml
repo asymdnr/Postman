@@ -1,0 +1,40 @@
+$kind: http-request
+description: >-
+  This request returns your custom task statuses in Limble.
+
+
+  <strong>Return data description</strong>
+
+
+  <table>
+      <thead>
+          <tr>
+              <th>Property</th>
+              <th>Description</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>statusID</td>
+              <td>A unique identifier for this status.</td>
+          </tr>
+          <tr>
+              <td>name</td>
+              <td>A custom string that labels this status.</td>
+          </tr>
+          <tr>
+              <td>description</td>
+              <td>An optional description that elaborates on what this status means.</td>
+          </tr>
+      </tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/statuses?limit=3&cursor=1&name=%ogr\
+  %&statuses=1"
+method: GET
+queryParams:
+  limit: "3"
+  cursor: "1"
+  name: "%ogr%"
+  statuses: "1"
+examples: ./.resources/Statuses.resources/examples
+order: 1000

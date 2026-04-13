@@ -1,0 +1,82 @@
+$kind: http-request
+description: >-
+  This request creates a new Suggested Field.
+
+
+  Suggested Fields are the full list of possible Fields that can be added to
+  Assets at that Location.
+
+
+  <table class="apiTable">
+  	<thead>
+  		<tr>
+  			<th>Parameter</th>
+  			<th>Type</th>
+  			<th>Required?</th>
+  			<th>Description</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr>
+  			<td>locationID</td>
+  			<td>Int</td>
+  			<td>Required</td>
+  			<td>The location ID of the Asset to add the new Field to.</td>
+  		</tr>
+  		<tr class="even">
+  			<td>name</td>
+  			<td>String</td>
+  			<td>Required</td>
+  			<td>The name of the new Field. <b>Some custom field names such as "Asset" are not allowed and reserved for internal use. This will result in a 409 error.</b></td>
+  		</tr>
+  		<tr>
+  			<td>fieldType</td>
+  			<td>Int</td>
+  			<td>Required</td>
+  			<td>The type of the new Field. You can choose from Text (1), Date (2), Pictures (3), Documents (4), Number (5),
+  				Currency (6).</td>
+  		</tr>
+  	</tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/assets/fields/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |
+    {
+    	"locationID": {{locationID}},
+    	"name": "{{newAssetFieldName}}",
+    	"fieldType": 1
+    }
+scripts:
+  - type: beforeRequest
+    code: >
+      pm.globals.set('locationID', 73);
+
+      var fieldName = () => `new asset field - ${Math.floor(Math.random() *
+      10000000)}`;
+
+      pm.globals.set('newAssetFieldName', fieldName());
+    language: text/javascript
+  - type: afterResponse
+    code: >
+      const assetFieldID = pm.response.json().fieldID;
+
+
+      pm.test("response is created", () => {
+          pm.response.to.have.status(201);
+      });
+
+
+      pm.test("location header is valid", () => {
+          const locationHeader = postman.getResponseHeader('Location')
+          pm.expect(locationHeader).to.eql(`/v2/assets/fields/?fields=${assetFieldID}`);
+      })
+
+
+      pm.globals.set('assetFieldID', assetFieldID);
+    language: text/javascript
+examples: ./.resources/New Asset Suggested Field.resources/examples
+order: 4000

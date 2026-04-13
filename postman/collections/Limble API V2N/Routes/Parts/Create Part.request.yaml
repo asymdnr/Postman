@@ -1,0 +1,53 @@
+$kind: http-request
+description: |-
+  This request adds new Parts to inventory list.
+
+  <table><tbody><tr><th>Parameter</th><th>Type</th><th>Required?</th><th>Description</th></tr><tr><td><div>locationID</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Int</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Required</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The location of the Part to be updated. Must be the Location's unique ID number.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>name</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>String</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Required</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The new name of the Part.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>number</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>String</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Optional</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The new number of the Part.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>generalStock</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>number</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Optional</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>How many of this Part are now in stock. Not including purchase orders</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>generalPrice</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>number</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Optional</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The new price of the Part. Not considering purchase order prices.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>unitCode</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>String</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Optional</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The unit code to assign to the part. If the unit code is not found, the request will return a 404 error.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>supplier</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>String</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Optional</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The new supplier of the Part.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>location</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>String</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Optional</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The new location of the Part (i.e. bin).</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>categoryID</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>int</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Optional</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The category this part is in. (i.e. Electronics).</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>staleThreshold</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Int</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Optional</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The Stale Threshold setting allows you to set how many days need to go by without a Work Order or Task using this Part. For example, if the Stale Threshold is set at 30 and a Part does not get used by a Work Order or Task within 30 days, then the Part clock indicator will change color to red. If you wish to turn off this feature, assign a value of -1.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>minQtyThreshold</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Int</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Optional</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The Minimum Part Qty Threshold setting allows you to set a limit on how low you want this Part's qty to get. For example, if a Part Qty is lower than the Part Qty Threshold, a Task will be assigned to the Manager of the location to order new Parts. If you wish to turn off this feature, assign a value of -1.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>maxQtyThreshold</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Int</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Optional</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The Max Part Quantity Threshold number is used to determine what level you would like to bring your stock back to when you need to reorder a part. For example if I have 4 parts and my Maximum Part Qty Threshold is set to 20, I will have a task letting me know to order 16 more parts. If you wish to disable this feature please have a value of -1 entered.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>minQtyStatus</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Boolean</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Optional</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>This indicates if you are understocked or not.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>staleStatus</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Boolean</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Optional</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>This indicates if the part has gone stale or not. This value cannot be changed by regular user interaction it is change automatically by limble.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>assignment</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Int</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Optional. Required if 'assignmentType' is used.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>The user or team to which the task will be assigned.<br>Must be a user or team that exists at the specified location. Must be the unique ID number of the user or team. If this parameter is set, the assignmentType parameter must also be set.<br></div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr><tr><td><div>assignmentType</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Enum</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Optional. Required if 'assignment' is used.</div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td><td><div>Specifies wether this task will be assigned to a 'user' or a 'team'. Those two strings are the only accepted input. If this parameter is set, the assignment parameter must also be set.<br></div><div contenteditable="false"><div><div><div></div></div></div><div></div></div></td></tr></tbody></table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/parts/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+    	"locationID": 163,
+    	"name": "{{updatedPartName}}",
+    	"generalStock": 10,
+    	"generalPrice": 1.00,
+    	"number":"123123123",
+    	"supplier": "limblecmms",
+    	"location": "bin121121",
+    	"categoryID": 1,
+    	"assignment": 341,
+    	"assignmentType": "user",
+    	"staleThreshold": 30,
+    	"minQtyThreshold": 30,
+    	"maxQtyThreshold": 30,
+    	"minQtyStatus": true
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      const partID = pm.response.json().partID;
+
+      pm.test("response is created", () => {
+          pm.response.to.have.status(201);
+      });
+
+      pm.test("location header is valid", () => {
+          const locationHeader = postman.getResponseHeader('Location')
+          pm.expect(locationHeader).to.eql(`/v2/parts/?parts=${partID}`);
+      });
+
+      pm.globals.set('partID', partID);
+    language: text/javascript
+  - type: beforeRequest
+    code: |+
+      const partName = `part_name_${Math.floor(Math.random() * 10000000)}`;
+
+      pm.globals.set('partName', partName);
+
+    language: text/javascript
+examples: ./.resources/Create Part.resources/examples
+order: 8000

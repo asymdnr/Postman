@@ -1,0 +1,118 @@
+$kind: http-request
+description: >-
+  This request gets information such as Bill IDs, Bill Numbers, etc.
+
+
+  This call returns a "meta" object containing URLs that can be used to get data
+  related to the Bill.
+
+
+  <strong>Note:</strong> this endpoint supports pagination. Please refer to the
+  [**Pagination**](#pagination) section for more information.
+
+
+  <p><b>Return data description</b></p>
+
+  <table>
+      <thead>
+          <tr>
+              <th>Property</th>
+              <th>Description</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>meta</td>
+              <td>useful links relating to this Bill</td>
+          </tr>
+          <tr>
+              <td>billID</td>
+              <td>The unique ID of the Bill.</td>
+          </tr>
+          <tr>
+              <td>billNumber</td>
+              <td>The bill number assigned to the Bill.</td>
+          </tr>
+          <tr>
+              <td>poID</td>
+              <td>The poID of which the Bill was made.</td>
+          </tr>
+          <tr>
+              <td>locationID</td>
+              <td>The unique ID of the location associated with this Bill.</td>
+          </tr>
+          <tr>
+              <td>date</td>
+              <td>The date this Bill was created as a UNIX timestamp.</td>
+          </tr>
+          <tr>
+              <td>status</td>
+              <td>The status of this Bill.
+              The status can be as follows:
+              0: The bill is setup.
+              1: The bill is submitted.
+              2: The bill is closed i.e. Marked as Paid</td>
+          </tr>
+          <tr>
+              <td>userID</td>
+              <td>The Id of the user this Bill was assigned to.</td>
+          </tr>
+          <tr>
+              <td>userIDStarted</td>
+              <td>The ID of the user this Bill was created by.</td>
+          </tr>
+          <tr>
+              <td>userIDMarkPaid</td>
+              <td>The ID of the user this Bill was marked paid by.</td>
+          </tr>
+          
+      </tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/bills?bills=1&numbers=1&status=0,1&\
+  end=1697443800&limit=2&pos=5&start=1597443703&locations=163&cursor=0&page=2"
+method: GET
+queryParams:
+  - key: bills
+    value: "1"
+    description: This parameter is used to only get specific Bills. This parameter
+      expects a comma delimited list of billIDs.
+  - key: numbers
+    value: "1"
+    description: This parameter is used to only get specific Bills by Number. This
+      parameter expects a comma delimited list of billNumbers.
+  - key: status
+    value: 0,1
+    description: >
+      This parameter is used to only get specific Bills by their status. The
+      bill status could be 0,1 or 2
+  - key: end
+    value: "1697443800"
+    description: "This parameter is used to only get Bills that were created before
+      or on the unix timestamp passed into it. "
+  - key: limit
+    value: "2"
+    description: This parameter is a result limiter. The default is set to return no
+      more than 100 results at one time.
+  - key: pos
+    value: "5"
+    description: This parameter is used to only get specific Bills by POs. This
+      parameter expects a comma delimited list of PO IDs.
+  - key: start
+    value: "1597443703"
+    description: "This parameter is used to only get Bills that were created after
+      or on the unix timestamp passed into it. "
+  - key: locations
+    value: "163"
+    description: This parameter is used to only get Bills at a specific group of
+      Locations. This parameter accepts a comma delimited list of Location IDs.
+  - key: cursor
+    value: "0"
+    description: This parameter is a cursor that selects what billID you want to
+      start receiving results at. e.g. passing 130 here will only get you bills
+      with an id greater than 130.
+  - key: page
+    value: "2"
+    description: This parameter is used to paginate results based on the limit.
+      Refer to Pagination section for more information.
+examples: ./.resources/Get Bills.resources/examples
+order: 3000

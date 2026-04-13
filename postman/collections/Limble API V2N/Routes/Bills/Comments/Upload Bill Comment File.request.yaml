@@ -1,0 +1,31 @@
+$kind: http-request
+description: >-
+  Uploads a file to a Bill comment.
+
+
+  Parameters:
+
+
+  | Parameter | In | Type | Required | Default | Description |
+
+  |---|---|---|---|---|---|
+
+  | billID | path | integer | yes |  | Bill identifier |
+
+  | commentID | path | integer | yes |  | Comment identifier |
+
+  | file | form-data | file | yes |  | File to upload (max 50MB). Same types as
+  PO comment files |
+url: "{{protocol}}://{{server}}:{{port}}/v2/bills/:billID/comments/:commentID/file"
+method: PUT
+pathVariables:
+  billID: "195"
+  commentID: "61"
+body:
+  type: formdata
+  content:
+    - type: file
+      key: file
+      src: []
+examples: ./.resources/Upload Bill Comment File.resources/examples
+order: 3000

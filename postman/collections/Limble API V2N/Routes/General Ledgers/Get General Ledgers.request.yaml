@@ -1,0 +1,76 @@
+$kind: http-request
+description: |-
+  This request returns your GLs in Limble.  
+
+  <b>Return data description</b>
+
+  <table>
+      <thead>
+          <tr>
+              <th>Property</th>
+              <th>Description</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>glID</td>
+              <td>The GL's unique identifier.</td>
+          </tr>
+          <tr>
+              <td>abbr</td>
+              <td>An abbreviation for the GL.</td>
+          </tr>
+          <tr>
+              <td>name</td>
+              <td>The full name of the GL.</td>
+          </tr>
+          <tr>
+              <td>locationID</td>
+              <td>Which Location this GL belongs to.</td>
+          </tr>
+          <tr>
+              <td>description</td>
+              <td>An optional bit of descriptive text for the GL.</td>
+          </tr>
+          <tr>
+              <td>assetID</td>
+              <td>Which Asset this GL belongs to.</td>
+          </tr>
+      </tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/gl?cursor=0&limit=100&name=%office%\
+  &abbr=%off%&locations=1,163,2&gls=1,2,3&assets=1,2,3"
+method: GET
+queryParams:
+  - key: cursor
+    value: "0"
+    description: This parameter is a cursor that selects what glID you want to start
+      receiving results at. e.g. passing 137 here will only get you GLs with an
+      ID greater than 137.
+  - key: limit
+    value: "100"
+    description: This parameter is a result limiter. The default is set to return no
+      more than 100 results at one time.
+  - key: name
+    value: "%office%"
+    description: This is a parameter used to string search for a name or partial
+      name of a GL. This parameter expects a string with the wildcard %.
+  - key: abbr
+    value: "%off%"
+    description: This is a parameter used to string search for an abbreviation or
+      partial abbreviation of a GL. This parameter expects a string with the
+      wildcard %.
+  - key: locations
+    value: 1,163,2
+    description: This parameter is used to only get GLs that are linked to a
+      location. This parameter accepts a comma delimited list of location IDs.
+  - key: gls
+    value: 1,2,3
+    description: This parameter is used to only get specific GLs. This parameter
+      accepts a comma delimited list of GL IDs.
+  - key: assets
+    value: 1,2,3
+    description: This parameter is used to only get GLs that are linked to an asset.
+      This parameter accepts a comma delimited list of asset IDs.
+examples: ./.resources/Get General Ledgers.resources/examples
+order: 1000

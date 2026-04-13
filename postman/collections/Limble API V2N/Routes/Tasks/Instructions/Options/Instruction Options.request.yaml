@@ -1,0 +1,15 @@
+$kind: http-request
+description: This request gets all the Options for an Instruction Option or
+  Dropdown list associated with a Task.
+url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/:taskID/instructions/:instruc\
+  tionID/options"
+method: GET
+pathVariables:
+  - key: taskID
+    value: "11429"
+    description: taskID of the task you are getting the option/dropdown list.
+  - key: instructionID
+    value: "49343"
+    description: instructionID of the option/dropdown list you are getting the options for.
+examples: ./.resources/Instruction Options.resources/examples
+order: 1000

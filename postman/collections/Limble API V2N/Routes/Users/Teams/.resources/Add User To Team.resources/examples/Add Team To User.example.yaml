@@ -1,0 +1,35 @@
+$kind: http-example
+request:
+  url: "{{protocol}}://{{server}}:{{port}}/v2/users/:userID/teams"
+  method: PUT
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    - key: userID
+      value: "341"
+      description: userID of the user you are adding a team to.
+  body:
+    type: text
+    content: |-
+      {
+      	"locationID": 163,
+      	"teamID": 1923
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-DNS-Prefetch-Control: off
+    X-Frame-Options: SAMEORIGIN
+    Strict-Transport-Security: max-age=15552000; includeSubDomains
+    X-Download-Options: noopen
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    API-Feedback-Link: https://portal.productboard.com/zodsn5nylisgwqkcbx9rh6kp/
+    Date: Tue, 27 Aug 2019 17:34:14 GMT
+    Connection: keep-alive
+    Content-Length: "0"
+  body:
+    type: text
+    content: ""
+order: 1000

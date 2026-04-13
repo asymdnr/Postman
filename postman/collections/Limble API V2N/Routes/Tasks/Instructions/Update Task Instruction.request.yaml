@@ -1,0 +1,55 @@
+$kind: http-request
+description: >-
+  This request updates an Task Instruction.
+
+
+  <table class="apiTable">
+  	<thead>
+  		<tr>
+  			<th>Parameter</th>
+  			<th>Type</th>
+  			<th>Required?</th>
+  			<th>Description</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		<tr>
+  			<td>instruction</td>
+  			<td>string</td>
+  			<td>Optional</td>
+  			<td>The text that guides a User on what to do on this Instruction.</td>
+  		</tr>
+  		<tr>
+  			<td>parentInstructionID</td>
+  			<td>Int</td>
+  			<td>Optional</td>
+  			<td>If this is set this Instruction is a 'child' or sub-instruction. This value of parentInstructionID is the id of the Instruction's parent.  A value of 0 means this Instruction does not have a parent Instruction.</td>
+  		</tr>
+  	</tbody>
+  </table>
+url: "{{protocol}}://{{server}}:{{port}}/v2/tasks/instructions/:instructionID"
+method: PATCH
+headers:
+  Content-Type: application/json
+pathVariables:
+  - key: instructionID
+    value: "64518"
+    description: instructionID of the instruction you are editing.
+body:
+  type: text
+  content: |-
+    {
+    	"instruction": "This is an example instruction"
+    }
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"response should be okay to process\", function () { \r
+
+      \    pm.response.to.not.be.error; \r
+
+      \    pm.response.to.not.have.jsonBody(\"error\"); \r
+
+      });"
+    language: text/javascript
+examples: ./.resources/Update Task Instruction.resources/examples
+order: 4000
